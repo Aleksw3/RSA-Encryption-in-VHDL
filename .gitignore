@@ -1,0 +1,8 @@
+RSA_encryption_VHDL/RSA_encryption_VHDL.cache/
+RSA_encryption_VHDL/RSA_encryption_VHDL.ip_user_files/
+*.log
+*.jou
+*.sim/
+*.runs/
+*.cache/
+*.ip_user_files/
