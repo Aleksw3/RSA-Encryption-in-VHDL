@@ -55,6 +55,15 @@ signal input_message, output_message: std_logic_vector(bit_width downto 0);
 signal multiple_in, multiple_out: std_logic;
 signal start: std_logic :='0';
 signal counter_val: unsigned (7 downto 0);
+
+type state is (IDLE, INIT_EXP, LOOP_EXP, LAST_EXP);
+signal curr_state, next_state: state;
+
+signal mux_select: std_logic_vector(1 downto 0);
+signal monpro_done: std_logic_vector(1 downto 0);
+
+signal shift_signal: std_logic=:'0';
+
 begin
 
 
@@ -103,17 +112,54 @@ begin
 	end if;
 end process message_out;
 
-cnt: process(clk)
+control_fsm_synch: process(reset_n, clk)
 begin
 	if reset_n = '0' then
-
+		curr_state <= IDLE;
+		counter_val <= (others => '0');
 	elsif rising_edge(clk) then
-		if start then
+		if monpro_done = "00" then
+			curr_state<= next_state;
+		end if;
+		if start_counter='1' then
 			counter_val <= counter_val + 1;
+		else
+			counter_val<= (others=>'0');
 		end if;
 	end if;
-end process cnt;
-counter <= std_logic_vector(counter_val);
+end process control_fsm_synch;
+
+control_fsm: process(counter_val, curr_state, start, start_counter)
+begin
+	case (curr_state) is
+		when IDLE =>
+			if start='1' then
+				next_state <= INIT_EXP;
+			end if;
+
+		when INIT_EXP =>
+			mux_select  <= "00";
+			next_state <= LOOP_EXP;
+			start_counter<='1';
+
+		when LOOP_EXP =>
+			mux_select  <= "01";
+			start_counter   <= '1';
+			if counter_val = 255 then
+				next_state <= LAST_EXP;
+			end if;
+		when LAST_EXP =>
+			next_state <= IDLE;
+	end case;
+end process control_fsm;
+
+--shift_sig:process(clk, counter_val)
+--begin
+--	if rising_edge(clk) then
+--		shift_sig<=
+--	end if;
+	
+--end process shift_sig;
 
 
 
@@ -121,5 +167,6 @@ RL_exp: entity work.RL_exponentiation
 			generic map(bit_width => bit_width)
 			port map(clk=>clk,reset_n=>reset_n, key_e => key, key_n => n,
 					 r_squared => r_squared, input_message => message,
-					 output_message => output_message);
+					 output_message => output_message, mux_select => mux_select,
+					 monpro_done => monpro_done, shift_signal => shift_signal);
 end Behavioral;
