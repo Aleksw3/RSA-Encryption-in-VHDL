@@ -65,7 +65,7 @@ begin
     message_in:process(clk) -- Acquire message and initialize exponentiation
     begin
         if reset_n='0' then
-            -- reset something dunno
+            -- rese something dunno
         else
             if rising_edge(clk) then
                 if msgin_valid = '1' and busy = '1' then
