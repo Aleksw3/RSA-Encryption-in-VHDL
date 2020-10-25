@@ -8,6 +8,15 @@ Exponentiation
 			Key
 			clk
 			rst_n
+			n
+			r_squared
+			mux_select(1 downto 0)
+			monpro_active(1 downto 0) -- 00 when inactive, active if either is 1(concatination of active bits of blocks)
+			shift_signal -- when to shift 
+
+			output_message
+
+
 
 
 

@@ -37,15 +37,16 @@ entity RL_exponentiation is
 			bit_width: integer:= 255
 		);
 	Port ( 
-			clk:	      in std_logic;
-			reset_n:	  in std_logic;
-			key:  	      in std_logic_vector(bit_width downto 0);
-			n:     	      in std_logic_vector(bit_width downto 0);
-			r_squared:    in std_logic_vector(bit_width+1 downto 0); --Pre calculate in different register
-			message:      in std_logic_vector(bit_width downto 0);
-			mux_select:   in std_logic_vector(1 downto 0);
-			MonPro_done:  out std_logic_vector(1 downto 0);
-			shift_signal: in std_logic;
+			clk:	      	in std_logic;
+			reset_n:	  	in std_logic;
+			init:		  	in std_logic;
+			key:  	      	in std_logic_vector(bit_width downto 0);
+			N:     	      	in std_logic_vector(bit_width downto 0);
+			r_squared:    	in std_logic_vector(bit_width+1 downto 0); --Pre calculate in different register
+			message:     	in std_logic_vector(bit_width downto 0);
+			mux_select:     in std_logic_vector(1 downto 0);
+			MonPro_active:  out std_logic_vector(1 downto 0);
+			shift_enable: 	in std_logic;
 
 			output_message: out std_logic_vector(bit_width downto 0)
 		);
@@ -54,25 +55,39 @@ end RL_exponentiation;
 architecture Behavioral of RL_exponentiation is
 
 signal C, S: std_logic_vector(bit_width downto 0); 		   -- Outputs from MonPro modules
-
-signal shift_signal_d: std_logic:='0';
+signal key_shift_reg,message_reg, modulus_N: std_logic_vector(bit_width downto 0);
+--signal shift_signal_d: std_logic:='0';
 
 signal key_shift_reg: std_logic_vector(bit_width downto 0);
-signal MonPro_C_input_rdy, MonPro_S_input_rdy: std_logic :='0';
+--signal MonPro_C_input_rdy, MonPro_S_input_rdy: std_logic :='0';
 
-begin
+signal MonPro_active_s: std_logic; -- connect to monpro block
+
+beginW
+	initialize:process(clk)
+	begin
+		if rising_edge(clk) then
+			if init = '1' then
+				key_shift_reg <= key;
+				message_reg <= message;
+				modulus_N <= N;
+			end if;
+		end if;	
+	end process initialize;
+
 	key_shift_reg:process(clk)
 	begin
 		if rising_edge(clk) then
-			shift_signal_d <= shift_signal; 
-			if shift_signal and not shift_signal_d then
+			if shift_enable = '1' and MonPro_active_s = "00" then
 				key_shift_reg <= key_shift_reg(bit_width-1 downto 1) & '0';
 			end if;
 		end if;
 	end process key_shift_reg;
 
+	MonPro_active <= MonPro_active_s;
+
 	-- Multiplexers infront of MonPro blocks
-	MonPro_inputs: process()
+	MonPro_inputs: process(mux_select)
 	begin
 		case(mux_select) is
 			when "00" =>
@@ -83,7 +98,7 @@ begin
 				MonPro_S_B <= r_squared;
 			when "01" =>
 				MonPro_C_A <= C_reg;
-				MonPro_C_B <= S_reg
+				MonPro_C_B <= S_reg;
 
 				MonPro_S_A <= S_reg;
 				MonPro_S_B <= S_reg;

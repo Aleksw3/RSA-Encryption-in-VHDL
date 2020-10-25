@@ -60,9 +60,9 @@ type state is (IDLE, INIT_EXP, LOOP_EXP, LAST_EXP);
 signal curr_state, next_state: state;
 
 signal mux_select: std_logic_vector(1 downto 0);
-signal monpro_done: std_logic_vector(1 downto 0);
+signal monpro_active: std_logic_vector(1 downto 0);
 
-signal shift_signal: std_logic=:'0';
+signal shift_enable: std_logic := '0';
 
 begin
 
@@ -118,7 +118,7 @@ begin
 		curr_state <= IDLE;
 		counter_val <= (others => '0');
 	elsif rising_edge(clk) then
-		if monpro_done = "00" then
+		if monpro_active = "00" then
 			curr_state<= next_state;
 		end if;
 		if start_counter='1' then
@@ -129,24 +129,30 @@ begin
 	end if;
 end process control_fsm_synch;
 
-control_fsm: process(counter_val, curr_state, start, start_counter)
+control_fsm: process(counter_val, curr_state, start, start_counter,init)
 begin
 	case (curr_state) is
 		when IDLE =>
 			if start='1' then
 				next_state <= INIT_EXP;
+				init <= '1';
 			end if;
+			mux_select  <= "00";
+			start_counter<='0';
+			shift_enable<= '0';
 
 		when INIT_EXP =>
+			init <= '0';
 			mux_select  <= "00";
 			next_state <= LOOP_EXP;
-			start_counter<='1';
+			shift_enable<= '0';
 
 		when LOOP_EXP =>
 			mux_select  <= "01";
-			start_counter   <= '1';
+			shift_enable<= '1';
 			if counter_val = 255 then
 				next_state <= LAST_EXP;
+				counter_val<= (others => '0');
 			end if;
 		when LAST_EXP =>
 			next_state <= IDLE;
@@ -168,5 +174,5 @@ RL_exp: entity work.RL_exponentiation
 			port map(clk=>clk,reset_n=>reset_n, key_e => key, key_n => n,
 					 r_squared => r_squared, input_message => message,
 					 output_message => output_message, mux_select => mux_select,
-					 monpro_done => monpro_done, shift_signal => shift_signal);
+					 monpro_active => monpro_active, shift_signal => shift_signal);
 end Behavioral;
