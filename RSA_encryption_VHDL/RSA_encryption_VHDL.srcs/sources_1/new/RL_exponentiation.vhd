@@ -1,69 +1,67 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 10/23/2020 05:55:07 PM
--- Design Name: 
--- Module Name: RL_exponentiation - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.numeric_std.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
-
 entity RL_exponentiation is
 	Generic(
-			bit_width: integer:= 255
+			bit_width: integer:= 256
 		);
 	Port ( 
 			clk:	      	in std_logic;
 			reset_n:	  	in std_logic;
 			init:		  	in std_logic;
-			key:  	      	in std_logic_vector(bit_width downto 0);
-			N:     	      	in std_logic_vector(bit_width downto 0);
-			r_squared:    	in std_logic_vector(bit_width+1 downto 0); --Pre calculate in different register
-			message:     	in std_logic_vector(bit_width downto 0);
+			key:  	      	in std_logic_vector(bit_width-1 downto 0);
+			N:     	      	in std_logic_vector(bit_width-1 downto 0);
+			r_squared:    	in std_logic_vector(bit_width downto 0); --Pre calculate in different register
+			message:     	in std_logic_vector(bit_width-1 downto 0);
 			mux_select:     in std_logic_vector(1 downto 0);
-			MonPro_active:  out std_logic_vector(1 downto 0);
+			
+			MonPro_busy:    out std_logic_vector(1 downto 0);
+			
 			shift_enable: 	in std_logic;
-
 			output_message: out std_logic_vector(bit_width downto 0)
 		);
 end RL_exponentiation;
 
 architecture Behavioral of RL_exponentiation is
 
-signal C, S: std_logic_vector(bit_width downto 0); 		   -- Outputs from MonPro modules
-signal key_shift_reg,message_reg, modulus_N: std_logic_vector(bit_width downto 0);
---signal shift_signal_d: std_logic:='0';
+signal C_reg, S_reg, N_reg: std_logic_vector(bit_width-1 downto 0); 		   -- Outputs from MonPro modules
+signal message_reg, modulus_N: std_logic_vector(bit_width-1 downto 0);
+signal MonPro_C_X, MonPro_C_Y, MonPro_S_X, MonPro_S_Y: std_logic_vector(bit_width-1 downto 0);
 
-signal key_shift_reg: std_logic_vector(bit_width downto 0);
+signal key_shift_reg: std_logic_vector(bit_width-1 downto 0);
 --signal MonPro_C_input_rdy, MonPro_S_input_rdy: std_logic :='0';
+signal MonPro_C_busy, MonPro_S_busy: std_logic;
+signal MonPro_C_en, MonPro_S_en: std_logic;
 
-signal MonPro_active_s: std_logic; -- connect to monpro block
 
-beginW
+type state is (IDLE, CS, S);
+signal curr_state, next_state: state;
+
+signal MonPro_rdy: std_logic;
+constant one: signed(1 downto 0) := "01";
+
+
+begin
+MonPro_C: entity work.MonPro 
+			port map(clk => clk, reset_n => reset_n,
+					  EN => MonPro_S_en, N=>N_reg,
+					  X => MonPro_C_X, Y=> MonPro_C_Y,
+					  Done => MonPro_C_done, 
+					  Busy => MonPro_C_busy, Z => C_reg);
+
+MonPro_S: entity work.MonPro 
+			port map(clk => clk, reset_n => reset_n,
+					  EN => MonPro_S_en, N=>N_reg,
+					  X => MonPro_S_X, Y=> MonPro_S_Y,
+					  Done => MonPro_S_done, 
+					  Busy => MonPro_C_busy,Z => S_reg);
+
+MonPro_S_en <= MonPro_rdy;
+MonPro_C_en <= MonPro_rdy and key_shift_reg(0);
+
+MonPro_busy <= MonPro_C_busy & MonPro_S_busy; 
+
 	initialize:process(clk)
 	begin
 		if rising_edge(clk) then
@@ -75,60 +73,53 @@ beginW
 		end if;	
 	end process initialize;
 
-	key_shift_reg:process(clk)
+	key_shift_reg_process:process(clk)
 	begin
 		if rising_edge(clk) then
-			if shift_enable = '1' and MonPro_active_s = "00" then
+			if shift_enable = '1' and  MonPro_C_busy = '0' and MonPro_S_busy = '0' then
 				key_shift_reg <= key_shift_reg(bit_width-1 downto 1) & '0';
 			end if;
 		end if;
-	end process key_shift_reg;
-
-	MonPro_active <= MonPro_active_s;
+	end process key_shift_reg_process;
 
 	-- Multiplexers infront of MonPro blocks
 	MonPro_inputs: process(mux_select)
 	begin
 		case(mux_select) is
 			when "00" =>
-				MonPro_C_A <= std_logic_vector(resize(1,bit_width));
-				MonPro_C_B <= r_squared;
+				MonPro_C_X <= std_logic_vector(resize(one,bit_width-1)); -- 1
+				MonPro_C_Y <= r_squared;
 
-				MonPro_S_A <= message_reg;
-				MonPro_S_B <= r_squared;
+				MonPro_S_X <= message_reg;
+				MonPro_S_Y <= r_squared;
 			when "01" =>
-				MonPro_C_A <= C_reg;
-				MonPro_C_B <= S_reg;
+				MonPro_C_X <= C_reg;
+				MonPro_C_Y <= S_reg;
 
-				MonPro_S_A <= S_reg;
-				MonPro_S_B <= S_reg;
+				MonPro_S_X <= S_reg;
+				MonPro_S_Y <= S_reg;
 			when "10" =>
-				MonPro_C_A <= std_logic_vector(resize(1,bit_width));
-				MonPro_C_B <= C_reg;
+				MonPro_C_X <= std_logic_vector(resize(one,bit_width-1)); -- 1
+				MonPro_C_Y <= C_reg;
 
-				MonPro_S_A <= (others => '0');
-				MonPro_S_B <= (others => '0');
+				MonPro_S_X <= (others => '0');
+				MonPro_S_Y <= (others => '0');
 			when "11" => -- should never get in this state but in case, DC. Set to zero so we can see the error in simulation
-				MonPro_C_A <= (others => '0');
-				MonPro_C_B <= (others => '0');
-				MonPro_S_A <= (others => '0');
-				MonPro_S_B <= (others => '0');
+				MonPro_C_X <= (others => '0');
+				MonPro_C_Y <= (others => '0');
+				MonPro_S_X <= (others => '0');
+				MonPro_S_Y <= (others => '0');
 		end case;
-
 	end process MonPro_inputs;
 
-
-
-	-- Enable and write C-reg value to output_message
-	output_message:process(C_reg) 
+	process(MonPro_C_busy,MonPro_S_busy)
 	begin
-		if output_enable = '1' then
-			output_message <= C_reg;
+		if MonPro_S_busy = '0' and MonPro_C_busy ='0' then
+			MonPro_rdy <= '1';
+		else 
+			MonPro_rdy <= '0';
 		end if;
 
-	end process output_message;
-
-
-
+	end process;
 
 end Behavioral;
