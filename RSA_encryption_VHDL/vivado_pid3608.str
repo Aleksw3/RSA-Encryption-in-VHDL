@@ -1,0 +1,246 @@
+/*
+
+Xilinx Vivado v2020.1 (64-bit) [Major: 2020, Minor: 1]
+SW Build: 2902540 on Wed May 27 19:54:49 MDT 2020
+IP Build: 2902112 on Wed May 27 22:43:36 MDT 2020
+
+Process ID (PID): 3608
+License: Customer
+
+Current time: 	Sun Oct 25 17:22:48 CET 2020
+Time zone: 	Central European Standard Time (Europe/Paris)
+
+OS: Windows 10
+OS Version: 10.0
+OS Architecture: amd64
+Available processors (cores): 8
+
+Screen size: 3840x2160
+Screen resolution (DPI): 300
+Available screens: 1
+Default font: family=Segoe UI,name=Segoe UI,style=plain,size=36
+
+Java version: 	9.0.4 64-bit
+Java home: 	C:/Users/Sindr/Documents/Vivado/Vivado/2020.1/tps/win64/jre9.0.4
+Java executable location: 	C:/Users/Sindr/Documents/Vivado/Vivado/2020.1/tps/win64/jre9.0.4/bin/java.exe
+Java initial memory (-Xms): 	128 MB
+Java maximum memory (-Xmx):	 3 GB
+
+
+User name: 	Sindr
+User home directory: C:/Users/Sindr
+User working directory: C:/Users/Sindr/Documents/NTNU/ELSYS/Design of Digital Systems 1/Project/TermProject/RSA_encryption_VHDL
+User country: 	US
+User language: 	en
+User locale: 	en_US
+
+RDI_BASEROOT: C:/Users/Sindr/Documents/Vivado/Vivado
+HDI_APPROOT: C:/Users/Sindr/Documents/Vivado/Vivado/2020.1
+RDI_DATADIR: C:/Users/Sindr/Documents/Vivado/Vivado/2020.1/data
+RDI_BINDIR: C:/Users/Sindr/Documents/Vivado/Vivado/2020.1/bin
+
+Vivado preferences file location: C:/Users/Sindr/AppData/Roaming/Xilinx/Vivado/2020.1/vivado.xml
+Vivado preferences directory: C:/Users/Sindr/AppData/Roaming/Xilinx/Vivado/2020.1/
+Vivado layouts directory: C:/Users/Sindr/AppData/Roaming/Xilinx/Vivado/2020.1/data/layouts
+PlanAhead jar file location: 	C:/Users/Sindr/Documents/Vivado/Vivado/2020.1/lib/classes/planAhead.jar
+Vivado log file location: 	C:/Users/Sindr/Documents/NTNU/ELSYS/Design of Digital Systems 1/Project/TermProject/RSA_encryption_VHDL/vivado.log
+Vivado journal file location: 	C:/Users/Sindr/Documents/NTNU/ELSYS/Design of Digital Systems 1/Project/TermProject/RSA_encryption_VHDL/vivado.jou
+Engine tmp dir: 	C:/Users/Sindr/Documents/NTNU/ELSYS/Design of Digital Systems 1/Project/TermProject/RSA_encryption_VHDL/.Xil/Vivado-3608-PC
+
+Xilinx Environment Variables
+----------------------------
+XILINX: C:/Users/Sindr/Documents/Vivado/Vivado/2020.1/ids_lite/ISE
+XILINX_DSP: C:/Users/Sindr/Documents/Vivado/Vivado/2020.1/ids_lite/ISE
+XILINX_PLANAHEAD: C:/Users/Sindr/Documents/Vivado/Vivado/2020.1
+XILINX_VIVADO: C:/Users/Sindr/Documents/Vivado/Vivado/2020.1
+XILINX_VIVADO_HLS: C:/Users/Sindr/Documents/Vivado/Vivado/2020.1
+
+
+GUI allocated memory:	215 MB
+GUI max memory:		3,072 MB
+Engine allocated memory: 1,016 MB
+
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+
+*/
+
+// TclEventType: START_GUI
+// WARNING: HEventQueue.dispatchEvent() is taking  1176 ms.
+// Tcl Message: start_gui 
+// TclEventType: PROJECT_OPEN_DIALOG
+// aK (cs): Older Project Version: addNotify
+// Tcl Command: 'rdi::info_commands {device::*}'
+// Tcl Command: 'rdi::info_commands {debug::*}'
+// Tcl Command: 'rdi::info_commands {*}'
+// HMemoryUtils.trashcanNow. Engine heap size: 1,016 MB. GUI used memory: 104 MB. Current time: 10/25/20, 5:22:49 PM CET
+// WARNING: HEventQueue.dispatchEvent() is taking  1002 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  1001 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  1002 ms.
+selectRadioButton(PAResourceTtoZ.UpgradeProjectDialog_OPEN_PROJECT_IN_READ_ONLY_MODE, "Open project in read-only mode"); // a (Q, aK)
+selectRadioButton(PAResourceTtoZ.UpgradeProjectDialog_AUTOMATICALLY_UPGRADE_TO_CURRENT, "Automatically upgrade to the current version"); // a (Q, aK)
+// WARNING: HEventQueue.dispatchEvent() is taking  1001 ms.
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (aK)
+// Opening Vivado Project: C:\Users\Sindr\Documents\NTNU\ELSYS\Design of Digital Systems 1\Project\TermProject\RSA_encryption_VHDL\RSA_encryption_VHDL.xpr. Version: Vivado v2019.2 
+// bz (cs):  Open Project : addNotify
+// TclEventType: DEBUG_PROBE_SET_CHANGE
+dismissDialog("Older Project Version"); // aK (cs)
+// Tcl Message: open_project {C:/Users/Sindr/Documents/NTNU/ELSYS/Design of Digital Systems 1/Project/TermProject/RSA_encryption_VHDL/RSA_encryption_VHDL.xpr} 
+// Tcl Message: INFO: [ProjectBase 1-489] The host OS only allows 260 characters in a normal path. The project is stored in a path with more than 80 characters. If you experience issues with IP, Block Designs, or files not being found, please consider moving the project to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter. Current project path is 'C:/Users/Sindr/Documents/NTNU/ELSYS/Design of Digital Systems 1/Project/TermProject/RSA_encryption_VHDL' 
+// TclEventType: MSGMGR_MOVEMSG
+// TclEventType: FILE_SET_NEW
+// TclEventType: RUN_CURRENT
+// TclEventType: PROJECT_DASHBOARD_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_DASHBOARD_GADGET_NEW
+// TclEventType: PROJECT_DASHBOARD_GADGET_CHANGE
+// TclEventType: PROJECT_NEW
+// Tcl Message: open_project {C:/Users/Sindr/Documents/NTNU/ELSYS/Design of Digital Systems 1/Project/TermProject/RSA_encryption_VHDL/RSA_encryption_VHDL.xpr} 
+// Tcl Message: INFO: [ProjectBase 1-489] The host OS only allows 260 characters in a normal path. The project is stored in a path with more than 80 characters. If you experience issues with IP, Block Designs, or files not being found, please consider moving the project to a location with a shorter path. Alternately consider using the OS subst command to map part of the path to a drive letter. Current project path is 'C:/Users/Sindr/Documents/NTNU/ELSYS/Design of Digital Systems 1/Project/TermProject/RSA_encryption_VHDL' INFO: [Project 1-313] Project file moved from '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL' since last save. 
+// Tcl Message: Scanning sources... Finished scanning sources 
+// Tcl Message: INFO: [Project 1-230] Project 'RSA_encryption_VHDL.xpr' upgraded for this version of Vivado. INFO: [IP_Flow 19-234] Refreshing IP repositories INFO: [IP_Flow 19-1704] No user IP repositories specified 
+// TclEventType: PROJECT_NEW
+// [GUI Memory]: 111 MB (+114107kb) [00:00:43]
+// [Engine Memory]: 1,016 MB (+914385kb) [00:00:43]
+// [GUI Memory]: 123 MB (+6700kb) [00:00:43]
+// [GUI Memory]: 141 MB (+12391kb) [00:00:44]
+// [GUI Memory]: 159 MB (+11449kb) [00:00:44]
+// WARNING: HEventQueue.dispatchEvent() is taking  3518 ms.
+// Tcl Message: INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Users/Sindr/Documents/Vivado/Vivado/2020.1/data/ip'. 
+// Project name: RSA_encryption_VHDL; location: C:/Users/Sindr/Documents/NTNU/ELSYS/Design of Digital Systems 1/Project/TermProject/RSA_encryption_VHDL; part: xc7k70tfbv676-1
+// Tcl Message: open_project: Time (s): cpu = 00:00:13 ; elapsed = 00:00:05 . Memory (MB): peak = 1025.703 ; gain = 0.000 
+dismissDialog("Open Project"); // bz (cs)
+// [GUI Memory]: 173 MB (+6559kb) [00:00:50]
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+// Tcl Message: update_compile_order -fileset sim_1 
+// Elapsed time: 24 seconds
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Syntax Error Files]", 1); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Syntax Error Files, RL_exponentiation.vhd]", 2, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Syntax Error Files, RL_exponentiation.vhd]", 2, false, false, false, false, false, true); // B (F, cs) - Double Click
+selectCodeEditor("RL_exponentiation.vhd", 494, 381); // bP (w, cs)
+selectCodeEditor("RL_exponentiation.vhd", 423, 528); // bP (w, cs)
+selectCodeEditor("RL_exponentiation.vhd", 423, 528); // bP (w, cs)
+selectCodeEditor("RL_exponentiation.vhd", 413, 477); // bP (w, cs)
+selectCodeEditor("RL_exponentiation.vhd", 651, 434); // bP (w, cs)
+selectCodeEditor("RL_exponentiation.vhd", 397, 319); // bP (w, cs)
+// Elapsed time: 27 seconds
+selectCodeEditor("RL_exponentiation.vhd", 784, 392); // bP (w, cs)
+selectCodeEditor("RL_exponentiation.vhd", 813, 366); // bP (w, cs)
+selectCodeEditor("RL_exponentiation.vhd", 804, 311); // bP (w, cs)
+selectCodeEditor("RL_exponentiation.vhd", 850, 349); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // m (l, cs)
+// Elapsed time: 161 seconds
+selectMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // aa (q, cs)
+selectMenu(PAResourceItoN.MainMenuMgr_PROJECT, "Project"); // af (cs)
+dismissMenu(PAResourceItoN.MainMenuMgr_FILE, "File"); // aa (q, cs)
+selectButton(PAResourceCommand.PACommandNames_ADD_SOURCES, "Sources_add_sources"); // E (g, cs)
+// Run Command: PAResourceCommand.PACommandNames_ADD_SOURCES
+// c (cs): Add Sources: addNotify
+selectButton("NEXT", "Next >"); // JButton (j, c)
+selectButton(PAResourceQtoS.SrcChooserPanel_ADD_OR_CREATE_SOURCE_FILE, "Add"); // E (g, c)
+selectMenuItem(PAResourceQtoS.SrcChooserPanel_ADD_HDL_AND_NETLIST_FILES_TO_YOUR_PROJECT, "Add Files..."); // ai (ao, c)
+// Elapsed time: 23 seconds
+setFileChooser("C:/Users/Sindr/Documents/NTNU/ELSYS/Design of Digital Systems 1/VHDL/UnderProgress/Radix2MonPro.vhd");
+selectTable(PAResourceQtoS.SrcChooserTable_SRC_CHOOSER_TABLE, "VSourceFile ; 1 ; Radix2MonPro.vhd ; xil_defaultlib ; C:/Users/Sindr/Documents/NTNU/ELSYS/Design of Digital Systems 1/VHDL/UnderProgress", 0, "C:/Users/Sindr/Documents/NTNU/ELSYS/Design of Digital Systems 1/VHDL/UnderProgress", 4); // bQ (J, c)
+selectButton("CANCEL", "Cancel"); // JButton (j, c)
+// 'h' command handler elapsed time: 43 seconds
+dismissDialog("Add Sources"); // c (cs)
+selectButton(PAResourceCommand.PACommandNames_ADD_SOURCES, "Sources_add_sources"); // E (g, cs)
+// Run Command: PAResourceCommand.PACommandNames_ADD_SOURCES
+// c (cs): Add Sources: addNotify
+selectButton("NEXT", "Next >"); // JButton (j, c)
+selectButton(PAResourceQtoS.SrcChooserPanel_CREATE_FILE, "Create File"); // a (E, c)
+// F (c): Create Source File: addNotify
+setText(PAResourceAtoD.CreateSrcFileDialog_FILE_NAME, "MonPro"); // ac (Q, F)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (F)
+dismissDialog("Create Source File"); // F (c)
+selectButton("FINISH", "Finish"); // JButton (j, c)
+// 'h' command handler elapsed time: 19 seconds
+dismissDialog("Add Sources"); // c (cs)
+// Tcl Message: close [ open {C:/Users/Sindr/Documents/NTNU/ELSYS/Design of Digital Systems 1/Project/TermProject/RSA_encryption_VHDL/RSA_encryption_VHDL.srcs/sources_1/new/MonPro.vhd} w ] 
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: add_files {{C:/Users/Sindr/Documents/NTNU/ELSYS/Design of Digital Systems 1/Project/TermProject/RSA_encryption_VHDL/RSA_encryption_VHDL.srcs/sources_1/new/MonPro.vhd}} 
+// I (cs): Define Module: addNotify
+selectTable(PAResourceAtoD.DefineModulesDialog_DEFINE_MODULES_AND_SPECIFY_IO_PORTS, " ; in ; false ; 0 ; 0", 0, (String) null, 0); // ab (J, I)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (I)
+// TclEventType: FILE_SET_CHANGE
+dismissDialog("Define Module"); // I (cs)
+// [GUI Memory]: 183 MB (+1247kb) [00:06:16]
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+// Elapsed time: 13 seconds
+expandTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Non-module Files]", 4); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Non-module Files, Montgomery_Product.vhd]", 5, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Non-module Files, Montgomery_Product.vhd]", 5, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Non-module Files, Montgomery_Product.vhd]", 5, false, false, false, false, false, true); // B (F, cs) - Double Click
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Non-module Files]", 4, true); // B (F, cs) - Node
+collapseTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, Non-module Files]", 4); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, MonPro(Behavioral) (MonPro.vhd)]", 6, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, MonPro(Behavioral) (MonPro.vhd)]", 6, false, false, false, false, false, true); // B (F, cs) - Double Click
+// Elapsed time: 13 seconds
+selectCodeEditor("MonPro.vhd", 721, 672); // bP (w, cs)
+selectCodeEditor("MonPro.vhd", 364, 825); // bP (w, cs)
+typeControlKey((HResource) null, "MonPro.vhd", 'v'); // bP (w, cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 10 seconds
+selectCodeEditor("MonPro.vhd", 174, 419); // bP (w, cs)
+selectCodeEditor("MonPro.vhd", 192, 421); // bP (w, cs)
+selectCodeEditor("MonPro.vhd", 286, 322); // bP (w, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Montgomery_Product.vhd", 2); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "RL_exponentiation.vhd", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "MonPro.vhd", 3); // m (l, cs)
+selectCodeEditor("MonPro.vhd", 486, 312); // bP (w, cs)
+selectCodeEditor("MonPro.vhd", 603, 642); // bP (w, cs)
+selectCodeEditor("MonPro.vhd", 347, 329); // bP (w, cs)
+selectCodeEditor("MonPro.vhd", 773, 283); // bP (w, cs)
+selectCodeEditor("MonPro.vhd", 773, 283, false, false, false, true, false); // bP (w, cs) - Popup Trigger
+selectCodeEditor("MonPro.vhd", 347, 524); // bP (w, cs)
+selectComboBox("FindAndReplaceDialog.cs_Find what:", "n", -1); // JComboBox (cs, FindAndReplaceDialog)
+selectComboBox("FindAndReplaceDialog.cs_Replace with:", "bit_width", -1); // JComboBox (cs, FindAndReplaceDialog)
+selectComboBox("FindAndReplaceDialog.cs_Find what:", "n", -1); // JComboBox (cs, FindAndReplaceDialog)
+selectButton("FindAndReplaceDialog.cs_Find", "Find"); // JButton (cs, FindAndReplaceDialog)
+selectCodeEditor("MonPro.vhd", 876, 317); // bP (w, cs)
+selectCodeEditor("MonPro.vhd", 858, 301); // bP (w, cs)
+selectCodeEditor("MonPro.vhd", 901, 304); // bP (w, cs)
+selectCodeEditor("MonPro.vhd", 281, 216); // bP (w, cs)
+selectCodeEditor("MonPro.vhd", 412, 436, false, false, false, true, false); // bP (w, cs) - Popup Trigger
+selectMenuItem(RDIResource.HInputHandler_REPLACE_TEXT, "Replace..."); // ai (ao, Popup.HeavyWeightWindow)
+selectComboBox("FindAndReplaceDialog.cs_Find what:", "*n", -1); // JComboBox (cs, FindAndReplaceDialog)
+selectButton("FindAndReplaceDialog.cs_Find", "Find"); // JButton (cs, FindAndReplaceDialog)
+selectCodeEditor("MonPro.vhd", 695, 353); // bP (w, cs)
+selectComboBox("FindAndReplaceDialog.cs_Find what:", "(n", -1); // JComboBox (cs, FindAndReplaceDialog)
+selectComboBox("FindAndReplaceDialog.cs_Replace with:", "(bit_width", -1); // JComboBox (cs, FindAndReplaceDialog)
+selectButton("FindAndReplaceDialog.cs_Find", "Find"); // JButton (cs, FindAndReplaceDialog)
+selectCodeEditor("MonPro.vhd", 568, 430); // bP (w, cs)
+selectCodeEditor("MonPro.vhd", 902, 320); // bP (w, cs)
+selectCodeEditor("MonPro.vhd", 1082, 355); // bP (w, cs)
+selectCodeEditor("MonPro.vhd", 920, 464); // bP (w, cs)
+selectCodeEditor("MonPro.vhd", 1074, 292); // bP (w, cs)
+selectCodeEditor("MonPro.vhd", 1158, 467); // bP (w, cs)
+selectCodeEditor("MonPro.vhd", 914, 563); // bP (w, cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 11 seconds
+selectCodeEditor("MonPro.vhd", 1161, 461); // bP (w, cs)
+// Elapsed time: 57 seconds
+selectCodeEditor("MonPro.vhd", 317, 299); // bP (w, cs)
+selectCodeEditor("MonPro.vhd", 745, 654); // bP (w, cs)
