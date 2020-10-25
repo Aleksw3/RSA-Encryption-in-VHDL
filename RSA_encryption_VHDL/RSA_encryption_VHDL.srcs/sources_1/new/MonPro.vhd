@@ -26,7 +26,6 @@ entity MonPro is
 	generic(bit_width: integer := 256);
 	port(
 		N, X, Y : 	in std_logic_vector(bit_width - 1 downto 0);
-		R		:	in std_logic_vector(bit_width downto 0);
 		Done	:	in std_logic;
 		Z		:	out std_logic_vector(bit_width - 1 downto 0));
 end MonPro;
