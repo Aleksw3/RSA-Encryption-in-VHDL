@@ -4,7 +4,7 @@ use IEEE.numeric_std.all;
 
 entity RSA_Core is
     Generic(
-            bit_width: integer:=256
+            bit_width: integer:=4
     );
     Port ( 
         clk:     in std_logic;
@@ -54,7 +54,7 @@ signal MonPro_en_non_loop:std_logic := '0';
 
 begin
     rl_exp: entity work.RL_Exponentiation 
-                Generic(bit_width => bit_width);
+                generic map(bit_width => bit_width)
                 port map(clk => clk, reset_n => reset_n, 
                          init => init, key => key_e, 
                          N => key_n, r_squared => r_squared,

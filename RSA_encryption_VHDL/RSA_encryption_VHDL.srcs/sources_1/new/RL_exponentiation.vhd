@@ -47,15 +47,15 @@ constant one: signed(1 downto 0) := "01";
 
 begin
 MonPro_C: entity work.MonPro 
-            Generic(bit_width => bit_width);
-            port map(clk => clk, reset_n => reset_n,
+            generic map(bit_width => bit_width)
+            port map (clk => clk, reset_n => reset_n,
                       EN => MonPro_C_en, N=>N_reg,
                       X => MonPro_C_X, Y=> MonPro_C_Y,
                       Busy => MonPro_C_busy, Z => C_s);
 
 MonPro_S: entity work.MonPro 
-            Generic(bit_width => bit_width);
-            port map(clk => clk, reset_n => reset_n,
+            generic map(bit_width => bit_width)
+            port map (clk => clk, reset_n => reset_n,
                       EN => MonPro_S_en, N=>N_reg,
                       X => MonPro_S_X, Y=> MonPro_S_Y,
                       Busy => MonPro_S_busy,Z => S_s);
