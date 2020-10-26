@@ -12,7 +12,7 @@ Exponentiation
 			r_squared
 			mux_select(1 downto 0)
 			monpro_active(1 downto 0) -- 00 when inactive, active if either is 1(concatination of active bits of blocks)
-			shift_signal -- when to shift 
+			shift_signal -- when to shifWt 
 
 			output_message
 
@@ -49,3 +49,16 @@ Control logic
 MonPro blocks:
 	MonPro_C
 	MonPro_S
+
+MonPro
+	Output signal => busy 1 -> 0
+		save signal in register
+		shift signal
+		enable <= '0'
+	enable monpro
+
+
+
+MonPro_Enable:
+	Turn off when busy 1 -> 0
+	turn  on when shift signal  
