@@ -244,3 +244,80 @@ selectCodeEditor("MonPro.vhd", 1161, 461); // bP (w, cs)
 // Elapsed time: 57 seconds
 selectCodeEditor("MonPro.vhd", 317, 299); // bP (w, cs)
 selectCodeEditor("MonPro.vhd", 745, 654); // bP (w, cs)
+// Elapsed time: 547 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, RL_exponentiation(Behavioral) (RL_exponentiation.vhd)]", 5, false); // B (F, cs)
+selectCodeEditor("MonPro.vhd", 386, 504); // bP (w, cs)
+// WARNING: HEventQueue.dispatchEvent() is taking  611104 ms.
+// HMemoryUtils.trashcanNow. Engine heap size: 1,016 MB. GUI used memory: 121 MB. Current time: 10/25/20, 5:52:50 PM CET
+// WARNING: HTimer (ActiveMsgMonitor Process Messages Timer) is taking 211ms to process. Increasing delay to 2000 ms.
+// Elapsed time: 642 seconds
+selectCodeEditor("MonPro.vhd", 835, 572); // bP (w, cs)
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// WARNING: HEventQueue.dispatchEvent() is taking  371257 ms.
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 1674 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Montgomery_Product.vhd", 2); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "RL_exponentiation.vhd", 1); // m (l, cs)
+// HMemoryUtils.trashcanNow. Engine heap size: 1,016 MB. GUI used memory: 111 MB. Current time: 10/25/20, 6:22:52 PM CET
+// Elapsed time: 1528 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // m (l, cs)
+// Elapsed time: 15 seconds
+selectButton(PAResourceOtoP.ProjectSettingsGadget_EDIT_PROJECT_SETTINGS, "Edit"); // h (E, cs)
+// Run Command: RDIResourceCommand.RDICommands_SETTINGS
+// d (cs): Settings: addNotify
+selectTree(PAResourceQtoS.SettingsDialog_PROJECT_TREE, "[projectRoot, Simulation]", 1, false); // B (E, d)
+selectTree(PAResourceQtoS.SettingsDialog_PROJECT_TREE, "[projectRoot, Synthesis]", 3, false); // B (E, d)
+selectTree(PAResourceQtoS.SettingsDialog_PROJECT_TREE, "[projectRoot, Implementation]", 4, false); // B (E, d)
+selectTree(PAResourceQtoS.SettingsDialog_PROJECT_TREE, "[projectRoot, General]", 0, false); // B (E, d)
+selectButton(PAResourceQtoS.SettingsProjectGeneralPage_CHOOSE_DEVICE_FOR_YOUR_PROJECT, (String) null); // t (a, d)
+// c (d): Select Device: addNotify
+selectComboBox(PAResourceEtoH.FPGAChooser_FAMILY, "Zynq-7000", 14); // v (C, c)
+selectComboBox(PAResourceEtoH.FPGAChooser_PACKAGE, "clg400", 2); // v (C, c)
+selectComboBox(PAResourceEtoH.FPGAChooser_SPEED, "-1", 1); // v (C, c)
+selectTable(PAResourceEtoH.FPGAChooser_FPGA_TABLE, "xc7z020clg400-1 ; 400 ; 125 ; 53200 ; 106400 ; 140 ; 0 ; 220 ; 0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 0 ; 4 ;  ;  ;  ;  ; 0.95 ; 0.95 ; 1.05", 3, "xc7z020clg400-1", 0); // w (J, c)
+// Elapsed time: 52 seconds
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (c)
+dismissDialog("Select Device"); // c (d)
+// Elapsed time: 15 seconds
+selectButton(RDIResource.BaseDialog_APPLY, "Apply"); // a (d)
+// bz (cs):  Change Settings : addNotify
+// TclEventType: RUN_MODIFY
+// Tcl Message: set_property part xc7z020clg400-1 [current_project] 
+// TclEventType: RUN_MODIFY
+// TclEventType: CREATE_IP_CATALOG
+// TclEventType: PART_MODIFIED
+// Tcl Message: ERROR: [Common 17-180] Spawn failed: No error 
+// Tcl Message: ERROR: [Common 17-39] 'set_property' failed due to earlier errors. 
+// CommandFailedException: ERROR: [Common 17-69] Command failed: ERROR: [Common 17-39] 'set_property' failed due to earlier errors.  
+dismissDialog("Change Settings"); // bz (cs)
+selectButton(RDIResource.BaseDialog_OK, "OK"); // a (d)
+dismissDialog("Settings"); // d (cs)
+// Elapsed time: 25 seconds
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "MonPro.vhd", 3); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Montgomery_Product.vhd", 2); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "RL_exponentiation.vhd", 1); // m (l, cs)
+selectTab("PlanAheadTabBaseWorkspace_JideTabbedPane", (HResource) null, "Project Summary", 0); // m (l, cs)
+// HMemoryUtils.trashcanNow. Engine heap size: 1,016 MB. GUI used memory: 113 MB. Current time: 10/25/20, 6:52:52 PM CET
+// WARNING: HEventQueue.dispatchEvent() is taking  2257 ms.
+// WARNING: HEventQueue.dispatchEvent() is taking  262417 ms.
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Elapsed time: 1945 seconds
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, MonPro(structural) (MonPro.vhd)]", 6, false); // B (F, cs)
+selectTree(PAResourceEtoH.FileSetPanel_FILE_SET_PANEL_TREE, "[root, Design Sources, MonPro(structural) (MonPro.vhd)]", 6, false, false, false, false, false, true); // B (F, cs) - Double Click
+// Elapsed time: 18 seconds
+selectCodeEditor("MonPro.vhd", 528, 642); // bP (w, cs)
+// HMemoryUtils.trashcanNow. Engine heap size: 1,016 MB. GUI used memory: 113 MB. Current time: 10/25/20, 7:22:56 PM CET
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// HMemoryUtils.trashcanNow. Engine heap size: 1,016 MB. GUI used memory: 112 MB. Current time: 10/25/20, 7:52:56 PM CET
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// TclEventType: DG_GRAPH_STALE
+// TclEventType: FILE_SET_CHANGE
+// Tcl Message: update_compile_order -fileset sources_1 
+// Tcl Message: update_compile_order -fileset sim_1 
