@@ -16,23 +16,6 @@ end CompressorTree;
 
 --Architecture
 architecture dataflow of CompressorTree is
-
-	component Full_Adder is
-	port(
-		A : in std_logic;
-		B : in std_logic;
-		C_in : in std_logic;
-		S : out std_logic;
-		C_out : out std_logic);
-	end component;
-	
-	component Half_Adder is
-	port(
-		A : in std_logic;
-		B : in std_logic;
-		S : out std_logic;
-		C : out std_logic);
-	end component;
 	
 	component Compressor42 is
 	port(
