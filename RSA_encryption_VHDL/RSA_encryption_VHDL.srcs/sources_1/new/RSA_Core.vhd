@@ -4,7 +4,7 @@ use IEEE.numeric_std.all;
 
 entity RSA_Core is
     Generic(
-            bit_width: integer:=4
+            bit_width: integer:=256
     );
     Port ( 
         clk:     in std_logic;
@@ -66,7 +66,7 @@ begin
                          Exp_done       => done,
                          shift_enable   => shift_enable,
                          output_message => output_message);
-    msgin_ready <= busy;
+    msgin_ready <= not(busy);
     
     message_in:process(clk, reset_n) -- Acquire message and initialize exponentiation
     begin
