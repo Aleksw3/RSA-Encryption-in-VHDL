@@ -24,7 +24,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;  
 
 entity MonPro is
-	generic(bit_width: integer := 8);
+	generic(bit_width: integer := 256);
 	port(
 		clk, reset_n, EN	:	in std_logic;
 		N, X, Y 		: 	in std_logic_vector(bit_width - 1 downto 0);
@@ -162,7 +162,16 @@ architecture structural of MonPro is
 						end case;
 						curr_state <= next_state;
 					else
-						curr_state <= IDLE;
+					   curr_state <= IDLE;
+					   X_s <= (others => '0');
+					   Y_s <= (others => '0');
+					   N_s <= (others => '0');
+					   Z_s <= (others => '0');
+					   A <= (others => '0');
+                       B <= (others => '0');
+                       busy_s <= '0';
+                       done_s <= '0';
+                       cnt <= 0;
 					end if;
 				end if;
 			end if;

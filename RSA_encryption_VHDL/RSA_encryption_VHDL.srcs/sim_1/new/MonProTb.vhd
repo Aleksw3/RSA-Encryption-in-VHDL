@@ -39,21 +39,6 @@ architecture Behavioral of MonProTb is
 		busy				:	out std_logic;
 		Z					:	out std_logic_vector(bit_width - 1 downto 0));
 	end component;
-	
-	
-	
---	function to_slv(bv : bit_vector) return std_logic_vector is
---        variable slv : std_logic_vector(bv'range);
---    begin
---        for i in bv'range loop
---            if bv(i) = '1' then
---                slv(i) := '1';
---            else
---                slv(i) := '0';
---            end if;
---        end loop;
---        return slv;
---    end;	
 
 	--Constants
 	constant period 	: time := 1 ns;
@@ -72,7 +57,7 @@ architecture Behavioral of MonProTb is
 	signal N, X, Y 			: std_logic_vector(bit_width - 1 downto 0) := (others => '0');
 	
 	--Output signals of Monpro
-	signal busy, busy_s 			          : std_logic := '0';
+	signal busy, busy_s 			  : std_logic := '0';
 	signal Z				          : std_logic_vector(bit_width - 1 downto 0) := (others => '0');
 	signal Z_expected, Z_holder       : std_logic_vector(bit_width - 1 downto 0) := (others => '0');
 	
@@ -96,16 +81,9 @@ begin
 		
 			reset_n <= '1';
 			EN <= '1';
-			wait for 100 ns;
-			reset_n <= '0';
---			X <= std_logic_vector(to_unsigned(413343538,X'length));
---            Y <= std_logic_vector(to_unsigned(1400488832,Y'length));
---            N <= std_logic_vector(to_unsigned(1825920369,N'length));
---            Z_expected <= std_logic_vector(to_unsigned(1108506787,Z_expected'length));
---			wait for period*2;
---			assert to_integer(unsigned(Z)) = (cnt_X*cnt_Y)mod(cnt_N)
---                report "The MonPro is broken!"
---                severity ERROR;
+			wait for 0 ns;
+			EN <= '0' after 100 ns, '1' after 200 ns;
+			wait;
 		end process reset_proc;
 		
 read_file:process
@@ -116,6 +94,7 @@ read_file:process
    
 --   file vectors: text open write_mode is "stimulus.txt";
 begin
+    
    file_open(vectors, "stimulus.txt", read_mode);
    while not endfile(vectors) loop
         readline(vectors, v_line);
@@ -142,14 +121,14 @@ begin
         wait until busy = '0' and busy_s = '1';
         
     end loop; 
-	file_close(vectors);
+    file_close(vectors);
 
 end process read_file;
    
 monpro_proc : process
 begin
     wait for 1 ns;
-    if busy = '0' then
+    if busy = '0' and EN = '1' then
         assert Z = Z_expected
             report "The MonPro is broken!"
             severity ERROR;
