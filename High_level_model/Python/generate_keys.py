@@ -49,5 +49,5 @@ def generate_keys(p = 0, q = 0): # Can insert known values for p and q if needed
       d = gcd(phi, e_key)
     d_key = multiplicative_inverse(e_key, phi)
 
-  #print(f"n = {n}, encryption key = {e_key}, decryption_key = {d_key}")
+  # print(f"n = {n}, encryption key = {e_key}, decryption_key = {d_key}")
   return n, e_key, d_key

@@ -76,7 +76,8 @@ architecture structural of MonPro is
 	signal Sum : std_logic_vector(bit_width-1 downto 0);
 	
 	--Inputs and outputs stored in registers
-	signal X_s, Y_s, N_s, Z_s : std_logic_vector(bit_width-1 downto 0);
+	signal X_s, Y_s, N_s : std_logic_vector(bit_width-1 downto 0);
+	signal Z_s : std_logic_vector(bit_width-1 downto 0) := (others => '0');
 	
 	--CPA input and output signals
 	signal CPA_Sum : std_logic_vector(bit_width-1 downto 0);
