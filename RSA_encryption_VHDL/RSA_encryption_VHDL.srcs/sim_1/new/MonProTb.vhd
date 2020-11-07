@@ -82,7 +82,7 @@ begin
 			reset_n <= '1';
 			EN <= '1';
 			wait for 0 ns;
-			EN <= '0' after 100 ns, '1' after 200 ns;
+			EN <= '0' after 70 ns, '1' after 80 ns;
 			wait;
 		end process reset_proc;
 		

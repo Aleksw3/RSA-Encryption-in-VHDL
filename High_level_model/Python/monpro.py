@@ -21,14 +21,26 @@ def monpro(a,b,n):
 	# print(u)
 	return u
 
-upperLim = 32
+#Check whether RM%N = (R^2)M(r^-1)%N
 
-file.write("# Column Description:\n# ID | X | Y | N | Z\n")
+upperLim = 8
 
-for i in range(50):
+# file.write("# Column Description:\n# ID | X | Y | N | Z\n")
+
+R = 2**upperLim
+A = b(R**2, upperLim)
+
+for i in range(1):
 	N = random.randint(10, 2**(upperLim-1))
-	A = random.randint(3, 2*N - 1)
+	# A = random.randint(3, 2*N - 1)
 	B = random.randint(3, 2*N - 1)
-	A = b(A, upperLim)
+	# A = b(A, upperLim)
 	u = monpro(A,B,N)
-	file.write(f"{i} {A} {b(B,upperLim)} {b(N,upperLim)} {b(int(u),upperLim)}\n")
+	print(f"Value of A:\t{R}\nValue of B:\t{B}\nValue of N:\t{N}")
+	print(f"Value of RM%N: {(R*B)%N}\tValue of MonPro: {u}")
+	# if(R*B)%N==u:
+	# 	print(f"Value of RM%N: {(R*B)%N}\tValue of MonPro: {u}")
+	# else:
+	# 	print("Fuck my life")
+
+# 	file.write(f"{i} {A} {b(B,upperLim)} {b(N,upperLim)} {b(int(u),upperLim)}\n")
