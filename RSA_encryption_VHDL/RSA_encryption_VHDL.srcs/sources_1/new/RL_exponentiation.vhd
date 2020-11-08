@@ -9,43 +9,63 @@ entity RL_exponentiation is
     Port ( 
             clk:            in std_logic;
             reset_n:        in std_logic;
-            init:           in std_logic;
-            key:            in std_logic_vector(bit_width-1 downto 0);
+            KEY:            in std_logic_vector(bit_width-1 downto 0);
             N:              in std_logic_vector(bit_width-1 downto 0);
-            r_squared:      in std_logic_vector(bit_width-1 downto 0); --Pre calculate in different register
-            message:        in std_logic_vector(bit_width-1 downto 0);
-            mux_select:     in std_logic_vector(1 downto 0);
-            
-            MonPro_busy:    out std_logic_vector(1 downto 0);
-            MonPro_rdy:     in std_logic;
-            MonPro_en_non_loop: in std_logic;
+            R:              in std_logic_vector(bit_width-1 downto 0); --Pre calculate in different register
+            MESSAGE:        in std_logic_vector(bit_width-1 downto 0);
 
-            Exp_done: in std_logic;
+            busy:           out std_logic;
+            init:           in  std_logic;
+            done:           out std_logic;
+            R2:             in std_logic_vector(bit_width-1 downto 0);
+            R2M:            in std_logic_vector(bit_width-1 downto 0);
             
-            shift_enable:   in std_logic;
             output_message: out std_logic_vector(bit_width-1 downto 0)
         );
 end RL_exponentiation;
 
 architecture Behavioral of RL_exponentiation is
 
-signal C_reg, S_reg, N_reg: std_logic_vector(bit_width-1 downto 0);            -- Outputs from MonPro modules
-signal C_s, S_s: std_logic_vector(bit_width-1 downto 0);           -- Outputs from MonPro modules
+-- Registers for inputs
+signal C_reg, S_reg, N_reg, R_reg: std_logic_vector(bit_width-1 downto 0);            -- Outputs from MonPro modules
 signal message_reg: std_logic_vector(bit_width-1 downto 0);
-signal MonPro_C_X, MonPro_C_Y, MonPro_S_X, MonPro_S_Y: std_logic_vector(bit_width-1 downto 0);
 
-signal key_shift_reg: std_logic_vector(bit_width-1 downto 0);
-signal MonPro_C_busy, MonPro_S_busy,MonPro_C_busy_s, MonPro_S_busy_s: std_logic;
+--Signals informing and showing the status of the MonPro
+signal MonPro_C_busy, MonPro_S_busy: std_logic;
 signal MonPro_C_en, MonPro_S_en: std_logic;
+signal MonPro_C_en_start, MonPro_S_en_start: std_logic:='0';
+signal MP_done: std_logic:= '0';
+signal MP_start: std_logic:='0';
+
+--MonPro inputs
+signal MonPro_C_X,MonPro_C_Y: std_logic_vector(bit_width-1 downto 0);
+signal MonPro_S_X,MonPro_S_Y: std_logic_vector(bit_width-1 downto 0);
+
+signal S_s, C_s: std_logic_vector(bit_width-1 downto 0);
+
+-- State machine for the MonPro exponential
+type state_exp is (IDLE,INITIAL,LOOP_EXP,LAST,DATA_OUT);
+signal curr_state_exp, next_state_exp: state_exp;
+
+-- State machine for the MonPro calculation
+type state_mp is (IDLE,LOAD,START,BUSY_WAIT,MP_DONE_FSM);
+signal curr_state_mp, next_state_mp: state_mp;
+
+-- shift register
+signal key_shift_reg: std_logic_vector(bit_width-1 downto 0);
+signal key_reg: std_logic_vector(bit_width-1 downto 0);
+signal counter:       unsigned (8 downto 0);
+signal MonPro_S_busy_f, MonPro_C_busy_f: std_logic:='0';
 
 
-type state is (IDLE,START, MP, LOAD);
-signal curr_state, next_state: state;
+
+
+
+signal MP_busy: std_logic_vector(1 downto 0);
 
 constant one: signed(1 downto 0) := "01";
-
-
 begin
+
 MonPro_C: entity work.MonPro 
             generic map(bit_width => bit_width)
             port map (clk => clk, reset_n => reset_n,
@@ -60,100 +80,214 @@ MonPro_S: entity work.MonPro
                       X => MonPro_S_X, Y=> MonPro_S_Y,
                       Busy => MonPro_S_busy,Z => S_s);
 
-MonPro_busy <= MonPro_C_busy & MonPro_S_busy; 
-output_message <= C_reg;
+MP_busy <= MonPro_C_busy & MonPro_S_busy;
+
+MonPro_S_en <= MonPro_S_en_start or MonPro_S_busy;
+MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
 
 
-    -- Multiplexers infront of MonPro blocks
-    MonPro_inputs: process(mux_select, C_reg,S_reg, message_reg, r_squared)
-    begin
-        case(mux_select) is
-            when "00" =>
-                MonPro_C_X <= std_logic_vector(resize(one,MonPro_C_X'length)); -- 1
-                MonPro_C_Y <= r_squared;
-
-                MonPro_S_X <= message_reg;
-                MonPro_S_Y <= r_squared;
-            when "01" =>
-                MonPro_C_X <= C_reg;
-                MonPro_C_Y <= S_reg;
-
-                MonPro_S_X <= S_reg;
-                MonPro_S_Y <= S_reg;
-            when "10" =>
-                MonPro_C_X <= std_logic_vector(resize(one,MonPro_C_X'length)); -- 1
-                MonPro_C_Y <= C_reg;
-
-                MonPro_S_X <= (others => '0');
-                MonPro_S_Y <= (others => '0');
-            when "11" => -- should never get in this state but in case, DC. Set to zero so we can see the error in simulation
-                MonPro_C_X <= (others => '0');
-                MonPro_C_Y <= (others => '0');
-                MonPro_S_X <= (others => '0');
-                MonPro_S_Y <= (others => '0');
-        end case;
-    end process MonPro_inputs;
-
-    
-    synch: process(clk, reset_n)
+    synchrounous_fsm_exp: process(clk, reset_n)
     begin
         if rising_edge(clk) then
-            curr_state <= next_state;
-            case(next_state) is
+            curr_state_exp <= next_state_exp;
+            case(curr_state_exp) is
                 when IDLE =>
-                    MonPro_C_en   <= '0';
-                    MonPro_S_en   <= '0';
-                    message_reg   <= (others => '0');
-                    N_reg         <= (others => '0');
-                    C_reg         <= (others => '0');
-                    S_reg         <= (others => '0');
-                    key_shift_reg <= (others => '0');
-
-                when START =>
-                    message_reg <= message;
-                    N_reg <= N;
-                    key_shift_reg <= key;
-                when MP =>
-                    MonPro_C_en <= key_shift_reg(0) or MonPro_en_non_loop;
-                    MonPro_S_en <= '1';
-                when LOAD =>
-                    C_reg <= C_s;
-                    S_reg <= S_s;
-                    MonPro_C_en <= '0';
-                    MonPro_S_en <= '0';
-
-                    if shift_enable = '1' then
-                        key_shift_reg <= '0' & key_shift_reg(bit_width-1 downto 1);
+                    busy <='0';
+                    if next_state_exp = INITIAL then
+                        MP_start<='1';
+                    else
+                        MP_start<='0';
                     end if;
+                when INITIAL =>
+                    busy <='1';
+                    N_reg <= N;
+                    message_reg <= MESSAGE;
+                    key_reg <= KEY;
+                    R_reg <= R;
+                    if next_state_exp = LOOP_EXP then
+                        MP_start<='1';
+                    else
+                        MP_start<='0';
+                    end if;
+                when LOOP_EXP =>
+                    busy <='1';
+                    if next_state_exp = LAST then
+                        MP_start<='1';
+                    else
+                        MP_start<='0';
+                    end if;
+                when LAST =>
+                    busy <='1';
+                    MP_start<='0';
+                when DATA_OUT =>
+                    done <= '1';
+                    busy <='1';
+                    MP_start<='0';
+                    output_message <= C_reg;
             end case;
         end if;
 
-    end process synch;
+    end process synchrounous_fsm_exp;
 
-    comb: process(curr_state, MonPro_S_busy,MonPro_C_busy, init, Exp_done)
+    combinational_fsm_exp: process(init, MP_done,curr_state_exp)
     begin
-        case(curr_state) is
+        case(curr_state_exp) is
             when IDLE =>
                 if init = '1' then
-                    next_state <= START;
+                    next_state_exp <= INITIAL;
                 else
-                    next_state <= IDLE;
+                    next_state_exp <= IDLE;
                 end if;
-            when START =>
-                next_state <= MP;
-            when MP =>
-                if MonPro_S_busy = '0' and MonPro_C_busy = '0' then
-                    next_state <= LOAD;
+            when INITIAL =>
+                if MP_done = '1' then
+                    next_state_exp <= LOOP_EXP;
                 else
-                    next_state <= MP;
+                    next_state_exp <= INITIAL;
+                end if;
+            when LOOP_EXP =>
+                if MP_done = '1' then
+                    next_state_exp <= LAST;
+                else
+                    next_state_exp <= LOOP_EXP;
+                end if;
+            when LAST =>
+                if MP_done = '1' then
+                    next_state_exp <= DATA_OUT;
+                else
+                    next_state_exp <= LAST;
+                end if;
+            when DATA_OUT =>
+                next_state_exp <= IDLE;
+        end case;
+    end process combinational_fsm_exp;
+
+
+    synchrounous_fsm_MP: process(clk, reset_n)
+    begin
+        if rising_edge(clk) then
+            curr_state_mp <= next_state_mp;
+
+            case(curr_state_mp) is
+                when IDLE =>
+                    MP_done <= '0';
+                when LOAD =>
+                    if curr_state_exp = INITIAL then
+                        MonPro_S_X <= R_reg;
+                        MonPro_S_Y <= R_reg;
+                        MonPro_C_X <= message_reg;
+                        MonPro_C_Y <= R_reg;
+
+                    elsif curr_state_exp = LOOP_EXP then
+                        MonPro_S_X <= S_reg;
+                        MonPro_S_Y <= S_reg;
+                        MonPro_C_X <= C_reg;
+                        MonPro_C_Y <= S_reg;
+
+                    else -- curr_state_exp = LAST
+                        MonPro_C_X <= std_logic_vector(resize(one,MonPro_C_X'length));
+                        MonPro_C_Y <= S_reg;
+                    end if;
+
+                when START =>
+                    if curr_state_exp = INITIAL then
+                        MonPro_S_en_start <= '1';
+                        MonPro_C_en_start <= '1';
+                    elsif curr_state_exp = LOOP_EXP then
+                        MonPro_S_en_start <= '1';
+                        MonPro_C_en_start <= key_reg(0);
+                        key_shift_reg <= '0'&key_reg(bit_width-1 downto 1);
+                    else -- curr_state_exp = LAST
+                        MonPro_C_en_start <= '1';
+                        MonPro_S_en_start <= '0';
+                    end if;
+                when BUSY_WAIT =>
+                    if curr_state_exp = LOOP_EXP and MP_busy = "00" then
+                        if MonPro_S_en ='1' then
+                            key_shift_reg <= std_logic_vector(shift_right(unsigned(key_shift_reg),1));
+                        end if;
+                        MonPro_S_X <= S_reg;
+                        MonPro_S_Y <= S_reg;
+                        MonPro_C_X <= C_reg;
+                        MonPro_C_Y <= S_reg;
+                        MonPro_S_en_start <= '1';
+                        MonPro_C_en_start <= key_shift_reg(0); -- msb or lsb?? confused face
+                    elsif curr_state_exp = LAST then
+                        MonPro_C_en_start <= '1';
+                        MonPro_S_en_start <= '0';
+                    else
+                        MonPro_S_en_start <= '0';
+                        MonPro_C_en_start <= '0';
+                    end if;
+                when MP_DONE_FSM =>
+                    MP_done <= '1';
+            end case;
+        end if;
+
+    end process synchrounous_fsm_MP;
+
+    combinational_fsm_monpro: process(curr_state_mp, MP_busy, counter, MP_start, MonPro_S_busy, MonPro_C_busy, curr_state_exp)
+    begin
+        case(curr_state_mp) is
+            when IDLE =>
+                if MP_start ='1' then
+                    next_state_mp <= LOAD;
+                else
+                    next_state_mp <= IDLE;
                 end if;
             when LOAD =>
-                if Exp_done ='1' then
-                    next_state <= IDLE;
+                next_state_mp<=START;
+            when START =>
+                if MonPro_S_busy = '1' or MonPro_C_busy = '1' then
+                    next_state_mp<=BUSY_WAIT;
                 else
-                    next_state <= MP;
+                    next_state_mp <= START;
                 end if;
+            when BUSY_WAIT =>
+                if MP_busy = "00" then
+                    if curr_state_exp = LOOP_EXP then
+                        if counter = bit_width then
+                            next_state_mp <= MP_DONE_FSM;
+                        end if;
+                    else
+                        next_state_mp <= MP_DONE_FSM;
+                    end if;
+                else
+                    next_state_mp <= BUSY_WAIT;
+                end if;
+            when MP_DONE_FSM =>
+                next_state_mp <= IDLE;
         end case;
+    end process combinational_fsm_monpro;
+    
+    falling_edge_busy: process(reset_n, clk)
+    begin
+        if rising_edge(clk) then
+            MonPro_S_busy_f <= MonPro_S_busy;
+            MonPro_C_busy_f <= MonPro_C_busy;
+            if curr_state_exp = LOOP_EXP then
+                if MonPro_S_busy_f='1' and MonPro_S_busy='0' then
+                     counter <= counter+1;
+                end if;
+            else
+                counter<=(others=>'0');
+            end if;
+            if MonPro_S_busy_f='1' and MonPro_S_busy='0' then
+                if curr_state_exp = INITIAL then
+                    S_reg <= R2M;
+                else
+                    S_reg <= S_s;
+                end if;
+            end if;
+            if MonPro_C_busy_f='1' and MonPro_C_busy='0' then
+                if curr_state_exp = INITIAL then
+                    C_reg <= R2;
+                else
+                    C_reg <= C_s;
+                end if;
+            end if;
+        end if;
+    end process falling_edge_busy;
 
-    end process comb;
+
+
 end Behavioral;

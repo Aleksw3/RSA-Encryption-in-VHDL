@@ -28,17 +28,14 @@ entity RSA_Core is
 --      rsa_status: out std_logic_vector(31 downto 0);
 
         -- Additional value/constant saved in rsa_regio
-        R:   in std_logic_vector(bit_width-1 downto 0); -- Need to figure out this 
-        R2:  in std_logic_vector(bit_width-1 downto 0); --
-        R2M: in std_logic_vector(bit_width-1 downto 0) -- 
+        R: in std_logic_vector(bit_width-1 downto 0) -- Need to figure out this length
     );
 end RSA_Core;
 
 architecture Behavioral of RSA_Core is
-signal multiple_out:     std_logic := '0';
-signal done, busy, init: std_logic;
-signal msgout_data_reg:  std_logic_vector(bit_width-1 downto 0);
-signal output_message:  std_logic_vector(bit_width-1 downto 0);
+signal multiple_out: std_logic := '0';
+signal done:         std_logic;
+signal msgout_data_reg: std_logic_vector(bit_width-1 downto 0);
 
 begin
     rl_exp: entity work.RL_Exponentiation 
@@ -52,8 +49,6 @@ begin
                          busy => busy,
                          init => init,
                          done => done,
-                         R2 => R2,
-                         R2M => R2M,
                          output_message => output_message);
     
     -- ready to receive if rl_exp not working
@@ -63,7 +58,7 @@ begin
     message_in:process(clk, reset_n) -- Acquire message and initialize exponentiation
     begin
         if reset_n='0' then
-            init <= '0';
+            start <= '0';
         else
             if rising_edge(clk) then
                 if msgin_valid = '1' and busy = '0' then
@@ -81,9 +76,10 @@ begin
     message_out:process(clk, reset_n) -- Send out message, give signal that process is done
     begin
         if reset_n='0' then
+            msgout_data  <= (others => '0');
             msgout_last  <= '0';
             multiple_out <= '0';
-            msgout_data_reg <= (others => '0');
+            msgout_data_reg <= '0';
         else
             if rising_edge(clk) then
                 if done = '1' and msgout_ready = '1' then --- and done ='1'
