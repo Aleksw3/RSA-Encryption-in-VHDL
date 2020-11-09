@@ -11,14 +11,12 @@ entity RL_exponentiation is
             reset_n:        in std_logic;
             KEY:            in std_logic_vector(bit_width-1 downto 0);
             N:              in std_logic_vector(bit_width-1 downto 0);
-            R:              in std_logic_vector(bit_width-1 downto 0); --Pre calculate in different register
             MESSAGE:        in std_logic_vector(bit_width-1 downto 0);
 
             busy:           out std_logic;
             init:           in  std_logic;
             done:           out std_logic;
-            R2:             in std_logic_vector(bit_width-1 downto 0);
-            R2M:            in std_logic_vector(bit_width-1 downto 0);
+            R2N:            in std_logic_vector(bit_width-1 downto 0);
             
             output_message: out std_logic_vector(bit_width-1 downto 0)
         );
@@ -27,7 +25,7 @@ end RL_exponentiation;
 architecture Behavioral of RL_exponentiation is
 
 -- Registers for inputs
-signal C_reg, S_reg, N_reg, R_reg: std_logic_vector(bit_width-1 downto 0);            -- Outputs from MonPro modules
+signal C_reg, S_reg, N_reg, R_reg, R2N_reg: std_logic_vector(bit_width-1 downto 0);            -- Outputs from MonPro modules
 signal message_reg: std_logic_vector(bit_width-1 downto 0);
 
 --Signals informing and showing the status of the MonPro
@@ -48,7 +46,7 @@ type state_exp is (IDLE,INITIAL,LOOP_EXP,LAST,DATA_OUT);
 signal curr_state_exp, next_state_exp: state_exp;
 
 -- State machine for the MonPro calculation
-type state_mp is (IDLE,LOAD,START,BUSY_WAIT,MP_DONE_FSM);
+type state_mp is (IDLE,LOAD,BUSY_WAIT,MP_DONE_FSM);
 signal curr_state_mp, next_state_mp: state_mp;
 
 -- shift register
@@ -92,36 +90,33 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
             curr_state_exp <= next_state_exp;
             case(curr_state_exp) is
                 when IDLE =>
-                    busy <='0';
+                    done <='1';
                     if next_state_exp = INITIAL then
                         MP_start<='1';
                     else
                         MP_start<='0';
                     end if;
                 when INITIAL =>
-                    busy <='1';
+                    done <= '0';
                     N_reg <= N;
+                    R2N_reg <= R2N; -- R^2 % n, input constant
                     message_reg <= MESSAGE;
                     key_reg <= KEY;
-                    R_reg <= R;
                     if next_state_exp = LOOP_EXP then
                         MP_start<='1';
                     else
                         MP_start<='0';
                     end if;
                 when LOOP_EXP =>
-                    busy <='1';
                     if next_state_exp = LAST then
                         MP_start<='1';
                     else
                         MP_start<='0';
                     end if;
                 when LAST =>
-                    busy <='1';
                     MP_start<='0';
                 when DATA_OUT =>
                     done <= '1';
-                    busy <='1';
                     MP_start<='0';
                     output_message <= C_reg;
             end case;
@@ -165,62 +160,76 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
     synchrounous_fsm_MP: process(clk, reset_n)
     begin
         if rising_edge(clk) then
-            curr_state_mp <= next_state_mp;
-
-            case(curr_state_mp) is
-                when IDLE =>
-                    MP_done <= '0';
-                when LOAD =>
-                    if curr_state_exp = INITIAL then
-                        MonPro_S_X <= R_reg;
-                        MonPro_S_Y <= R_reg;
-                        MonPro_C_X <= message_reg;
-                        MonPro_C_Y <= R_reg;
-
-                    elsif curr_state_exp = LOOP_EXP then
-                        MonPro_S_X <= S_reg;
-                        MonPro_S_Y <= S_reg;
-                        MonPro_C_X <= C_reg;
-                        MonPro_C_Y <= S_reg;
-
-                    else -- curr_state_exp = LAST
-                        MonPro_C_X <= std_logic_vector(resize(one,MonPro_C_X'length));
-                        MonPro_C_Y <= S_reg;
-                    end if;
-
-                when START =>
-                    if curr_state_exp = INITIAL then
-                        MonPro_S_en_start <= '1';
-                        MonPro_C_en_start <= '1';
-                    elsif curr_state_exp = LOOP_EXP then
-                        MonPro_S_en_start <= '1';
-                        MonPro_C_en_start <= key_reg(0);
-                        key_shift_reg <= '0'&key_reg(bit_width-1 downto 1);
-                    else -- curr_state_exp = LAST
-                        MonPro_C_en_start <= '1';
-                        MonPro_S_en_start <= '0';
-                    end if;
-                when BUSY_WAIT =>
-                    if curr_state_exp = LOOP_EXP and MP_busy = "00" then
-                        if MonPro_S_en ='1' then
-                            key_shift_reg <= std_logic_vector(shift_right(unsigned(key_shift_reg),1));
-                        end if;
-                        MonPro_S_X <= S_reg;
-                        MonPro_S_Y <= S_reg;
-                        MonPro_C_X <= C_reg;
-                        MonPro_C_Y <= S_reg;
-                        MonPro_S_en_start <= '1';
-                        MonPro_C_en_start <= key_shift_reg(0); -- msb or lsb?? confused face
-                    elsif curr_state_exp = LAST then
-                        MonPro_C_en_start <= '1';
-                        MonPro_S_en_start <= '0';
-                    else
+            if reset_n = '0' then
+                curr_state_mp <= IDLE;
+            else
+                curr_state_mp <= next_state_mp;
+                case(curr_state_mp) is
+                    when IDLE =>
+                        MP_done <= '0';
+                        busy <='0';
                         MonPro_S_en_start <= '0';
                         MonPro_C_en_start <= '0';
-                    end if;
-                when MP_DONE_FSM =>
-                    MP_done <= '1';
-            end case;
+                        MonPro_C_X <= (others=>'0');
+                        MonPro_C_Y <= (others=>'0');
+                        MonPro_S_X <= (others=>'0');
+                        MonPro_S_Y <= (others=>'0');
+                    when LOAD =>
+                        busy <='1';
+                        if curr_state_exp = INITIAL then
+                            MonPro_C_X <= std_logic_vector(resize(one,MonPro_C_X'length));
+                            MonPro_C_Y <= R2N_reg;
+                            MonPro_S_X <= message_reg;
+                            MonPro_S_Y <= R2N_reg;
+                            
+                            MonPro_S_en_start <= '1';
+                            MonPro_C_en_start <= '1';
+    
+                        elsif curr_state_exp = LOOP_EXP then
+                            MonPro_S_X <= S_reg;
+                            MonPro_S_Y <= S_reg;
+                            MonPro_C_X <= C_reg;
+                            MonPro_C_Y <= S_reg;
+                            
+                            MonPro_S_en_start <= '1';
+                            MonPro_C_en_start <= key_reg(0);
+                            key_shift_reg <= '0'&key_reg(bit_width-1 downto 1);
+                        else -- curr_state_exp = LAST
+                            MonPro_C_X <= std_logic_vector(resize(one,MonPro_C_X'length));
+                            MonPro_C_Y <= C_reg;
+                            MonPro_S_X <= (others=>'0');
+                            MonPro_S_Y <= (others=>'0');
+                            MonPro_C_en_start <= '1';
+                            MonPro_S_en_start <= '0';
+                            
+                        end if;
+   
+                    when BUSY_WAIT =>
+                        busy <='1';
+                        if curr_state_exp = LOOP_EXP and MP_busy = "00" then
+                            if MonPro_S_en ='1' then
+                                key_shift_reg <= std_logic_vector(shift_right(unsigned(key_shift_reg),1));
+                            end if;
+                            MonPro_S_X <= S_reg;
+                            MonPro_S_Y <= S_reg;
+                            MonPro_C_X <= C_reg;
+                            MonPro_C_Y <= S_reg;
+                            MonPro_S_en_start <= '1';
+                            MonPro_C_en_start <= key_shift_reg(0); -- msb or lsb?? confused face
+                        elsif curr_state_exp = LAST and MP_busy = "00" and next_state_mp/=MP_DONE_FSM then
+                            MonPro_C_en_start <= '1';
+                            MonPro_S_en_start <= '0';
+                        else
+                            MonPro_S_en_start <= '0';
+                            MonPro_C_en_start <= '0';
+                        end if;
+                    when MP_DONE_FSM =>
+                        busy <='1';
+                        MP_done <= '1';
+                        MonPro_S_en_start <= '0';
+                        MonPro_C_en_start <= '0';
+                end case;
+            end if;
         end if;
 
     end process synchrounous_fsm_MP;
@@ -235,18 +244,18 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                     next_state_mp <= IDLE;
                 end if;
             when LOAD =>
-                next_state_mp<=START;
-            when START =>
                 if MonPro_S_busy = '1' or MonPro_C_busy = '1' then
                     next_state_mp<=BUSY_WAIT;
                 else
-                    next_state_mp <= START;
+                    next_state_mp <= LOAD;
                 end if;
             when BUSY_WAIT =>
                 if MP_busy = "00" then
                     if curr_state_exp = LOOP_EXP then
                         if counter = bit_width then
                             next_state_mp <= MP_DONE_FSM;
+                        else
+                            next_state_mp <= BUSY_WAIT;
                         end if;
                     else
                         next_state_mp <= MP_DONE_FSM;
@@ -271,20 +280,17 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
             else
                 counter<=(others=>'0');
             end if;
-            if MonPro_S_busy_f='1' and MonPro_S_busy='0' then
-                if curr_state_exp = INITIAL then
-                    S_reg <= R2M;
-                else
+--            if next_state_exp = INITIAL then
+--                C_reg <= (others=>'0');
+--                S_reg <= (others=>'0');
+--            else
+                if MonPro_S_busy_f='1' and MonPro_S_busy='0' then
                     S_reg <= S_s;
                 end if;
-            end if;
-            if MonPro_C_busy_f='1' and MonPro_C_busy='0' then
-                if curr_state_exp = INITIAL then
-                    C_reg <= R2;
-                else
+                if MonPro_C_busy_f='1' and MonPro_C_busy='0' then
                     C_reg <= C_s;
                 end if;
-            end if;
+--            end if;
         end if;
     end process falling_edge_busy;
 

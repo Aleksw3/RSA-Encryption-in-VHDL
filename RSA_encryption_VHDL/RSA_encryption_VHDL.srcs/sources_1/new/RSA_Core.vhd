@@ -28,15 +28,13 @@ entity RSA_Core is
 --      rsa_status: out std_logic_vector(31 downto 0);
 
         -- Additional value/constant saved in rsa_regio
-        R:   in std_logic_vector(bit_width-1 downto 0); -- Need to figure out this 
-        R2:  in std_logic_vector(bit_width-1 downto 0); --
-        R2M: in std_logic_vector(bit_width-1 downto 0) -- 
+        R2N:  in std_logic_vector(bit_width-1 downto 0)
     );
 end RSA_Core;
 
 architecture Behavioral of RSA_Core is
 signal multiple_out:     std_logic := '0';
-signal done, busy, init: std_logic;
+signal done,busy, init: std_logic;
 signal msgout_data_reg:  std_logic_vector(bit_width-1 downto 0);
 signal output_message:  std_logic_vector(bit_width-1 downto 0);
 
@@ -47,18 +45,15 @@ begin
                          reset_n => reset_n, 
                          KEY => key_e, 
                          N => key_n,
-                         R => R,
                          MESSAGE => msgin_data,
                          busy => busy,
                          init => init,
                          done => done,
-                         R2 => R2,
-                         R2M => R2M,
+                         R2N => R2N,
                          output_message => output_message);
     
     -- ready to receive if rl_exp not working
     msgin_ready <= not busy; 
-
     -- Message in handshake
     message_in:process(clk, reset_n) -- Acquire message and initialize exponentiation
     begin

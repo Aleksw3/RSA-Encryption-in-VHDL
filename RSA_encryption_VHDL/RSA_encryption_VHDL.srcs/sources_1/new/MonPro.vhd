@@ -96,7 +96,7 @@ architecture structural of MonPro is
 		--Multibit AND operations that are inputs to compressor
 		AndOperations : for i in 0 to bit_width-1 generate
 			C(i) <= N_s(i) AND Q;
-			D(i) <= Y_s(i) AND X_s(bit_width-1);
+			D(i) <= Y_s(i) AND X_s(0);
 		end generate;
 		
 		Summation	: CarryPropagateAdder 
@@ -104,7 +104,7 @@ architecture structural of MonPro is
 					port map(A => Cprs_Carry, B => Cprs_Sum_s, Sum => Sum,
 					Cout => CPA_Cout);
 	
-	    Q <= B(0) XOR (X_s(bit_width-1) AND Y_s(0));
+	    Q <= B(0) XOR (X_s(0) AND Y_s(0));
 		Cprs_Sum_s <= std_logic_vector(shift_right(unsigned(Cprs_Sum),1));
 		--Signal connections to port
 		Z <= Z_s;
@@ -143,7 +143,7 @@ architecture structural of MonPro is
 								A <= Cprs_Carry;
 								B <= Cprs_Sum_s;
 								
-								X_s <=  std_logic_vector(shift_left(unsigned(X_s),1));
+								X_s <=  std_logic_vector(shift_right(unsigned(X_s),1));
 								cnt := cnt + 1;
 								if(cnt = bit_width-1) then
 								    done_s <= '1';
