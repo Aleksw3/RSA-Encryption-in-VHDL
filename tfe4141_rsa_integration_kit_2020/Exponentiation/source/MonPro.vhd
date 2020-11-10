@@ -71,7 +71,7 @@ architecture structural of MonPro is
 	signal Cprs_Cout : std_logic;
 	signal A, B, C, D : std_logic_vector(C_block_size-1 downto 0);
 	signal Cprs_Carry : std_logic_vector(C_block_size-1 downto 0) := (others => '0');
-	signal Cprs_Sum :   std_logic_vector(C_block_size-1 downto 0) := (others => '0');
+	signal Cprs_Sum : std_logic_vector(C_block_size - 1 downto 0) := (others => '0');
 	signal Cprs_Sum_s : std_logic_vector(C_block_size-1 downto 0) := (others => '0'); --shifted signal
 	signal Sum : std_logic_vector(C_block_size-1 downto 0);
 	

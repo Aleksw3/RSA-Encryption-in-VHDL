@@ -50,6 +50,7 @@ add_wave core/key_e core/key_n core/R2N core/N core/rl_exp/message_reg
 
 # answers
 add_wave core/msgout_data
+add_wave core/output_message
 add_wave cipher message done
 add_wave msgout_valid msgin_ready msgin_valid
 

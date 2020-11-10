@@ -64,12 +64,13 @@ def R_L_bin_exp(M: int, e:int, n:int):
   Right-left binary exponentiation method for montgomery
   '''
   global k
-  # print(bin(M),bin(e),bin(n))
+  print(hex(M),hex(e),hex(n))
   e_bin_str = int_to_bin(e,k)[::-1]
   r = 2**k
   # C = mp2(1, (r*r)%n, n)
   C = mp2(1, (r*r)%n, n)
   S = mp2(M, (r*r)%n, n)
+  print(f"R2N = {hex((r*r)%n)}")
   print(f"C = {hex(C)}")
   print(f"S = {hex(S)}")
   # print(e_bin_str)
@@ -77,7 +78,7 @@ def R_L_bin_exp(M: int, e:int, n:int):
   for i in range(len(e_bin_str)):
     C,S = mp2(C,S,n) if int(e_bin_str[i]) == 1 else C,mp2(S,S,n)
     print(f" e = {e_bin_str[i]} C{i} = {hex(C)[2:]} S{i} = {hex(S)[2:]}")
-  # print(hex(C))
+  print(hex(C))
   C = mp2(C,1,n)
   print(hex(C))
 
@@ -108,12 +109,12 @@ if __name__ == "__main__":
 
   # n_key, e_key, d_key = generate_keys()
   # # print(n_key,e_key,d_key)
-  n_key, e_key = 0x0177c33d, 0x00296fe3
+  n_key, e_key = 0x99925173ad65686715385ea800cd28120288fc70a9bc98dd4c90d676f8ff768d, 0x0000000000000000000000000000000000000000000000000000000000010001
        
-  M = 50
-  k = 32
-  r = 2**32
-  assert k<=32, "k too large"
+  M = 0x0A23232323232323232323232323232323232323232323232323232323232323
+  k = 256
+  # r = 2**k
+  # assert k<=32, "k too large"
   Cipher = R_L_bin_exp(M, e_key, n_key)
   # # Deciphered = R_L_bin_exp(Cipher, d_key, n_key)
   # print(Cipher,Deciphered)

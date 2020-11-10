@@ -1,28 +1,33 @@
-library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+library ieee;
+use ieee.std_logic_1164.all;
 use IEEE.numeric_std.ALL;
 
-entity RL_exponentiation is
-    Generic(
-            C_block_size: integer:= 256
-        );
-    Port ( 
-            clk:            in std_logic;
-            reset_n:        in std_logic;
-            KEY:            in std_logic_vector(C_block_size-1 downto 0);
-            N:              in std_logic_vector(C_block_size-1 downto 0);
-            MESSAGE:        in std_logic_vector(C_block_size-1 downto 0);
+entity exponentiation is
+	generic (
+		C_block_size : integer := 256
+	);
+	port (
+	     -- basic important
+		 clk:            in std_logic;
+         reset_n:        in std_logic;
+         -- input values
+         KEY:            in std_logic_vector(C_block_size-1 downto 0);
+         N:              in std_logic_vector(C_block_size-1 downto 0);
+         MESSAGE:        in std_logic_vector(C_block_size-1 downto 0);
+         R2N:            in std_logic_vector(C_block_size-1 downto 0);
+         
+         output_message: out std_logic_vector(C_block_size-1 downto 0);
+         
+         -- control logic
+         init:           in  std_logic;
+         busy:           out std_logic;
+         done:           out std_logic
+         
+	);
+end exponentiation;
 
-            busy:           out std_logic;
-            init:           in  std_logic;
-            done:           out std_logic;
-            R2N:            in std_logic_vector(C_block_size-1 downto 0);
-            
-            output_message: out std_logic_vector(C_block_size-1 downto 0)
-        );
-end RL_exponentiation;
 
-architecture Behavioral of RL_exponentiation is
+architecture expBehave of exponentiation is
 
 -- Registers for inputs
 signal C_reg, S_reg, N_reg, R_reg, R2N_reg: std_logic_vector(C_block_size-1 downto 0);            -- Outputs from MonPro modules
@@ -51,17 +56,13 @@ signal curr_state_mp, next_state_mp: state_mp;
 
 -- shift register
 signal key_shift_reg: std_logic_vector(C_block_size-1 downto 0);
-signal key_reg: std_logic_vector(C_block_size-1 downto 0);
+signal key_reg:       std_logic_vector(C_block_size-1 downto 0);
 signal counter:       unsigned (8 downto 0);
 signal MonPro_S_busy_f, MonPro_C_busy_f: std_logic:='0';
 
-
-
-
-
 signal MP_busy: std_logic_vector(1 downto 0);
-
 constant one: signed(1 downto 0) := "01";
+
 begin
 
 -----------------------------------------------------------------------------------------------
@@ -112,12 +113,14 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                 case(curr_state_exp) is
                     when IDLE =>
                         done <='1';
+                        busy<= '0';
                         if next_state_exp = INITIAL then
                             MP_start<='1';
                         else
                             MP_start<='0';
                         end if;
                     when INITIAL =>
+                        busy<= '1';
                         done <= '0';
                         N_reg <= N;
                         R2N_reg <= R2N; -- R^2 % n, input constant
@@ -137,6 +140,7 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                     when LAST =>
                         MP_start<='0';
                     when DATA_OUT =>
+                        busy<= '1'; 
                         done <= '1';
                         MP_start<='0';
                         output_message <= C_reg;
@@ -193,7 +197,7 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
             if reset_n = '0' then
                 curr_state_mp     <= IDLE;
                 MP_done           <= '0';
-                busy              <= '0';                
+--                busy              <= '0';                
                 MonPro_C_X        <= (others=>'0');
                 MonPro_C_Y        <= (others=>'0');
                 MonPro_S_X        <= (others=>'0');
@@ -205,7 +209,7 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                 case(curr_state_mp) is
                     when IDLE =>
                         MP_done           <= '0';
-                        busy              <= '0';                
+--                        busy              <= '0';                
                         MonPro_C_X        <= (others=>'0');
                         MonPro_C_Y        <= (others=>'0');
                         MonPro_S_X        <= (others=>'0');
@@ -213,7 +217,7 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                         MonPro_S_en_start <= '0';
                         MonPro_C_en_start <= '0';
                     when LOAD =>
-                        busy <='1';
+--                        busy <='1';
                         if curr_state_exp = INITIAL then
                             MonPro_C_X <= std_logic_vector(resize(one,MonPro_C_X'length));
                             MonPro_C_Y <= R2N_reg;
@@ -243,7 +247,7 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                         end if;
    
                     when BUSY_WAIT =>
-                        busy <='1';
+--                        busy <='1';
                         if curr_state_exp = LOOP_EXP and MP_busy = "00" then
                             if MonPro_S_en ='1' then
                                 key_shift_reg <= std_logic_vector(shift_right(unsigned(key_shift_reg),1));
@@ -262,7 +266,7 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                             MonPro_C_en_start <= '0';
                         end if;
                     when MP_DONE_FSM =>
-                        busy <='1';
+--                        busy <='1';
                         MP_done <= '1';
                         MonPro_S_en_start <= '0';
                         MonPro_C_en_start <= '0';
@@ -309,9 +313,7 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                 next_state_mp <= IDLE;
         end case;
     end process combinational_fsm_monpro;
-    
-
-
+   
 -----------------------------------------------------------------------------------------------
 --------------Update C and S registers in falling flank of busy--------------------------------
 -----------------------------------------------------------------------------------------------
@@ -338,7 +340,4 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
             end if;
         end if;
     end process falling_edge_busy;
-
-
-
-end Behavioral;
+end expBehave;
