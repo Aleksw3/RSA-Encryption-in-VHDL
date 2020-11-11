@@ -1,7 +1,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.numeric_std.all;
-
+ 
 entity RSA_Core is
     Generic(
             C_BLOCK_SIZE: integer:=256
@@ -12,7 +12,7 @@ entity RSA_Core is
         -----------------------------------------------------------------------------
         clk:     in std_logic;
         reset_n: in std_logic;
-
+ 
         -----------------------------------------------------------------------------
         -- Slave msgin interface
         -----------------------------------------------------------------------------
@@ -24,9 +24,9 @@ entity RSA_Core is
         msgin_last:  in std_logic;
         -- Message that will be sent out of the rsa_msgin module
         msgin_data:  in std_logic_vector(C_BLOCK_SIZE-1 downto 0);
-        
-        
-
+ 
+ 
+ 
         -----------------------------------------------------------------------------
         -- Master msgout interface
         -----------------------------------------------------------------------------
@@ -38,19 +38,19 @@ entity RSA_Core is
         msgout_last:  out std_logic;
         -- Message that will be sent out of the rsa_msgin module        
         msgout_data:  out std_logic_vector(C_BLOCK_SIZE-1 downto 0);
-
+ 
         -----------------------------------------------------------------------------
         -- Interface to the register block
         -----------------------------------------------------------------------------
         key_n: in std_logic_vector(C_BLOCK_SIZE-1 downto 0);
         key_e_d: in std_logic_vector(C_BLOCK_SIZE-1 downto 0);
         rsa_status: out std_logic_vector(31 downto 0);
-
+ 
         -- Additional value/constant saved in rsa_regio
         R2N:  in std_logic_vector(C_BLOCK_SIZE-1 downto 0) --r^2 % n
     );
 end RSA_Core;
-
+ 
 architecture Behavioral of RSA_Core is
 signal multiple_out:     std_logic := '0';
 signal done, busy, init: std_logic;
@@ -61,7 +61,7 @@ signal output_message:   std_logic_vector(C_BLOCK_SIZE-1 downto 0);
 signal msgin_data_reg:   std_logic_vector(C_BLOCK_SIZE-1 downto 0);
 type msg_state is (MSGIN,WAIT_FOR_BUSY, MSGOUT);
 signal state_msg, next_state_msg, prev_state: msg_state:=MSGIN;
-
+ 
 begin
 -----------------------------------------------------------------------------------------------
 --------------------- Exponentiation component port map ---------------------------------------
@@ -79,8 +79,8 @@ begin
                          done => done,
                          R2N => R2N,
                          output_message => output_message);
-    
-
+ 
+ 
 -----------------------------------------------------------------------------------------------
 --------------------- Message In Signalling----------------------------------------------------
 -----------------------------------------------------------------------------------------------
@@ -88,12 +88,12 @@ begin
     msgin_ready <= init; 
     msgout_data <= msgout_data_reg;
     msgout_valid <= msgout_valid_s;
-
+ 
     process(reset_n, clk)
     begin
         if rising_edge(clk) then
             state_msg <= next_state_msg;
-            
+ 
             case(state_msg) is
                 when MSGIN =>
                     if msgin_valid = '1' then
@@ -106,11 +106,6 @@ begin
                             else
                                 last_input_msg <= '0';
                             end if;
-                            if last_input_msg = '1' then
-                                last_input_msg <='0';
-                            else 
-                                last_input_msg <='0';
-                            end if;
                         else
                             init<='0';
                         end if;
@@ -121,6 +116,7 @@ begin
                     if prev_state = MSGOUT then
                         if msgout_valid_s = '1' and msgout_ready = '1' then
                             msgout_valid_s <='0';
+                            msgout_last <= '0';
                         end if;
                     end if;
                 when MSGOUT =>
@@ -134,8 +130,6 @@ begin
                         end if;
                         if last_input_msg = '1' then
                             msgout_last <= '1';
-                        else
-                            msgout_last <= '0';
                         end if;
                     else
                         msgout_valid_s <='0';
@@ -143,9 +137,9 @@ begin
                     end if;
             end case ;
         end if;
-
+ 
     end process;
-
+ 
     process(state_msg, msgout_ready,init,msgin_valid,busy)
     begin
         case(state_msg) is
@@ -157,7 +151,7 @@ begin
                     next_state_msg <=MSGIN;
                 end if;
             when WAIT_FOR_BUSY =>
-            
+ 
                 if prev_state = MSGIN then
                     if busy = '1' then
                         next_state_msg <= MSGOUT;
@@ -171,7 +165,7 @@ begin
                         next_state_msg <= WAIT_FOR_BUSY;
                     end if;
                 end if;
-                
+ 
             when MSGOUT =>
                 if done='1' then
                     next_state_msg <=WAIT_FOR_BUSY;
@@ -180,14 +174,14 @@ begin
                     next_state_msg <=MSGOUT;
                 end if;
         end case ;
-
+ 
     end process;
-
-
-    
+ 
+ 
+ 
 -----------------------------------------------------------------------------------------------
 --------------------- Message Out signalling---------------------------------------------------
 -----------------------------------------------------------------------------------------------
-
-
+ 
+ 
 end Behavioral;
