@@ -1,0 +1,88 @@
+#-----------------------------------------------------------
+# Vivado v2019.2 (64-bit)
+# SW Build 2708876 on Wed Nov  6 21:39:14 MST 2019
+# IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
+# Start of session at: Wed Nov 11 13:57:07 2020
+# Process ID: 19019
+# Current directory: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/RSA_soc/RSA_soc.runs/impl_1
+# Command line: vivado -log RSA_soc_wrapper.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source RSA_soc_wrapper.tcl -notrace
+# Log file: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/RSA_soc/RSA_soc.runs/impl_1/RSA_soc_wrapper.vdi
+# Journal file: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/RSA_soc/RSA_soc.runs/impl_1/vivado.jou
+#-----------------------------------------------------------
+source RSA_soc_wrapper.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/IP'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/home/aleksw/Apps/Xilinx/Vivado/2019.2/data/ip'.
+Command: link_design -top RSA_soc_wrapper -part xc7z020clg400-1
+Design is defaulting to srcset: sources_1
+Design is defaulting to constrset: constrs_1
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+INFO: [Project 1-454] Reading design checkpoint '/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_axi_smc_0/rsa_soc_axi_smc_0.dcp' for cell 'rsa_soc_i/axi_smc'
+INFO: [Project 1-454] Reading design checkpoint '/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_processing_system7_0_0/rsa_soc_processing_system7_0_0.dcp' for cell 'rsa_soc_i/processing_system7_0'
+INFO: [Project 1-454] Reading design checkpoint '/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_rst_ps7_0_100M_0/rsa_soc_rst_ps7_0_100M_0.dcp' for cell 'rsa_soc_i/rst_ps7_0_100M'
+INFO: [Project 1-454] Reading design checkpoint '/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_xbar_0/rsa_soc_xbar_0.dcp' for cell 'rsa_soc_i/ps7_0_axi_periph/xbar'
+INFO: [Project 1-454] Reading design checkpoint '/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_auto_pc_0/rsa_soc_auto_pc_0.dcp' for cell 'rsa_soc_i/ps7_0_axi_periph/s00_couplers/auto_pc'
+INFO: [Project 1-454] Reading design checkpoint '/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_rsa_acc_0/rsa_soc_rsa_acc_0.dcp' for cell 'rsa_soc_i/rsa/rsa_acc'
+INFO: [Project 1-454] Reading design checkpoint '/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_rsa_dma_0/rsa_soc_rsa_dma_0.dcp' for cell 'rsa_soc_i/rsa/rsa_dma'
+Netlist sorting complete. Time (s): cpu = 00:00:00.22 ; elapsed = 00:00:00.22 . Memory (MB): peak = 1718.926 ; gain = 0.000 ; free physical = 4133 ; free virtual = 6617
+INFO: [Netlist 29-17] Analyzing 248 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-479] Netlist was created with Vivado 2019.2
+INFO: [Project 1-570] Preparing netlist for logic optimization
+Parsing XDC File [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_rsa_acc_0/src/PYNQ-Z1_C.xdc] for cell 'rsa_soc_i/rsa/rsa_acc/U0'
+Finished Parsing XDC File [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_rsa_acc_0/src/PYNQ-Z1_C.xdc] for cell 'rsa_soc_i/rsa/rsa_acc/U0'
+Parsing XDC File [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_rsa_dma_0/rsa_soc_rsa_dma_0.xdc] for cell 'rsa_soc_i/rsa/rsa_dma/U0'
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_rsa_dma_0/rsa_soc_rsa_dma_0.xdc:52]
+WARNING: [Vivado_Tcl 4-921] Waiver ID 'CDC-1' -to list should not be empty. [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_rsa_dma_0/rsa_soc_rsa_dma_0.xdc:56]
+WARNING: [Vivado_Tcl 4-919] Waiver ID 'CDC-1' -from list should not be empty. [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_rsa_dma_0/rsa_soc_rsa_dma_0.xdc:61]
+Finished Parsing XDC File [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_rsa_dma_0/rsa_soc_rsa_dma_0.xdc] for cell 'rsa_soc_i/rsa/rsa_dma/U0'
+Parsing XDC File [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_processing_system7_0_0/rsa_soc_processing_system7_0_0.xdc] for cell 'rsa_soc_i/processing_system7_0/inst'
+Finished Parsing XDC File [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_processing_system7_0_0/rsa_soc_processing_system7_0_0.xdc] for cell 'rsa_soc_i/processing_system7_0/inst'
+Parsing XDC File [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_rst_ps7_0_100M_0/rsa_soc_rst_ps7_0_100M_0_board.xdc] for cell 'rsa_soc_i/rst_ps7_0_100M/U0'
+Finished Parsing XDC File [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_rst_ps7_0_100M_0/rsa_soc_rst_ps7_0_100M_0_board.xdc] for cell 'rsa_soc_i/rst_ps7_0_100M/U0'
+Parsing XDC File [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_rst_ps7_0_100M_0/rsa_soc_rst_ps7_0_100M_0.xdc] for cell 'rsa_soc_i/rst_ps7_0_100M/U0'
+Finished Parsing XDC File [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_rst_ps7_0_100M_0/rsa_soc_rst_ps7_0_100M_0.xdc] for cell 'rsa_soc_i/rst_ps7_0_100M/U0'
+Parsing XDC File [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/Master_constraints/PYNQ-Z1_C.xdc]
+Finished Parsing XDC File [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/Master_constraints/PYNQ-Z1_C.xdc]
+Parsing XDC File [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/rsa_soc_ooc.xdc]
+WARNING: [Vivado 12-508] No pins matched 'processing_system7_0/FCLK_CLK0'. [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/rsa_soc_ooc.xdc:9]
+CRITICAL WARNING: [Vivado 12-4739] create_clock:No valid object(s) found for '-objects [get_pins processing_system7_0/FCLK_CLK0]'. [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/rsa_soc_ooc.xdc:9]
+Resolution: Check if the specified object(s) exists in the current design. If it does, ensure that the correct design hierarchy was specified for the object. If you are working with clocks, make sure create_clock was used to create the clock object before it is referenced.
+Finished Parsing XDC File [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/rsa_soc_ooc.xdc]
+Parsing XDC File [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_rsa_dma_0/rsa_soc_rsa_dma_0_clocks.xdc] for cell 'rsa_soc_i/rsa/rsa_dma/U0'
+Finished Parsing XDC File [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_rsa_dma_0/rsa_soc_rsa_dma_0_clocks.xdc] for cell 'rsa_soc_i/rsa/rsa_dma/U0'
+Sourcing Tcl File [/home/aleksw/Apps/Xilinx/Vivado/2019.2/data/ip/xpm/xpm_fifo/tcl/xpm_fifo_rst.tcl] for cell 'rsa_soc_i/rsa/rsa_dma/U0/I_PRMRY_DATAMOVER/GEN_MM2S_FULL.I_MM2S_FULL_WRAPPER/GEN_INCLUDE_MM2S_SF.I_RD_SF/I_DATA_FIFO/BLK_MEM.I_SYNC_FIFOGEN_FIFO/xpm_fifo_instance.xpm_fifo_sync_inst'
+Finished Sourcing Tcl File [/home/aleksw/Apps/Xilinx/Vivado/2019.2/data/ip/xpm/xpm_fifo/tcl/xpm_fifo_rst.tcl] for cell 'rsa_soc_i/rsa/rsa_dma/U0/I_PRMRY_DATAMOVER/GEN_MM2S_FULL.I_MM2S_FULL_WRAPPER/GEN_INCLUDE_MM2S_SF.I_RD_SF/I_DATA_FIFO/BLK_MEM.I_SYNC_FIFOGEN_FIFO/xpm_fifo_instance.xpm_fifo_sync_inst'
+Sourcing Tcl File [/home/aleksw/Apps/Xilinx/Vivado/2019.2/data/ip/xpm/xpm_fifo/tcl/xpm_fifo_rst.tcl] for cell 'rsa_soc_i/rsa/rsa_dma/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/GEN_ENABLE_INDET_BTT_SF.I_INDET_BTT/I_XD_FIFO/NON_BLK_MEM.I_SYNC_FIFOGEN_FIFO/xpm_fifo_instance.xpm_fifo_sync_inst'
+Finished Sourcing Tcl File [/home/aleksw/Apps/Xilinx/Vivado/2019.2/data/ip/xpm/xpm_fifo/tcl/xpm_fifo_rst.tcl] for cell 'rsa_soc_i/rsa/rsa_dma/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/GEN_ENABLE_INDET_BTT_SF.I_INDET_BTT/I_XD_FIFO/NON_BLK_MEM.I_SYNC_FIFOGEN_FIFO/xpm_fifo_instance.xpm_fifo_sync_inst'
+Sourcing Tcl File [/home/aleksw/Apps/Xilinx/Vivado/2019.2/data/ip/xpm/xpm_fifo/tcl/xpm_fifo_rst.tcl] for cell 'rsa_soc_i/rsa/rsa_dma/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/GEN_ENABLE_INDET_BTT_SF.I_INDET_BTT/I_DATA_FIFO/BLK_MEM.I_SYNC_FIFOGEN_FIFO/xpm_fifo_instance.xpm_fifo_sync_inst'
+Finished Sourcing Tcl File [/home/aleksw/Apps/Xilinx/Vivado/2019.2/data/ip/xpm/xpm_fifo/tcl/xpm_fifo_rst.tcl] for cell 'rsa_soc_i/rsa/rsa_dma/U0/I_PRMRY_DATAMOVER/GEN_S2MM_FULL.I_S2MM_FULL_WRAPPER/GEN_ENABLE_INDET_BTT_SF.I_INDET_BTT/I_DATA_FIFO/BLK_MEM.I_SYNC_FIFOGEN_FIFO/xpm_fifo_instance.xpm_fifo_sync_inst'
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+CRITICAL WARNING: [Project 1-486] Could not resolve non-primitive black box cell 'rsa_soc_axi_smc_0_bd_ae75' instantiated as 'rsa_soc_i/axi_smc/inst' [/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_axi_smc_0/synth/rsa_soc_axi_smc_0.v:480]
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1888.391 ; gain = 0.000 ; free physical = 4013 ; free virtual = 6508
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 2 instances were transformed.
+  RAM32M => RAM32M (RAMD32(x6), RAMS32(x2)): 2 instances
+
+17 Infos, 4 Warnings, 2 Critical Warnings and 0 Errors encountered.
+link_design completed successfully
+link_design: Time (s): cpu = 00:00:19 ; elapsed = 00:00:32 . Memory (MB): peak = 1888.391 ; gain = 452.652 ; free physical = 4013 ; free virtual = 6508
+Command: opt_design
+Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
+Running DRC as a precondition to command opt_design
+
+Starting DRC Task
+INFO: [DRC 23-27] Running DRC with 8 threads
+ERROR: [DRC INBB-3] Black Box Instances: Cell 'rsa_soc_i/axi_smc/inst' of type 'rsa_soc_axi_smc_0_bd_ae75' has undefined contents and is considered a black box.  The contents of this cell must be defined for opt_design to complete successfully.
+INFO: [Project 1-461] DRC finished with 1 Errors
+INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
+ERROR: [Vivado_Tcl 4-78] Error(s) found during DRC. Opt_design not run.
+
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 2020.828 ; gain = 132.438 ; free physical = 4015 ; free virtual = 6507
+INFO: [Common 17-83] Releasing license: Implementation
+22 Infos, 4 Warnings, 2 Critical Warnings and 2 Errors encountered.
+opt_design failed
+ERROR: [Common 17-39] 'opt_design' failed due to earlier errors.
+
+INFO: [Common 17-206] Exiting Vivado at Wed Nov 11 13:57:58 2020...

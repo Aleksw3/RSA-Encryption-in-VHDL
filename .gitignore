@@ -7,3 +7,5 @@ RSA_encryption_VHDL/RSA_encryption_VHDL.ip_user_files/
 *.cache/
 *.ip_user_files/
 RSA_encryption_VHDL/RSA_encryption_VHDL.xpr
+!/tfe4141_rsa_integration_kit_2020/*
+!tfe4141_rsa_integration_kit_2020/*
