@@ -1,0 +1,35 @@
+#### Seemingly Correct
+/RL_exp_tb/core/rl_exp/MonPro_S/A_r
+0000000000000000000000000000000000000000000000000000000000000000
+/RL_exp_tb/core/rl_exp/MonPro_S/B_r
+50907c08e15940fe8367bb908fdd99e1400233ddc21d301171e21f04995bd73e
+/RL_exp_tb/core/rl_exp/MonPro_S/C
+0000000000000000000000000000000000000000000000000000000000000000
+/RL_exp_tb/core/rl_exp/MonPro_S/D
+a120f811c2b281fd06cf77211fbb33c2800467bb843a6022e3c43e0932b7ae7c
+
+/RL_exp_tb/core/rl_exp/MonPro_S/compressor_carry
+0000800100200100048844001022220000004422002040008200200020240840
+/RL_exp_tb/core/rl_exp/MonPro_S/compressor_sum_shifted
+78d83a0c51e5e07dc0935558c7aa44d1e00309aaa30b8819a8d30e86c5e5ba9d
+/RL_exp_tb/core/rl_exp/MonPro_S/compressor_sum
+f1b07418a3cbc0fb8126aab18f5489a3c00613554617103351a61d0d8bcb753a
+
+
+
+#### WRONG??
+/RL_exp_tb/core/rl_exp/MonPro_S/A_r
+0000800100200100048844001022220000004422002040008200200020240840
+/RL_exp_tb/core/rl_exp/MonPro_S/B_r
+78d83a0c51e5e07dc0935558c7aa44d1e00309aaa30b8819a8d30e86c5e5ba9d
+/RL_exp_tb/core/rl_exp/MonPro_S/C
+99925173ad65686715385ea800cd28120288fc70a9bc98dd4c90d676f8ff768d
+/RL_exp_tb/core/rl_exp/MonPro_S/D
+a120f811c2b281fd06cf77211fbb33c2800467bb843a6022e3c43e0932b7ae7c
+
+/RL_exp_tb/core/rl_exp/MonPro_S/compressor_carry
+40209023022201e201246c50185643010000d261022550228380240921ad6868
+/RL_exp_tb/core/rl_exp/MonPro_S/compressor_sum_shifted
+19a571a65eece40eef6d4b40e3d41e523147869b666c106aaa13fd7a67330b8b
+/RL_exp_tb/core/rl_exp/MonPro_S/compressor_sum
+334ae34cbdd9c81ddeda9681c7a83ca4628f0d36ccd820d55427faf4ce661716

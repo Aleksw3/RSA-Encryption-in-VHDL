@@ -152,13 +152,13 @@ begin
                     if busy = '1' then
                         next_state_msg <= MSGOUT;
                     else
-                        next_state_msg <= MSGIN;
+                        next_state_msg <= WAIT_FOR_BUSY;
                     end if;
                 else 
                     if msgout_ready = '1' then
                         next_state_msg <= MSGIN;
                     else
-                        next_state_msg <= MSGOUT;
+                        next_state_msg <= WAIT_FOR_BUSY;
                     end if;
                 end if;
                 

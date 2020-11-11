@@ -136,11 +136,11 @@ begin
 
     end process;
 
-    process(state_msg, msgout_ready, msgin_ready,busy)
+    process(state_msg, msgout_ready,init,msgin_valid,busy)
     begin
         case(state_msg) is
             when MSGIN =>
-                if msgin_ready = '1' then
+                if init = '1' and msgin_valid = '1' and busy='0' then
                     next_state_msg <=WAIT_FOR_BUSY;
                     prev_state <= MSGIN;
                 else
@@ -151,18 +151,17 @@ begin
                 if prev_state = MSGIN then
                     if busy = '1' then
                         next_state_msg <= MSGOUT;
+                    else
+                        next_state_msg <= WAIT_FOR_BUSY;
                     end if;
                 else 
                     if msgout_ready = '1' then
                         next_state_msg <= MSGIN;
+                    else
+                        next_state_msg <= WAIT_FOR_BUSY;
                     end if;
                 end if;
-                    
-                if busy = '1' then
-                    
-                else
-                    next_state_msg <= WAIT_FOR_BUSY;
-                end if;
+                
             when MSGOUT =>
                 if done='1' then
                     next_state_msg <=WAIT_FOR_BUSY;

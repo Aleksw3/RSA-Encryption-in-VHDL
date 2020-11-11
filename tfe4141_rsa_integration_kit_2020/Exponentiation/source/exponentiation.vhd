@@ -210,10 +210,10 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                     when IDLE =>
                         MP_done           <= '0';
 --                        busy              <= '0';                
---                        MonPro_C_X        <= (others=>'0');
---                        MonPro_C_Y        <= (others=>'0');
---                        MonPro_S_X        <= (others=>'0');
---                        MonPro_S_Y        <= (others=>'0');
+                        MonPro_C_X        <= (others=>'0');
+                        MonPro_C_Y        <= (others=>'0');
+                        MonPro_S_X        <= (others=>'0');
+                        MonPro_S_Y        <= (others=>'0');
                         MonPro_S_en_start <= '0';
                         MonPro_C_en_start <= '0';
                     when LOAD =>
@@ -228,10 +228,11 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                             MonPro_C_en_start <= '1';
     
                         elsif curr_state_exp = LOOP_EXP then
-                            MonPro_S_X <= S_reg;
-                            MonPro_S_Y <= S_reg;
                             MonPro_C_X <= C_reg;
                             MonPro_C_Y <= S_reg;
+                            
+                            MonPro_S_X <= S_reg;
+                            MonPro_S_Y <= S_reg;
                             
                             MonPro_S_en_start <= '1';
                             MonPro_C_en_start <= key_reg(0);
@@ -252,12 +253,13 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                             if MonPro_S_en ='1' then
                                 key_shift_reg <= std_logic_vector(shift_right(unsigned(key_shift_reg),1));
                             end if;
-                            MonPro_S_X <= S_reg;
-                            MonPro_S_Y <= S_reg;
                             MonPro_C_X <= C_reg;
-                            MonPro_C_Y <= S_reg;
+                            MonPro_C_Y <= S_reg;     
+                            MonPro_S_X <= S_reg;
+                            MonPro_S_Y <= S_reg;      
+                                                  
                             MonPro_S_en_start <= '1';
-                            MonPro_C_en_start <= key_shift_reg(0); -- msb or lsb?? confused face
+                            MonPro_C_en_start <= key_shift_reg(0);
                         elsif curr_state_exp = LAST and MP_busy = "00" and next_state_mp/=MP_DONE_FSM then
                             MonPro_C_en_start <= '1';
                             MonPro_S_en_start <= '0';
@@ -298,7 +300,7 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
             when BUSY_WAIT =>
                 if MP_busy = "00" then
                     if curr_state_exp = LOOP_EXP then
-                        if counter = C_block_size then
+                        if counter = C_block_size-1 then
                             next_state_mp <= MP_DONE_FSM;
                         else
                             next_state_mp <= BUSY_WAIT;

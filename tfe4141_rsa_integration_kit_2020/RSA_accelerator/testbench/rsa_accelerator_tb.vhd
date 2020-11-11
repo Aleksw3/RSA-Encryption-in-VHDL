@@ -303,7 +303,8 @@ architecture struct of rsa_accelerator_tb is
 	signal msgout_counter    : unsigned(15 downto 0);
 
 begin
-    R2N <= x"56ddf8b43061ad3dbcd1757244d1a19e2e8c849dde4817e55bb29d1c20c06364";
+--    R2N <= x"33490ba4f7cfc6cac056e407fd9887c9f8650aae02ca35681a4d7c9b15019c59";
+      R2N <= x"28533fe966bbe428c8d5187911ac3654b520199625a72ddad5a8c7829102a076";
 	-----------------------------------------------------------------------------
 	-- Clock and reset generation
 	-----------------------------------------------------------------------------
@@ -311,9 +312,9 @@ begin
 	clk_gen: process is
 	begin
 		clk <= '1';
-		wait for 1 ns;
+		wait for 10 ns;
 		clk <= '0';
-		wait for 1 ns;
+		wait for 10 ns;
 	end process;
 
 	-- reset_n generator

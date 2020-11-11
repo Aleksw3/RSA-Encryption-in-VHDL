@@ -39,24 +39,24 @@ architecture structural of MonPro is
 	component CompressorMultiBit_4to2 is
 	generic(bit_width : integer);
 	port( 
-		   A 		        : in std_logic_vector(bit_width-1 downto 0);
-		   B 		        : in std_logic_vector(bit_width-1 downto 0);
-		   C 		        : in std_logic_vector(bit_width-1 downto 0);
-		   D		        : in std_logic_vector(bit_width-1 downto 0);
-		   Sum 	            : out std_logic_vector(bit_width-1 downto 0);
+		   A 		        : in std_logic_vector(C_block_size-1 downto 0);
+		   B 		        : in std_logic_vector(C_block_size-1 downto 0);
+		   C 		        : in std_logic_vector(C_block_size-1 downto 0);
+		   D		        : in std_logic_vector(C_block_size-1 downto 0);
+		   Sum 	            : out std_logic_vector(C_block_size-1 downto 0);
 		   Cout	            : out std_logic;
-		   Carry 	        : out std_logic_vector(bit_width-1 downto 0));
+		   Carry 	        : out std_logic_vector(C_block_size-1 downto 0));
     end component;
 	
 	component KoggeStoneAdder is
-    Port (i_x, i_y : in std_logic_vector(bit_width-1 downto 0);
-        o_result   : out std_logic_vector(bit_width downto 0));
+    Port (i_x, i_y : in std_logic_vector(C_block_size-1 downto 0);
+        o_result   : out std_logic_vector(C_block_size downto 0));
     end component;
     
---    component KoggeStoneAdder32Bit is
---    Port (i_x, i_y : in std_logic_vector(31 downto 0);
---        o_result   : out std_logic_vector(32 downto 0));
---    end component;
+    component KoggeStoneAdder32Bit is
+    Port (i_x, i_y : in std_logic_vector(31 downto 0);
+        o_result   : out std_logic_vector(32 downto 0));
+    end component;
 	
 	type state is (INIT, COMPUTE);
 	signal curr_state, next_state : state;
@@ -68,31 +68,31 @@ architecture structural of MonPro is
     --Intermediate Signals
     signal isODD                    : std_logic;
     signal compressor_cout          : std_logic;
-    signal C, D                     : std_logic_vector(bit_width-1 downto 0);
-    signal compressor_sum           : std_logic_vector(bit_width-1 downto 0) := (others => '0');
-    signal compressor_carry         : std_logic_vector(bit_width-1 downto 0) := (others => '0');
-    signal compressor_sum_shifted   : std_logic_vector(bit_width-1 downto 0);
-    signal Z_s                      : std_logic_vector(bit_width - 1 downto 0) := (others => '0');
+    signal C, D                     : std_logic_vector(C_block_size-1 downto 0);
+    signal compressor_sum           : std_logic_vector(C_block_size-1 downto 0) := (others => '0');
+    signal compressor_carry         : std_logic_vector(C_block_size-1 downto 0) := (others => '0');
+    signal compressor_sum_shifted   : std_logic_vector(C_block_size-1 downto 0);
+    signal Z_s                      : std_logic_vector(C_block_size - 1 downto 0) := (others => '0');
 	
     --Registers
-    signal X_r, Y_r, N_r, Z_r       : std_logic_vector(bit_width - 1 downto 0);
-    signal A_r, B_r                 : std_logic_vector(bit_width - 1 downto 0);
-    signal KSA_sum_input_r          : std_logic_vector(bit_width - 1 downto 0);
-    signal KSA_carry_input_r        : std_logic_vector(bit_width - 1 downto 0);
+    signal X_r, Y_r, N_r, Z_r       : std_logic_vector(C_block_size - 1 downto 0);
+    signal A_r, B_r                 : std_logic_vector(C_block_size - 1 downto 0);
+    signal KSA_sum_input_r          : std_logic_vector(C_block_size - 1 downto 0);
+    signal KSA_carry_input_r        : std_logic_vector(C_block_size - 1 downto 0);
     
     --CarryLookAheadAdder Signals
-    signal KSA_carry_input          : std_logic_vector(bit_width-1 downto 0) := (others => '0');
-    signal KSA_sum_input            : std_logic_vector(bit_width-1 downto 0) := (others => '0');
-    signal KSA_result               : std_logic_vector(bit_width downto 0) := (others => '0');
+    signal KSA_carry_input          : std_logic_vector(C_block_size-1 downto 0) := (others => '0');
+    signal KSA_sum_input            : std_logic_vector(C_block_size-1 downto 0) := (others => '0');
+    signal KSA_result               : std_logic_vector(C_block_size downto 0) := (others => '0');
 	
 	--Counter
-    signal count                    : integer range 0 to bit_width-1 := 0;
+    signal count                    : integer range 0 to C_block_size+10 := 0;
 	
 	begin
 		
 		--Component mapping
 		Cprs_Inst : CompressorMultiBit_4to2 
-            generic map(bit_width => bit_width)
+            generic map(bit_width => C_block_size)
             port map(A => A_r, B => B_r, 
             C => C, D => D, 
             Sum => Compressor_Sum, 
@@ -100,7 +100,7 @@ architecture structural of MonPro is
             Cout => Compressor_Cout);
 					 
 		--Multibit AND operations that are inputs to compressor
-		AndOperations : for i in 0 to bit_width-1 generate
+		AndOperations : for i in 0 to C_block_size-1 generate
 			C(i) <= N_r(i) AND isODD;
 			D(i) <= Y_r(i) AND X_r(0);
 		end generate;
@@ -154,7 +154,7 @@ architecture structural of MonPro is
 						when COMPUTE =>
 						    KSA_Sum_Input_r     <= Compressor_Sum_Shifted;
                             KSA_Carry_Input_r   <= Compressor_Carry;
-						    if (count < bit_width-1) then
+						    if (count < C_block_size) then
 								count <= count + 1;
 								A_r <= Compressor_Carry;
 								B_r <= Compressor_Sum_Shifted;
@@ -162,7 +162,7 @@ architecture structural of MonPro is
 							else
 							    if done_s = '1' then
 							        count   <= 0;
-							        Z_r <= KSA_Result(bit_width - 1 downto 0);
+							        Z_r <= KSA_Result(C_block_size - 1 downto 0);
 							        busy_s <= '0';
 							    else
 							        done_s <= '1';

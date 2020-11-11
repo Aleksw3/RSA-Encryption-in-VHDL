@@ -22,7 +22,7 @@ add_wave clk
 
 # rl_exp
 add_wave core/rl_exp/curr_state_exp core/rl_exp/curr_state_mp
-add_wave core/key_e core/key_n core/R2N core/N core/rl_exp/message_reg
+add_wave core/key_e_d core/key_n core/R2N core/rl_exp/message_reg
 # add_wave core/rl_exp/S_reg 
 # add_wave core/rl_exp/C_reg
 # add_wave core/rl_exp/C_reg core/rl_exp/C_s
@@ -34,8 +34,14 @@ add_wave core/key_e core/key_n core/R2N core/N core/rl_exp/message_reg
 
 
 # MonPro C
-# add_wave core/rl_exp/MonPro_C_X core/rl_exp/MonPro_C_Y 
-#core/rl_exp/MonPro_S_X core/rl_exp/MonPro_S_Y
+add_wave core/rl_exp/MonPro_C_X core/rl_exp/MonPro_C_Y 
+add_wave core/rl_exp/MonPro_S_X core/rl_exp/MonPro_S_Y
+add_wave core/rl_exp/MonPro_S/A_r core/rl_exp/MonPro_S/B_r
+add_wave core/rl_exp/MonPro_S/C core/rl_exp/MonPro_S/D
+add_wave core/rl_exp/MonPro_S/compressor_sum core/rl_exp/MonPro_S/compressor_carry
+add_wave core/rl_exp/MonPro_S/compressor_sum_shifted
+add_wave core/rl_exp/MonPro_S/KSA_result
+
 # add_wave core/rl_exp/MonPro_C_en core/rl_exp/MonPro_S_en
 # add_wave core/rl_exp/MonPro_C/busy
 # add_wave core/rl_exp/MonPro_S/busy
@@ -51,7 +57,7 @@ add_wave core/key_e core/key_n core/R2N core/N core/rl_exp/message_reg
 # answers
 add_wave core/msgout_data
 add_wave core/output_message
-add_wave cipher message done
-add_wave msgout_valid msgin_ready msgin_valid
+# add_wave cipher message done
+# add_wave msgout_valid msgin_ready msgin_valid
 
-run 100us
+run 340us
