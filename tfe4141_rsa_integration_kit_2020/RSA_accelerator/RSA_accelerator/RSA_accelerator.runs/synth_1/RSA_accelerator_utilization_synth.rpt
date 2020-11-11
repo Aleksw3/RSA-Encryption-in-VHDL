@@ -1,7 +1,7 @@
 Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2019.2 (lin64) Build 2708876 Wed Nov  6 21:39:14 MST 2019
-| Date         : Wed Nov 11 21:24:44 2020
+| Date         : Wed Nov 11 22:14:52 2020
 | Host         : aleksw running 64-bit Ubuntu 18.04.03 LTS
 | Command      : report_utilization -file RSA_accelerator_utilization_synth.rpt -pb RSA_accelerator_utilization_synth.pb
 | Design       : rsa_accelerator
@@ -30,12 +30,12 @@ Table of Contents
 +-------------------------+------+-------+-----------+-------+
 |        Site Type        | Used | Fixed | Available | Util% |
 +-------------------------+------+-------+-----------+-------+
-| Slice LUTs*             | 8436 |     0 |     53200 | 15.86 |
-|   LUT as Logic          | 8436 |     0 |     53200 | 15.86 |
+| Slice LUTs*             | 8435 |     0 |     53200 | 15.86 |
+|   LUT as Logic          | 8435 |     0 |     53200 | 15.86 |
 |   LUT as Memory         |    0 |     0 |     17400 |  0.00 |
 | Slice Registers         | 9381 |     0 |    106400 |  8.82 |
-|   Register as Flip Flop | 9380 |     0 |    106400 |  8.82 |
-|   Register as Latch     |    1 |     0 |    106400 | <0.01 |
+|   Register as Flip Flop | 9381 |     0 |    106400 |  8.82 |
+|   Register as Latch     |    0 |     0 |    106400 |  0.00 |
 | F7 Muxes                |  128 |     0 |     26600 |  0.48 |
 | F8 Muxes                |   32 |     0 |     13300 |  0.24 |
 +-------------------------+------+-------+-----------+-------+
@@ -55,9 +55,9 @@ Table of Contents
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
 | 0     |          Yes |           - |          Set |
-| 538   |          Yes |           - |        Reset |
+| 537   |          Yes |           - |        Reset |
 | 9     |          Yes |         Set |            - |
-| 8834  |          Yes |       Reset |            - |
+| 8835  |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -146,12 +146,12 @@ Table of Contents
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| FDRE     | 8834 |        Flop & Latch |
+| FDRE     | 8835 |        Flop & Latch |
 | LUT6     | 3740 |                 LUT |
-| LUT5     | 2805 |                 LUT |
+| LUT5     | 2804 |                 LUT |
 | LUT3     | 2163 |                 LUT |
-| LUT4     | 1728 |                 LUT |
-| LUT2     |  862 |                 LUT |
+| LUT4     | 1729 |                 LUT |
+| LUT2     |  861 |                 LUT |
 | FDCE     |  537 |        Flop & Latch |
 | MUXF7    |  128 |               MuxFx |
 | IBUF     |   90 |                  IO |
@@ -159,7 +159,6 @@ Table of Contents
 | MUXF8    |   32 |               MuxFx |
 | FDSE     |    9 |        Flop & Latch |
 | LUT1     |    5 |                 LUT |
-| LDCE     |    1 |        Flop & Latch |
 | BUFG     |    1 |               Clock |
 +----------+------+---------------------+
 

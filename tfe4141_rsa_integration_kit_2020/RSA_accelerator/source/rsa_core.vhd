@@ -96,8 +96,9 @@ begin
             
             case(state_msg) is
                 when MSGIN =>
+                    prev_state <= MSGIN;
+                    msgout_valid_s <='0';
                     if msgin_valid = '1' then
-                        msgout_valid_s <='0';
                         if busy = '0' and init='0' then
                             init <= '1';
                             msgin_data_reg <= msgin_data;
@@ -115,11 +116,13 @@ begin
                 when WAIT_FOR_BUSY=>
                     if prev_state = MSGOUT then
                         if msgout_valid_s = '1' and msgout_ready = '1' then
-                            msgout_valid_s <='0';
-                            msgout_last <= '0';             
+                            msgout_valid_s <= '0';
+                            msgout_last    <= '0';
+                            last_input_msg <= '0';             
                         end if;
                     end if;
                 when MSGOUT =>
+                    prev_state <= MSGOUT;
                     init <= '0';
                     if done = '1' then --- and done ='1'
                         msgout_data_reg <= output_message;
@@ -140,12 +143,12 @@ begin
 
     end process;
 
-    process(state_msg, msgout_ready,init,msgin_valid,busy,prev_state,done)
+    process(state_msg, msgout_ready,init,msgin_valid,busy,done,prev_state)
     begin
         case(state_msg) is
             when MSGIN =>
-                prev_state <= MSGIN;
-                if init = '1' and msgin_valid = '1' and busy='0' then
+               
+                if init = '1' then
                     next_state_msg <=WAIT_FOR_BUSY;
                 else
                     next_state_msg <=MSGIN;
@@ -167,7 +170,6 @@ begin
                 end if;
                 
             when MSGOUT =>
-                prev_state <= MSGOUT;
                 if done='1' then
                     next_state_msg <=WAIT_FOR_BUSY;
                 else

@@ -1,0 +1,40 @@
+Note: COMPARE MSGOUT_DATA[0000] RTL: 85EE722363960779206A2B37CC8B64B5FC12A934473FA0204BBAAF714BC90C01   EXPECTED: 85EE722363960779206A2B37CC8B64B5FC12A934473FA0204BBAAF714BC90C01
+Time: 805188 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgout_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd
+Note: DRIVE NEW MSGIN_DATA[0002] RTL: 0A2320202020202020202020203336203A2020544E554F43204547415353454D
+Time: 805212 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgin_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd
+Note: COMPARE MSGOUT_DATA[0001] RTL: 08F9BAF32E8505CBC9A28FED4D5791DCE46508C3D1636232BF91F5D0B6632A9F   EXPECTED: 08F9BAF32E8505CBC9A28FED4D5791DCE46508C3D1636232BF91F5D0B6632A9F
+Time: 1610328 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgout_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd
+Note: DRIVE NEW MSGIN_DATA[0003] RTL: 0A2320202020202020202041307830203A464C20726F662065646F6320786548
+Time: 1610388 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgin_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd
+Note: COMPARE MSGOUT_DATA[0002] RTL: 81CA80617856C964E2F92DDE82841CC7CE81210F56BF18A32D2EE2ADA64586D6   EXPECTED: 81CA80617856C964E2F92DDE82841CC7CE81210F56BF18A32D2EE2ADA64586D6
+Time: 2415468 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgout_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd
+Note: DRIVE NEW MSGIN_DATA[0004] RTL: 0A2320202020202020202033327830203A202320726F662065646F6320786548
+Time: 2415528 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgin_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd
+Note: COMPARE MSGOUT_DATA[0003] RTL: 805974EFD1C6E0D32AD06D3F86168D991B6DE12371BE881E903C562C2EBEDE8E   EXPECTED: 805974EFD1C6E0D32AD06D3F86168D991B6DE12371BE881E903C562C2EBEDE8E
+Time: 3220632 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgout_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd
+Note: DRIVE NEW MSGIN_DATA[0005] RTL: 0A23202020202020202020202020202020202020202020202020202020202020
+Time: 3220668 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgin_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd
+Note: COMPARE MSGOUT_DATA[0004] RTL: 542D2D11FADFEA7FF5C886164051E8F8B1EFA9AA844412F3A36088F2F60C42E9   EXPECTED: 542D2D11FADFEA7FF5C886164051E8F8B1EFA9AA844412F3A36088F2F60C42E9
+Time: 4025784 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgout_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd
+Note: DRIVE NEW MSGIN_DATA[0006] RTL: 0A232020202020202020202020205F5F5F5F5F5F5F5F5F202020202020202020
+Time: 4025844 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgin_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd
+Note: COMPARE MSGOUT_DATA[0005] RTL: 1C6A9B8EC4485BD5A460E171A1F6723680599CFB58315B9C8CE213B0A81EF034   EXPECTED: 1C6A9B8EC4485BD5A460E171A1F6723680599CFB58315B9C8CE213B0A81EF034
+Time: 4830936 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgout_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd
+Note: DRIVE NEW MSGIN_DATA[0007] RTL: 0A232020202020202020202020202F5F5F2020205F5F5C7C2F20202020205C7C
+Time: 4830960 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgin_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd
+Note: COMPARE MSGOUT_DATA[0006] RTL: 37D3504D313113543F1D7E6F998896FBDEAA8BD6FCC35E524988243E8A1D01F0   EXPECTED: 37D3504D313113543F1D7E6F998896FBDEAA8BD6FCC35E524988243E8A1D01F0
+Time: 5636100 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgout_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd
+Note: DRIVE NEW MSGIN_DATA[0008] RTL: 0A232020202020202020202020202020202820292020207C202820202029207C
+Time: 5636136 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgin_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd
+Note: COMPARE MSGOUT_DATA[0007] RTL: 6772DD02155F2FFE66CE467C3834B7E9982128043B1BF818AC87A5FBC15F4B30   EXPECTED: 6772DD02155F2FFE66CE467C3834B7E9982128043B1BF818AC87A5FBC15F4B30
+Time: 6441252 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgout_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd
+Note: DRIVE NEW MSGIN_DATA[0009] RTL: 0A232020202020202020202020202020207C207C2020207C20295F5F5F28207C
+Time: 6441276 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgin_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd
+Note: COMPARE MSGOUT_DATA[0008] RTL: 8AEDE2A68974E6FFC52EA148B56F99DBCF771969CA364967BB7A84E13C37554A   EXPECTED: 8AEDE2A68974E6FFC52EA148B56F99DBCF771969CA364967BB7A84E13C37554A
+Time: 7246392 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgout_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd
+Note: DRIVE NEW MSGIN_DATA[000A] RTL: 0A232020202020202020202020202020207C207C2020207C20205F5F5F20207C
+Time: 7246416 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgin_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd
+Note: COMPARE MSGOUT_DATA[0009] RTL: 2236ABF909ABF08DD547F4BA36A2BAB7295061C209467C9DB48CECC982D581D4   EXPECTED: 2236ABF909ABF08DD547F4BA36A2BAB7295061C209467C9DB48CECC982D581D4
+Time: 8051544 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgout_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd
+Note: DRIVE NEW MSGIN_DATA[000B] RTL: 0A232020202020202020202020202020207C207C2020207C202920202028207C
+Time: 8051592 ns  Iteration: 1  Process: /rsa_accelerator_tb/msgin_bfm  File: /home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd

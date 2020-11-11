@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1605126073">
+<GenRun Id="synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1605129144">
   <File Type="VDS-TIMINGSUMMARY" Name="RSA_accelerator_timing_summary_synth.rpt"/>
   <File Type="RDS-DCP" Name="RSA_accelerator.dcp"/>
   <File Type="RDS-UTIL-PB" Name="RSA_accelerator_utilization_synth.pb"/>
