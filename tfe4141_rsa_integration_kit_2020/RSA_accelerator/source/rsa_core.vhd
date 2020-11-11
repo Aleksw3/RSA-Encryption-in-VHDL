@@ -55,6 +55,7 @@ architecture Behavioral of RSA_Core is
 signal multiple_out:     std_logic := '0';
 signal done, busy, init: std_logic;
 signal last_input_msg:   std_logic:='0';
+signal msgout_valid_s:   std_logic:='0';
 signal msgout_data_reg:  std_logic_vector(C_BLOCK_SIZE-1 downto 0);
 signal output_message:   std_logic_vector(C_BLOCK_SIZE-1 downto 0);
 signal msgin_data_reg:   std_logic_vector(C_BLOCK_SIZE-1 downto 0);
@@ -86,6 +87,7 @@ begin
     -- ready to receive if exponentiation function is not busy
     msgin_ready <= init; 
     msgout_data <= msgout_data_reg;
+    msgout_valid <= msgout_valid_s;
 
     process(reset_n, clk)
     begin
@@ -95,7 +97,7 @@ begin
             case(state_msg) is
                 when MSGIN =>
                     if msgin_valid = '1' then
-                        msgout_valid <='0';
+                        msgout_valid_s <='0';
                         if busy = '0' and init='0' then
                             init <= '1';
                             msgin_data_reg <= msgin_data;
@@ -116,19 +118,27 @@ begin
                         init<='0';
                     end if;
                 when WAIT_FOR_BUSY=>
-
+                    if prev_state = MSGOUT then
+                        if msgout_valid_s = '1' and msgout_ready = '1' then
+                            msgout_valid_s <='0';
+                        end if;
+                    end if;
                 when MSGOUT =>
                     init <= '0';
                     if done = '1' then --- and done ='1'
                         msgout_data_reg <= output_message;
-                        msgout_valid <='1';
+                        if msgout_valid_s = '1' and msgout_ready = '1' then
+                            msgout_valid_s <='0';
+                        else
+                            msgout_valid_s <='1';
+                        end if;
                         if last_input_msg = '1' then
                             msgout_last <= '1';
                         else
                             msgout_last <= '0';
                         end if;
                     else
-                        msgout_valid <='0';
+                        msgout_valid_s <='0';
                         msgout_last <= '0';
                     end if;
             end case ;

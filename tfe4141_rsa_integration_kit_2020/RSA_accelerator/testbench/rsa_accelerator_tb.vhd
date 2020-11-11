@@ -303,8 +303,7 @@ architecture struct of rsa_accelerator_tb is
 	signal msgout_counter    : unsigned(15 downto 0);
 
 begin
---    R2N <= x"33490ba4f7cfc6cac056e407fd9887c9f8650aae02ca35681a4d7c9b15019c59";
-      R2N <= x"28533fe966bbe428c8d5187911ac3654b520199625a72ddad5a8c7829102a076";
+    R2N <= x"28533fe966bbe428c8d5187911ac3654b520199625a72ddad5a8c7829102a076";
 	-----------------------------------------------------------------------------
 	-- Clock and reset generation
 	-----------------------------------------------------------------------------
@@ -533,7 +532,7 @@ begin
 								report "COMPARE MSGOUT_DATA[" & stdvec_to_string(std_logic_vector(msgout_counter)) & "] " & "RTL: " & stdvec_to_string(msgout_data) & "   EXPECTED: " & stdvec_to_string(expected_msgout_data);
 							assert expected_msgout_data = msgout_data
 								report "Output message differs from the expected result"
-								severity Warning;
+								severity Failure;
 							assert msgout_counter(1) = msgout_last
 								report "msgin_last/msgout_last mismatch"
 								severity Failure;
@@ -592,8 +591,8 @@ u_rsa_core : entity work.rsa_core
 		-----------------------------------------------------------------------------
 		key_e_d                => key_e_d,
 		key_n                  => key_n,
-		R2N                    => R2N,
-		rsa_status             => rsa_status
+		rsa_status             => rsa_status,
+		R2N                    => R2N
 
 	);
 
