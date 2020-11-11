@@ -106,11 +106,6 @@ begin
                             else
                                 last_input_msg <= '0';
                             end if;
-                            if last_input_msg = '1' then
-                                last_input_msg <='0';
-                            else 
-                                last_input_msg <='0';
-                            end if;
                         else
                             init<='0';
                         end if;
@@ -121,6 +116,7 @@ begin
                     if prev_state = MSGOUT then
                         if msgout_valid_s = '1' and msgout_ready = '1' then
                             msgout_valid_s <='0';
+                            msgout_last <= '0';             
                         end if;
                     end if;
                 when MSGOUT =>
@@ -134,8 +130,6 @@ begin
                         end if;
                         if last_input_msg = '1' then
                             msgout_last <= '1';
-                        else
-                            msgout_last <= '0';
                         end if;
                     else
                         msgout_valid_s <='0';
@@ -146,13 +140,13 @@ begin
 
     end process;
 
-    process(state_msg, msgout_ready,init,msgin_valid,busy)
+    process(state_msg, msgout_ready,init,msgin_valid,busy,prev_state,done)
     begin
         case(state_msg) is
             when MSGIN =>
+                prev_state <= MSGIN;
                 if init = '1' and msgin_valid = '1' and busy='0' then
                     next_state_msg <=WAIT_FOR_BUSY;
-                    prev_state <= MSGIN;
                 else
                     next_state_msg <=MSGIN;
                 end if;
@@ -173,9 +167,9 @@ begin
                 end if;
                 
             when MSGOUT =>
+                prev_state <= MSGOUT;
                 if done='1' then
                     next_state_msg <=WAIT_FOR_BUSY;
-                    prev_state <= MSGOUT;
                 else
                     next_state_msg <=MSGOUT;
                 end if;

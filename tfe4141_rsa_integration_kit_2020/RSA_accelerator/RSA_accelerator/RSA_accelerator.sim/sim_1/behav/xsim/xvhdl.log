@@ -1,0 +1,4 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/source/rsa_core.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'RSA_Core'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/aleksw/NTNU/First_Year/DDS/Project/tfe4141_rsa_integration_kit_2020/RSA_accelerator/testbench/rsa_accelerator_tb.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'rsa_accelerator_tb'
