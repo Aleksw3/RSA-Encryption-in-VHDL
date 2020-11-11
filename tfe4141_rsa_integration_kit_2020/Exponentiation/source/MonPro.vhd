@@ -39,13 +39,13 @@ architecture structural of MonPro is
 	component CompressorMultiBit_4to2 is
 	generic(bit_width : integer);
 	port( 
-		   A 		        : in std_logic_vector(C_block_size-1 downto 0);
-		   B 		        : in std_logic_vector(C_block_size-1 downto 0);
-		   C 		        : in std_logic_vector(C_block_size-1 downto 0);
-		   D		        : in std_logic_vector(C_block_size-1 downto 0);
-		   Sum 	            : out std_logic_vector(C_block_size-1 downto 0);
+		   A 		        : in std_logic_vector(C_block_size downto 0);
+		   B 		        : in std_logic_vector(C_block_size downto 0);
+		   C 		        : in std_logic_vector(C_block_size downto 0);
+		   D		        : in std_logic_vector(C_block_size downto 0);
+		   Sum 	            : out std_logic_vector(C_block_size downto 0);
 		   Cout	            : out std_logic;
-		   Carry 	        : out std_logic_vector(C_block_size-1 downto 0));
+		   Carry 	        : out std_logic_vector(C_block_size downto 0));
     end component;
 	
 	component KoggeStoneAdder is
@@ -53,10 +53,10 @@ architecture structural of MonPro is
         o_result   : out std_logic_vector(C_block_size downto 0));
     end component;
     
---    component KoggeStoneAdder32Bit is
---    Port (i_x, i_y : in std_logic_vector(31 downto 0);
---        o_result   : out std_logic_vector(32 downto 0));
---    end component;
+    component KoggeStoneAdder32Bit is
+    Port (i_x, i_y : in std_logic_vector(31 downto 0);
+        o_result   : out std_logic_vector(32 downto 0));
+    end component;
 	
 	type state is (INIT, COMPUTE);
 	signal curr_state, next_state : state;
@@ -68,15 +68,16 @@ architecture structural of MonPro is
     --Intermediate Signals
     signal isODD                    : std_logic;
     signal compressor_cout          : std_logic;
-    signal C, D                     : std_logic_vector(C_block_size-1 downto 0);
-    signal compressor_sum           : std_logic_vector(C_block_size-1 downto 0) := (others => '0');
-    signal compressor_carry         : std_logic_vector(C_block_size-1 downto 0) := (others => '0');
-    signal compressor_sum_shifted   : std_logic_vector(C_block_size-1 downto 0);
+    signal C, D                     : std_logic_vector(C_block_size downto 0);
+	signal C_s, D_s                 : std_logic_vector(C_block_size-1 downto 0);
+    signal compressor_sum           : std_logic_vector(C_block_size downto 0) := (others => '0');
+    signal compressor_carry         : std_logic_vector(C_block_size downto 0) := (others => '0');
+    signal compressor_sum_shifted   : std_logic_vector(C_block_size downto 0);
     signal Z_s                      : std_logic_vector(C_block_size - 1 downto 0) := (others => '0');
 	
     --Registers
     signal X_r, Y_r, N_r, Z_r       : std_logic_vector(C_block_size - 1 downto 0);
-    signal A_r, B_r                 : std_logic_vector(C_block_size - 1 downto 0);
+    signal A_r, B_r                 : std_logic_vector(C_block_size downto 0);
     signal KSA_sum_input_r          : std_logic_vector(C_block_size - 1 downto 0);
     signal KSA_carry_input_r        : std_logic_vector(C_block_size - 1 downto 0);
     
@@ -101,8 +102,8 @@ architecture structural of MonPro is
 					 
 		--Multibit AND operations that are inputs to compressor
 		AndOperations : for i in 0 to C_block_size-1 generate
-			C(i) <= N_r(i) AND isODD;
-			D(i) <= Y_r(i) AND X_r(0);
+			C_s(i) <= N_r(i) AND isODD;
+			D_s(i) <= Y_r(i) AND X_r(0);
 		end generate;
 		
 		KSA_Inst : KoggeStoneAdder
@@ -114,7 +115,8 @@ architecture structural of MonPro is
 --            i_y => KSA_Sum_Input, o_result => KSA_Result);
 	
 	
-	
+		C <= '0' & C_s;
+		D <= '0' & D_s;
 	    isODD <= B_r(0) XOR (X_r(0) AND Y_r(0));
 		Compressor_Sum_Shifted <= std_logic_vector(shift_right(unsigned(Compressor_Sum),1));
 		--Signal connections to port
@@ -152,8 +154,8 @@ architecture structural of MonPro is
 							done_s <= '0';
 							busy_s <= '1';
 						when COMPUTE =>
-						    KSA_Sum_Input_r     <= Compressor_Sum_Shifted;
-                            KSA_Carry_Input_r   <= Compressor_Carry;
+						    KSA_Sum_Input_r     <= Compressor_Sum_Shifted(C_block_size-1 downto 0);
+                            KSA_Carry_Input_r   <= Compressor_Carry(C_block_size-1 downto 0);
 						    if (count < C_block_size) then
 								count <= count + 1;
 								A_r <= Compressor_Carry;
