@@ -1,1 +1,0 @@
--wto "9c7bceac52a94976838f5b8de8a2005b" --incr --debug "typical" --relax --mt "8" -L "xil_defaultlib" -L "secureip" --snapshot "RSA_accelerator_tb_behav" "xil_defaultlib.RSA_accelerator_tb" -log "elaborate.log" 

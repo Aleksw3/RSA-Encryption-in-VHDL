@@ -38,12 +38,12 @@ def R_L_bin_exp(M, e, n):
   r = 2**k
   C = mp2(1, R2N, n,k)
   S = mp2(M, R2N, n,k)
-  print(f"C = {hex(C)} and S = {hex(S)}")
+  print(f"C1 = {hex(C)} S1 = {hex(S)}")
   for i in range(k): ## LSB - MSB
     if int(e_bin_str[i]) == 1:
       C = mp2(C,S,n,k)
     S = mp2(S,S,n,k)
-    print(f"C = {hex(C)} and S = {hex(S)}")
+    print(f"C{i+1} = {hex(C)} S{i+1} = {hex(S)}")
   C = mp2(1,C,n,k)
   return C 
 
@@ -54,6 +54,8 @@ n_key = 0x99925173ad65686715385ea800cd28120288fc70a9bc98dd4c90d676f8ff768d
 e_key = 0x0000000000000000000000000000000000000000000000000000000000010001
 d_key = 0x0cea1651ef44be1f1f1476b7539bed10d73e3aac782bd9999a1e5a790932bfe9
 M =     0x0A23232323232323232323232323232323232323232323232323232323232323
+Cipher = 0x6772DD02155F2FFE66CE467C3834B7E9982128043B1BF818AC87A5FBC15F4B30
+# Cipher =     0x93b172508e464b44361b7d8b23ee0b3121abdf538a9fbbfe6fb3f555dbdc55ae
 k = 256
 
 # n_key, e_key, d_key = 753494879,155955757, 407237893
@@ -99,10 +101,12 @@ k = 256
 k = 256
 r = 2**(k+1)
 R2N = ((r**2) % n_key)
+# R2N = 
 
 
 
-Cipher = R_L_bin_exp(M, e_key, n_key)
+# Cipher = R_L_bin_exp(M, e_key, n_key)
 Deciphered = R_L_bin_exp(Cipher, d_key, n_key)
-print(f"cipher = {hex(Cipher)}",Deciphered==M, "Hello")
+print(f"Cipher - {hex(Cipher)} \nDeciphered = {hex(Deciphered)}")
+# print(f"cipher = {hex(Cipher)}",Deciphered==M, "Hello")
 # print(f"Cipher should be = 85ee722363960779206a2b37cc8b64b5fc12a934473fa0204bbaaf714bc90c01, \n{hex(Cipher)[2:]}\nis this true? = {0x85ee722363960779206a2b37cc8b64b5fc12a934473fa0204bbaaf714bc90c01  == Cipher}")
