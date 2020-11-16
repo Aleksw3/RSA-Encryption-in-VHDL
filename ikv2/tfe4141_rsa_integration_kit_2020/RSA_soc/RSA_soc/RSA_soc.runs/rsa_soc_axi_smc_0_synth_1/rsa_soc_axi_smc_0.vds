@@ -1,0 +1,272 @@
+#-----------------------------------------------------------
+# Vivado v2019.2 (64-bit)
+# SW Build 2708876 on Wed Nov  6 21:39:14 MST 2019
+# IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
+# Start of session at: Thu Nov 12 15:15:17 2020
+# Process ID: 10882
+# Current directory: /home/aleksw/Documents/tfe4141_rsa_integration_kit_2020/RSA_soc/RSA_soc/RSA_soc.runs/rsa_soc_axi_smc_0_synth_1
+# Command line: vivado -log rsa_soc_axi_smc_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source rsa_soc_axi_smc_0.tcl
+# Log file: /home/aleksw/Documents/tfe4141_rsa_integration_kit_2020/RSA_soc/RSA_soc/RSA_soc.runs/rsa_soc_axi_smc_0_synth_1/rsa_soc_axi_smc_0.vds
+# Journal file: /home/aleksw/Documents/tfe4141_rsa_integration_kit_2020/RSA_soc/RSA_soc/RSA_soc.runs/rsa_soc_axi_smc_0_synth_1/vivado.jou
+#-----------------------------------------------------------
+source rsa_soc_axi_smc_0.tcl -notrace
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/aleksw/Documents/tfe4141_rsa_integration_kit_2020/RSA_accelerator/IP'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/home/aleksw/Apps/Xilinx/Vivado/2019.2/data/ip'.
+Command: synth_design -top rsa_soc_axi_smc_0 -part xc7z020clg400-1 -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 11094 
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:20 . Memory (MB): peak = 1871.051 ; gain = 203.719 ; free physical = 198 ; free virtual = 6574
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'rsa_soc_axi_smc_0' [/home/aleksw/Documents/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_axi_smc_0/synth/rsa_soc_axi_smc_0.v:57]
+INFO: [Synth 8-6157] synthesizing module 'bd_ae75' [/home/aleksw/Documents/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_axi_smc_0/bd_0/synth/bd_ae75.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'bd_ae75' (1#1) [/home/aleksw/Documents/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_axi_smc_0/bd_0/synth/bd_ae75.v:10]
+INFO: [Synth 8-6155] done synthesizing module 'rsa_soc_axi_smc_0' (2#1) [/home/aleksw/Documents/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_axi_smc_0/synth/rsa_soc_axi_smc_0.v:57]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:11 ; elapsed = 00:00:25 . Memory (MB): peak = 1935.770 ; gain = 268.438 ; free physical = 284 ; free virtual = 6424
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:13 ; elapsed = 00:00:27 . Memory (MB): peak = 1941.707 ; gain = 274.375 ; free physical = 346 ; free virtual = 6487
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:27 . Memory (MB): peak = 1941.707 ; gain = 274.375 ; free physical = 346 ; free virtual = 6487
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 1941.707 ; gain = 0.000 ; free physical = 341 ; free virtual = 6482
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [/home/aleksw/Documents/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_axi_smc_0/ooc.xdc] for cell 'inst'
+CRITICAL WARNING: [Common 17-161] Invalid option value '10,000' specified for 'period'. [/home/aleksw/Documents/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_axi_smc_0/ooc.xdc:3]
+Finished Parsing XDC File [/home/aleksw/Documents/tfe4141_rsa_integration_kit_2020/RSA_soc/boards/ip/rsa_soc_axi_smc_0/ooc.xdc] for cell 'inst'
+Parsing XDC File [/home/aleksw/Documents/tfe4141_rsa_integration_kit_2020/RSA_soc/RSA_soc/RSA_soc.runs/rsa_soc_axi_smc_0_synth_1/dont_touch.xdc]
+Finished Parsing XDC File [/home/aleksw/Documents/tfe4141_rsa_integration_kit_2020/RSA_soc/RSA_soc/RSA_soc.runs/rsa_soc_axi_smc_0_synth_1/dont_touch.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2014.645 ; gain = 0.000 ; free physical = 277 ; free virtual = 6558
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.14 . Memory (MB): peak = 2017.613 ; gain = 2.969 ; free physical = 279 ; free virtual = 6557
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:26 ; elapsed = 00:00:49 . Memory (MB): peak = 2017.613 ; gain = 350.281 ; free physical = 337 ; free virtual = 6631
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg400-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:26 ; elapsed = 00:00:49 . Memory (MB): peak = 2017.613 ; gain = 350.281 ; free physical = 335 ; free virtual = 6629
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property DONT_TOUCH = true for inst. (constraint file  /home/aleksw/Documents/tfe4141_rsa_integration_kit_2020/RSA_soc/RSA_soc/RSA_soc.runs/rsa_soc_axi_smc_0_synth_1/dont_touch.xdc, line 12).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:26 ; elapsed = 00:00:49 . Memory (MB): peak = 2017.613 ; gain = 350.281 ; free physical = 333 ; free virtual = 6627
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:26 ; elapsed = 00:00:49 . Memory (MB): peak = 2017.613 ; gain = 350.281 ; free physical = 330 ; free virtual = 6625
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+Warning: Parallel synthesis criteria is not met 
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:28 ; elapsed = 00:00:52 . Memory (MB): peak = 2017.613 ; gain = 350.281 ; free physical = 286 ; free virtual = 6674
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:46 ; elapsed = 00:01:21 . Memory (MB): peak = 2017.613 ; gain = 350.281 ; free physical = 203 ; free virtual = 5929
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:46 ; elapsed = 00:01:21 . Memory (MB): peak = 2017.613 ; gain = 350.281 ; free physical = 200 ; free virtual = 5922
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:46 ; elapsed = 00:01:21 . Memory (MB): peak = 2020.613 ; gain = 353.281 ; free physical = 199 ; free virtual = 5869
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:53 ; elapsed = 00:01:31 . Memory (MB): peak = 2036.457 ; gain = 369.125 ; free physical = 175 ; free virtual = 5676
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:53 ; elapsed = 00:01:31 . Memory (MB): peak = 2036.457 ; gain = 369.125 ; free physical = 173 ; free virtual = 5675
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:53 ; elapsed = 00:01:31 . Memory (MB): peak = 2036.457 ; gain = 369.125 ; free physical = 172 ; free virtual = 5674
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:53 ; elapsed = 00:01:31 . Memory (MB): peak = 2036.457 ; gain = 369.125 ; free physical = 172 ; free virtual = 5674
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:53 ; elapsed = 00:01:31 . Memory (MB): peak = 2036.457 ; gain = 369.125 ; free physical = 172 ; free virtual = 5674
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:53 ; elapsed = 00:01:31 . Memory (MB): peak = 2036.457 ; gain = 369.125 ; free physical = 171 ; free virtual = 5673
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+--------------+----------+
+|      |BlackBox name |Instances |
++------+--------------+----------+
+|1     |bd_ae75       |         1|
++------+--------------+----------+
+
+Report Cell Usage: 
++------+--------+------+
+|      |Cell    |Count |
++------+--------+------+
+|1     |bd_ae75 |     1|
++------+--------+------+
+
+Report Instance Areas: 
++------+---------+-------+------+
+|      |Instance |Module |Cells |
++------+---------+-------+------+
+|1     |top      |       |    90|
++------+---------+-------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:53 ; elapsed = 00:01:31 . Memory (MB): peak = 2036.457 ; gain = 369.125 ; free physical = 171 ; free virtual = 5673
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:49 ; elapsed = 00:01:25 . Memory (MB): peak = 2036.457 ; gain = 293.219 ; free physical = 220 ; free virtual = 5719
+Synthesis Optimization Complete : Time (s): cpu = 00:00:53 ; elapsed = 00:01:31 . Memory (MB): peak = 2036.465 ; gain = 369.125 ; free physical = 220 ; free virtual = 5719
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 2036.465 ; gain = 0.000 ; free physical = 208 ; free virtual = 5708
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2044.395 ; gain = 0.000 ; free physical = 265 ; free virtual = 5629
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Common 17-83] Releasing license: Synthesis
+16 Infos, 0 Warnings, 1 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:11 ; elapsed = 00:02:02 . Memory (MB): peak = 2044.395 ; gain = 608.656 ; free physical = 364 ; free virtual = 5728
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2044.395 ; gain = 0.000 ; free physical = 364 ; free virtual = 5728
+WARNING: [Constraints 18-5210] No constraints selected for write.
+Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
+INFO: [Common 17-1381] The checkpoint '/home/aleksw/Documents/tfe4141_rsa_integration_kit_2020/RSA_soc/RSA_soc/RSA_soc.runs/rsa_soc_axi_smc_0_synth_1/rsa_soc_axi_smc_0.dcp' has been generated.
+WARNING: [Common 17-576] 'use_project_ipc' is deprecated. This option is deprecated and no longer used.
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP rsa_soc_axi_smc_0, cache-ID = a848b334a9706a6a
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2044.395 ; gain = 0.000 ; free physical = 182 ; free virtual = 6047
+WARNING: [Constraints 18-5210] No constraints selected for write.
+Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
+INFO: [Common 17-1381] The checkpoint '/home/aleksw/Documents/tfe4141_rsa_integration_kit_2020/RSA_soc/RSA_soc/RSA_soc.runs/rsa_soc_axi_smc_0_synth_1/rsa_soc_axi_smc_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file rsa_soc_axi_smc_0_utilization_synth.rpt -pb rsa_soc_axi_smc_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Thu Nov 12 15:17:51 2020...
