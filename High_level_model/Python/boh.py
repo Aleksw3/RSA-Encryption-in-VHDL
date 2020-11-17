@@ -6,27 +6,37 @@ def int_to_bin(in_num, k):
   while len(in_num)<k:
     # print("yes")
     in_num='0'+in_num
-  if len(in_num)!= k:
-    print(f"LENA = {len(in_num)}")
-    print(in_num,k,hex(boh))
+  # if len(in_num)!= k:
+  #   print(f"LENA = {len(in_num)}")
+  #   print(in_num,k,hex(boh))
   return in_num
 
+def mp2_radix(A,B,N,bits,radix,modulus_inv):  ## bit monpro
+  u = 0 
+  A = int_to_bin(A,bits+1)[::-1]+"0" ##257 bits so easier to just a a 0 to msb
+  B_bin_0 = int_to_bin(B,0)[-3:-1]
+  for i in range(0,bits+1,2): ## LSB - MSB for A
+    A_i = int(A[i:i+2],2)
+    u+=A_i*B
+    U_bin_str = int_to_bin(u,10) #[MSB-0] - [LSB-x]
+    # print((U_bin_str[-3:-1]))
+    if int(U_bin_str[-3:-1],2) != 0:
+      qj = ((A_i*B+int(U_bin_str[-3:-1],2))*(-modulus_inv))%radix
+      u+= qj*N
+    print((U_bin_str[-3:-1]))
+    u = (u>>2)
+  return u
 
 def mp2(A,B,N,bits):  ## bit monpro
-	u = 0 
-	A = int_to_bin(A,bits+1)[::-1]
-	for i in range(bits+1): ## LSB - MSB
-		if A[i]=='1':
-			u += B
-		if u%2 != 0:
-			u+=N
-		u = (u>>1)
-
-	# if u%2 != 0:
-	# 	print("Yes")
-	# 	u+=N
-	# u = (u>>1)
-	return u
+  u = 0 
+  A = int_to_bin(A,bits+1)[::-1]
+  for i in range(bits+1): ## LSB - MSB
+    if A[i]=='1':
+      u += B
+    if u%2 != 0:
+      u+=N
+    u = (u>>1)
+  return u
 
 def R_L_bin_exp(M, e, n): 
   '''
@@ -106,7 +116,19 @@ R2N = ((r**2) % n_key)
 
 
 # Cipher = R_L_bin_exp(M, e_key, n_key)
-Deciphered = R_L_bin_exp(Cipher, d_key, n_key)
-print(f"Cipher - {hex(Cipher)} \nDeciphered = {hex(Deciphered)}")
+# Deciphered = R_L_bin_exp(Cipher, d_key, n_key)
+# print(f"Cipher - {hex(Cipher)} \nDeciphered = {hex(Deciphered)}")
 # print(f"cipher = {hex(Cipher)}",Deciphered==M, "Hello")
 # print(f"Cipher should be = 85ee722363960779206a2b37cc8b64b5fc12a934473fa0204bbaaf714bc90c01, \n{hex(Cipher)[2:]}\nis this true? = {0x85ee722363960779206a2b37cc8b64b5fc12a934473fa0204bbaaf714bc90c01  == Cipher}")
+
+N = 0x99925173ad65686715385ea800cd28120288fc70a9bc98dd4c90d676f8ff768d
+X = 0xee5279c61dc177d39b873a8488544e5e4a19411713c81616103660f57922a05c
+Y = 0xee5279c61dc177d39b873a8488544e5e4a19411713c81616103660f57922a05c
+expected = 0x101d74e7ea7dbd9469e02bd65cf8b1c791632d0573e6246c2243d98125458a99c
+bits = 256
+modulus_inv = 1
+radix = 4
+
+radix_monpro_output  = mp2_radix(X,Y,N,bits,radix,modulus_inv)
+
+print(f"Output:   {hex(radix_monpro_output)}\nExpected: {hex(expected)}")
