@@ -42,8 +42,8 @@ end CSA_multiplier;
 --signal carry,carry0,carry1: unsigned(width_A+width_B-1 downto 0);
 
 type ps is array (integer range<>) of unsigned((width_A+width_B-1) downto 0);
-signal P: ps(0 to (width_B-1));
-signal sum,carry: ps(0 to (width_B-2));
+signal P: ps(0 to (width_A-1));
+--signal sum,carry: ps(0 to (width_A-1));
 
 
 begin
@@ -63,9 +63,6 @@ end process;
 
 first_adder: entity work.CSA_adder_for_mult 
 				generic map(width => width_A+width_B-1)
-				port map(x=>P(0),y=>P(1),carry_in=>(others => '0'),sum=>sum(0),carry=>carry(0));
+				port map(x=>P(0),y=>P(1),carry_in=>(others => '0'),sum=>sum_out,carry=>carry_out);
 
-last_adder: entity work.CSA_adder_for_mult 
-				generic map(width => width_A+width_B-1)
-				port map(x=>P(1),y=>sum(1),carry_in=>carry(0),sum=>sum_out,carry=>carry_out);
 end Behavioral;

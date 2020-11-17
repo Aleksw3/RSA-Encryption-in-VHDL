@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1605621237">
-  <File Type="VDS-TIMINGSUMMARY" Name="critical_path_test_timing_summary_synth.rpt"/>
+  <File Type="PA-TCL" Name="critical_path_test.tcl"/>
+  <File Type="REPORTS-TCL" Name="critical_path_test_reports.tcl"/>
+  <File Type="RDS-RDS" Name="critical_path_test.vds"/>
+  <File Type="RDS-UTIL" Name="critical_path_test_utilization_synth.rpt"/>
   <File Type="RDS-DCP" Name="critical_path_test.dcp"/>
   <File Type="RDS-UTIL-PB" Name="critical_path_test_utilization_synth.pb"/>
-  <File Type="RDS-UTIL" Name="critical_path_test_utilization_synth.rpt"/>
-  <File Type="RDS-PROPCONSTRS" Name="critical_path_test_drc_synth.rpt"/>
-  <File Type="RDS-RDS" Name="critical_path_test.vds"/>
-  <File Type="REPORTS-TCL" Name="critical_path_test_reports.tcl"/>
-  <File Type="VDS-TIMING-PB" Name="critical_path_test_timing_summary_synth.pb"/>
-  <File Type="PA-TCL" Name="critical_path_test.tcl"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PSRCDIR/sources_1/new/CSA_adder.vhd">

@@ -45,7 +45,7 @@ architecture Behavioral of csa_mult_tb is
 	--sum_out: OUT unsigned(width_A+width_B downto 0)
 
 constant width_A: 	integer:=16; --bit vector length so 8 bit is 7 downto 0
-constant width_B: 	integer:=8; --smaller bit vector
+constant width_B: 	integer:=2; --smaller bit vector
 signal A: 			unsigned(width_A-1 downto 0);
 signal B: 			unsigned(width_B-1 downto 0);
 signal carry_out: 	unsigned(width_A+width_B-1 downto 0);
@@ -58,10 +58,10 @@ CSA_comp1: entity work.CSA_multiplier generic map(width_A => width_A,width_B => 
 
 	process
 	begin
-		for i in 50 to ((2**width_B) - 1) loop
+		for i in 1 to ((2**width_B) - 1) loop
 			B <= to_unsigned(i, B'length);
 
-			for j in 60000 to ((2**width_A)-1) loop
+			for j in 50000 to ((2**width_A)-1) loop
 				A <= to_unsigned(j, A'length);
 				wait for 1 ns;
 				assert ((i*j) = (to_integer(carry_out)+to_integer(sum_out)))
