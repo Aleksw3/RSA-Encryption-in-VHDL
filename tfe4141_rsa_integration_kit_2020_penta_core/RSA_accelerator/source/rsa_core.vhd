@@ -59,6 +59,8 @@ signal msgout_data_reg:  std_logic_vector(C_BLOCK_SIZE-1 downto 0);
 --signal output_message:   std_logic_vector(C_BLOCK_SIZE-1 downto 0);
 --signal msgin_data_reg:   std_logic_vector(C_BLOCK_SIZE-1 downto 0);
 signal msgin_data_reg0,msgin_data_reg1,msgin_data_reg2,msgin_data_reg3,msgin_data_reg4:   std_logic_vector(C_BLOCK_SIZE-1 downto 0);
+
+signal key_n_reg, key_e_d_reg, R2N_reg: std_logic_vector(C_BLOCK_SIZE-1 downto 0);
 signal msgin_valid_reg, msgin_last_reg, msgout_ready_reg, msgout_valid_reg: std_logic;
 signal msgin_data_reg: std_logic_vector(C_BLOCK_SIZE-1 downto 0);
 
@@ -87,61 +89,61 @@ begin
                 generic map(C_BLOCK_SIZE => C_BLOCK_SIZE)
                 port map(clk => clk, 
                          reset_n => reset_n, 
-                         KEY => key_e_d, 
-                         N => key_n,
+                         KEY => key_e_d_reg, 
+                         N => key_n_reg,
                          MESSAGE => msgin_data_reg0,
                          busy => exp_0_busy,
                          init => exp_0_init,
                          done => exp_0_done,
-                         R2N => R2N,
+                         R2N => R2N_reg,
                          output_message => exp_0_output);
     Exp_1_port_map: entity work.exponentiation 
                 generic map(C_BLOCK_SIZE => C_BLOCK_SIZE)
                 port map(clk => clk, 
                          reset_n => reset_n, 
-                         KEY => key_e_d, 
-                         N => key_n,
+                         KEY => key_e_d_reg, 
+                         N => key_n_reg,
                          MESSAGE => msgin_data_reg1,
                          busy => exp_1_busy,
                          init => exp_1_init,
                          done => exp_1_done,
-                         R2N => R2N,
+                         R2N => R2N_reg,
                          output_message => exp_1_output);
     Exp_2_port_map: entity work.exponentiation 
                 generic map(C_BLOCK_SIZE => C_BLOCK_SIZE)
                 port map(clk => clk, 
                          reset_n => reset_n, 
-                         KEY => key_e_d, 
-                         N => key_n,
+                         KEY => key_e_d_reg, 
+                         N => key_n_reg,
                          MESSAGE => msgin_data_reg2,
                          busy => exp_2_busy,
                          init => exp_2_init,
                          done => exp_2_done,
-                         R2N => R2N,
+                         R2N => R2N_reg,
                          output_message => exp_2_output);
     Exp_3_port_map: entity work.exponentiation 
                 generic map(C_BLOCK_SIZE => C_BLOCK_SIZE)
                 port map(clk => clk, 
                          reset_n => reset_n, 
-                         KEY => key_e_d, 
-                         N => key_n,
+                         KEY => key_e_d_reg, 
+                         N => key_n_reg,
                          MESSAGE => msgin_data_reg3,
                          busy => exp_3_busy,
                          init => exp_3_init,
                          done => exp_3_done,
-                         R2N => R2N,
+                         R2N => R2N_reg,
                          output_message => exp_3_output);
      Exp_4_port_map: entity work.exponentiation 
                 generic map(C_BLOCK_SIZE => C_BLOCK_SIZE)
                 port map(clk => clk, 
                          reset_n => reset_n, 
-                         KEY => key_e_d, 
-                         N => key_n,
+                         KEY => key_e_d_reg, 
+                         N => key_n_reg,
                          MESSAGE => msgin_data_reg4,
                          busy => exp_4_busy,
                          init => exp_4_init,
                          done => exp_4_done,
-                         R2N => R2N,
+                         R2N => R2N_reg,
                          output_message => exp_4_output);
 
     
@@ -165,10 +167,16 @@ begin
                 msgin_last_reg <= '0';
                 msgout_ready_reg <= '0';
                 msgin_data_reg <= (others =>'0');
+                key_n_reg <= (others =>'0');
+                key_e_d_reg <= (others =>'0');
+                R2N_reg <= (others =>'0');
             else
                 msgin_valid_reg <= msgin_valid;
                 msgin_last_reg <= msgin_last;
                 msgin_data_reg <= msgin_data;
+                key_n_reg <= key_n;
+                key_e_d_reg <= key_e_d;
+                R2N_reg <= R2N;
             end if;
         end if;
     end process input_registers;
