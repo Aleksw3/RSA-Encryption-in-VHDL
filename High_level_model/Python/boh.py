@@ -14,16 +14,15 @@ def int_to_bin(in_num, k):
 def mp2_radix(A,B,N,bits,radix,modulus_inv):  ## bit monpro
   u = 0 
   A = int_to_bin(A,bits+1)[::-1]+"0" ##257 bits so easier to just a a 0 to msb
-  B_bin_0 = int_to_bin(B,0)[-3:-1]
+  B_bin_0 = int_to_bin(B,0)[-2:]
+  # print(B_bin_0,bin(B)[2:])
   for i in range(0,bits+1,2): ## LSB - MSB for A
-    A_i = int(A[i:i+2],2)
+    A_i = int((A[i:i+2])[::-1],2)
     u+=A_i*B
     U_bin_str = int_to_bin(u,10) #[MSB-0] - [LSB-x]
-    # print((U_bin_str[-3:-1]))
-    if int(U_bin_str[-3:-1],2) != 0:
-      qj = ((A_i*B+int(U_bin_str[-3:-1],2))*(-modulus_inv))%radix
-      u+= qj*N
-    print((U_bin_str[-3:-1]))
+    if int(U_bin_str[-2:],2) != 0:
+      qj = ((A_i*(int(B_bin_0,2))+int(U_bin_str[-2:],2))*(modulus_inv))%radix
+      u += qj*N
     u = (u>>2)
   return u
 
@@ -129,6 +128,11 @@ bits = 256
 modulus_inv = 1
 radix = 4
 
-radix_monpro_output  = mp2_radix(X,Y,N,bits,radix,modulus_inv)
+radix_monpro_output0  = mp2_radix(X,Y,N,bits,radix,0)
+radix_monpro_output1  = mp2_radix(X,Y,N,bits,radix,3)
+radix_monpro_output2  = mp2_radix(X,Y,N,bits,radix,2)
+radix_monpro_output3  = mp2_radix(X,Y,N,bits,radix,3)
+# (A,B,N,bits
+# print(f"output mp:{hex(mp2(X,Y,N,bits))}")
 
-print(f"Output:   {hex(radix_monpro_output)}\nExpected: {hex(expected)}")
+print(f"Output0:   {hex(radix_monpro_output0)}\nOutput1:   {hex(radix_monpro_output1)}\nOutput2:   {hex(radix_monpro_output2)}\nOutput3:   {hex(radix_monpro_output3)}\nExpected: {hex(expected)}")
