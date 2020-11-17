@@ -10,7 +10,7 @@ entity MonPro is
 		N, X, Y 		: in std_logic_vector(C_block_size downto 0);
 		N_inv           : in std_logic_vector(1 downto 0);
 		busy			: out std_logic;
-		Carry, Sum		: out std_logic_vector(C_block_size-1 downto 0));
+		Carry, Sum		: out std_logic_vector(C_block_size downto 0));
 end MonPro;
 
 architecture structural of MonPro is
@@ -61,7 +61,7 @@ architecture structural of MonPro is
     signal E, F                     : std_logic_vector(C_block_size+radix downto 0);
     signal unsigned_E, unsigned_F   : unsigned(C_block_size + radix downto 0);
     signal unsigned_C, unsigned_D   : unsigned(C_block_size + radix downto 0);
-    signal ModMult_Result           : std_logic_vector(1 downto 0);
+    signal ModMult_Result           : std_logic_vector(radix-1 downto 0);
 
 --	signal C_s, D_s                 : std_logic_vector(C_block_size-1 downto 0);
     signal compressor_sum           : std_logic_vector(C_block_size + radix + 2 downto 0) := (others => '0');
@@ -70,19 +70,15 @@ architecture structural of MonPro is
 	signal compressor_carry_shifted : std_logic_vector(C_block_size + radix + 2 downto 0);
 	
     --Registers
-    signal X_r, Y_r, N_r, Z_r       : std_logic_vector(C_block_size downto 0);
+    signal X_r, Y_r, N_r            : std_logic_vector(C_block_size downto 0);
     signal A_r, B_r                 : std_logic_vector(C_block_size+radix downto 0);
-    signal KSA_sum_input_r          : std_logic_vector(C_block_size - 1 downto 0);
-    signal KSA_carry_input_r        : std_logic_vector(C_block_size - 1 downto 0);
-    signal N_inv_r                  : std_logic_vector(1 downto 0);
+    signal KSA_sum_input_r          : std_logic_vector(C_block_size downto 0);
+    signal KSA_carry_input_r        : std_logic_vector(C_block_size downto 0);
+    signal N_inv_r                  : std_logic_vector(radix-1 downto 0);
     
-    --CarryLookAheadAdder Signals
-    signal KSA_carry_input          : std_logic_vector(C_block_size-1 downto 0) := (others => '0');
-    signal KSA_sum_input            : std_logic_vector(C_block_size-1 downto 0) := (others => '0');
-    signal KSA_result               : std_logic_vector(C_block_size downto 0) := (others => '0');
 	
 	--Counter
-    signal count                    : integer range 0 to C_block_size+2 := 0;
+    signal count                    : integer range 0 to C_block_size := 0;
 	
 	begin
 		
@@ -94,17 +90,22 @@ architecture structural of MonPro is
             Sum => Compressor_Sum, 
             Carry => Compressor_Carry);
 					 
+					 
 		CSA_Multiplier_EF : CSA_multiplier
 		      generic map(width_A => C_block_size + 1, width_B => radix)
 		      port map(A => unsigned(Y_r), B => unsigned(X_r(radix-1 downto 0)),
 		              carry_out => unsigned_E, sum_out => unsigned_F); 
+		              
+		              
 		CSA_Multiplier_CD : CSA_multiplier
 		      generic map(width_A => C_block_size + 1, width_B => radix)
-		      port map(A => unsigned(N_r), B => unsigned(ModMult_Result(1 downto 0)),
+		      port map(A => unsigned(N_r), B => unsigned(ModMult_Result(radix-1 downto 0)),
 		              carry_out => unsigned_C, sum_out => unsigned_D); 
+		              
+		              
         ModularMultiplication_inst : ModularMultiplication
-              port map(x => x_r(1 downto 0), y => y_r(1 downto 0),
-                       compressor_sum => B_r(1 downto 0), N_inv => N_inv,
+              port map(x => x_r(radix-1 downto 0), y => y_r(radix-1 downto 0),
+                       compressor_sum => B_r(radix-1 downto 0), N_inv => N_inv_r,
                        o_result => ModMult_Result);
 	
 	
@@ -113,8 +114,6 @@ architecture structural of MonPro is
         
 		busy <= busy_s;
 		
-		KSA_Carry_Input <= KSA_Carry_Input_r;
-		KSA_Sum_Input	<= KSA_Sum_Input_r;
 		
 		C <= std_logic_vector(unsigned_C);
 		D <= std_logic_vector(unsigned_D);
@@ -159,8 +158,8 @@ architecture structural of MonPro is
 								X_r   <= std_logic_vector(shift_right(unsigned(X_r),radix));
 							elsif count <= C_block_size/radix then
 							    count <= count + 1;
-								KSA_Sum_Input_r     <= Compressor_Sum_Shifted(C_block_size-1 downto 0);
-                                KSA_Carry_Input_r   <= Compressor_Carry_Shifted(C_block_size-1 downto 0);
+								KSA_Sum_Input_r     <= Compressor_Sum_Shifted(C_block_size downto 0);
+                                KSA_Carry_Input_r   <= Compressor_Carry_Shifted(C_block_size downto 0);
 							else
 							    if done_s = '0' then
 							        done_s <= '1';
