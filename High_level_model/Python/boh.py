@@ -24,7 +24,7 @@ def mp2_radix(A,B,N,bits,radix,modulus_inv):  ## bit monpro
       qj = ((A_i*(int(B_bin_0,2))+int(U_bin_str[-2:],2))*(modulus_inv))%radix
       u += qj*N
     u = (u>>2)
-  return u
+  return u*2
 
 def mp2(A,B,N,bits):  ## bit monpro
   u = 0 
@@ -129,10 +129,10 @@ modulus_inv = 1
 radix = 4
 
 radix_monpro_output0  = mp2_radix(X,Y,N,bits,radix,0)
-radix_monpro_output1  = mp2_radix(X,Y,N,bits,radix,3)
+radix_monpro_output1  = mp2_radix(X,Y,N,bits,radix,1)
 radix_monpro_output2  = mp2_radix(X,Y,N,bits,radix,2)
 radix_monpro_output3  = mp2_radix(X,Y,N,bits,radix,3)
 # (A,B,N,bits
 # print(f"output mp:{hex(mp2(X,Y,N,bits))}")
 
-print(f"Output0:   {hex(radix_monpro_output0)}\nOutput1:   {hex(radix_monpro_output1)}\nOutput2:   {hex(radix_monpro_output2)}\nOutput3:   {hex(radix_monpro_output3)}\nExpected: {hex(expected)}")
+print(f"Output0:   {hex(radix_monpro_output0)}\nOutput1:   {hex(radix_monpro_output1)}\nOutput2:   {hex(radix_monpro_output2)}\nOutput3:  {hex(radix_monpro_output3)}\nExpected: {hex(expected)}")
