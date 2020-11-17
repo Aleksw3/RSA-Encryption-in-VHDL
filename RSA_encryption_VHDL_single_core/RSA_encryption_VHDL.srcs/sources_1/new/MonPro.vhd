@@ -1,24 +1,3 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 10/25/2020 05:28:52 PM
--- Design Name: 
--- Module Name: MonPro - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
-
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;  
@@ -35,7 +14,6 @@ end MonPro;
 architecture structural of MonPro is
 
 	--Structural components
-	
 	component CompressorMultiBit_4to2 is
 	generic(bit_width : integer);
 	port( 
@@ -59,6 +37,7 @@ architecture structural of MonPro is
     signal isODD                    : std_logic;
     signal compressor_cout          : std_logic;
     signal C, D                     : std_logic_vector(C_block_size downto 0);
+
 --	signal C_s, D_s                 : std_logic_vector(C_block_size-1 downto 0);
     signal compressor_sum           : std_logic_vector(C_block_size downto 0) := (others => '0');
     signal compressor_carry         : std_logic_vector(C_block_size downto 0) := (others => '0');
@@ -95,10 +74,6 @@ architecture structural of MonPro is
 			D(i) <= Y_r(i) AND X_r(0);
 		end generate;
 		
---		KSA_Inst : KoggeStoneAdder
---        port map(i_x => KSA_Carry_Input, 
---        i_y => KSA_Sum_Input, o_result => KSA_Result);
-        
 --        KSA_Inst : KoggeStoneAdder32Bit
 --            port map(i_x => KSA_Carry_Input, 
 --            i_y => KSA_Sum_Input, o_result => KSA_Result);
@@ -108,13 +83,13 @@ architecture structural of MonPro is
 --		D <= '0' & D_s;
 	    isODD <= B_r(0) XOR (X_r(0) AND Y_r(0));
 		Compressor_Sum_Shifted <= std_logic_vector(shift_right(unsigned(Compressor_Sum),1));
+
 		--Signal connections to port
 		busy <= busy_s;
 		KSA_Carry_Input <= KSA_Carry_Input_r;
 		KSA_Sum_Input	<= KSA_Sum_Input_r;
 		
 		SynchProc : process(clk)
-
 		begin
 			if rising_edge(clk) then	
 				if reset_n = '0' then   
@@ -142,15 +117,15 @@ architecture structural of MonPro is
 							done_s <= '0';
 							busy_s <= '1';
 						when COMPUTE =>
-						    if count <= C_block_size then
-                                KSA_Sum_Input_r     <= Compressor_Sum_Shifted(C_block_size-1 downto 0);
-                                KSA_Carry_Input_r   <= Compressor_Carry(C_block_size-1 downto 0);
-                            end if;
 						    if (count < C_block_size) then
 								count <= count + 1;
 								A_r   <= Compressor_Carry;
 								B_r   <= Compressor_Sum_Shifted;
 								X_r   <= std_logic_vector(shift_right(unsigned(X_r),1));
+							elsif count <= C_block_size then
+							    count <= count + 1;
+								KSA_Sum_Input_r     <= Compressor_Sum_Shifted(C_block_size-1 downto 0);
+                                KSA_Carry_Input_r   <= Compressor_Carry(C_block_size-1 downto 0);
 							else
 							    if done_s = '0' then
 							        done_s <= '1';

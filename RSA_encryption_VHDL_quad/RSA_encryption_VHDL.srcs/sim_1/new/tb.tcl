@@ -20,47 +20,50 @@ add_wave clk
 # add_wave core/init done
 # add_wave core/key_e
 
-# rl_exp
-add_wave core/rl_exp/curr_state_exp core/rl_exp/curr_state_mp
-add_wave core/key_e_d core/key_n core/R2N core/rl_exp/message_reg
-add_wave core/msgin_data
-add_wave core/rl_exp/MonPro_S_out_rdy core/rl_exp/MonPro_C_out_rdy
-add_wave core/rl_exp/MonPro_S/EN core/rl_exp/MonPro_C/EN
-add_wave core/rl_exp/KSA_enable core/rl_exp/KSA_counter
-add_wave core/rl_exp/KSA_input_X core/rl_exp/KSA_input_Y
+# Exp_0_port_map
+add_wave core/Exp_0_port_map/curr_state_exp core/Exp_0_port_map/curr_state_mp
+add_wave core/curr_msgin_exp core/curr_msgout_exp
+add_wave core/exp_0_busy core/exp_0_init core/exp_0_done core/exp_1_busy
+add_wave core/key_e_d core/key_n core/R2N core/Exp_0_port_map/message_reg
+add_wave core/msgin_valid core/msgin_valid_reg core/msgin_data
+add_wave core/exp_0_init core/exp_1_init core/init
+# add_wave core/Exp_0_port_map/MonPro_S_out_rdy core/Exp_0_port_map/MonPro_C_out_rdy
+add_wave core/Exp_0_port_map/MonPro_S/EN core/Exp_0_port_map/MonPro_C/EN
+#add_wave core/Exp_0_port_map/KSA_enable core/Exp_0_port_map/KSA_counter
+#add_wave core/Exp_0_port_map/KSA_input_X core/Exp_0_port_map/KSA_input_Y
 
-add_wave core/rl_exp/S_reg 
-add_wave core/rl_exp/C_reg
-# add_wave core/rl_exp/C_reg core/rl_exp/C_s
-# add_wave core/rl_exp/S_reg core/rl_exp/S_s
-# add_wave core/rl_exp/MonPro_C_busy core/rl_exp/MonPro_S_busy
-# add_wave core/rl_exp/key_shift_reg
+add_wave core/Exp_0_port_map/S_reg 
+add_wave core/Exp_0_port_map/C_reg
+# add_wave core/Exp_0_port_map/C_reg core/Exp_0_port_map/C_s
+# add_wave core/Exp_0_port_map/S_reg core/Exp_0_port_map/S_s
+# add_wave core/Exp_0_port_map/MonPro_C_busy core/Exp_0_port_map/MonPro_S_busy
+# add_wave core/Exp_0_port_map/key_shift_reg
 
-# add_wave core/rl_exp/MonPro_C_en core/rl_exp/MonPro_S_en
+# add_wave core/Exp_0_port_map/MonPro_C_en core/Exp_0_port_map/MonPro_S_en
 
 
 # MonPro C
-# add_wave core/rl_exp/MonPro_C_X core/rl_exp/MonPro_C_Y 
-# add_wave core/rl_exp/MonPro_S_X core/rl_exp/MonPro_S_Y
-# add_wave core/rl_exp/MonPro_S/A_r core/rl_exp/MonPro_S/B_r
-# add_wave core/rl_exp/MonPro_S/C core/rl_exp/MonPro_S/D
-add_wave core/rl_exp/MonPro_C_Carry_out core/rl_exp/MonPro_C_Sum_out
-add_wave core/rl_exp/MonPro_S_Carry_out core/rl_exp/MonPro_S_Sum_out
-# add_wave core/rl_exp/MonPro_S/compressor_sum core/rl_exp/MonPro_S/compressor_carry
-# add_wave core/rl_exp/MonPro_C/compressor_sum core/rl_exp/MonPro_C/compressor_carry
+# add_wave core/Exp_0_port_map/MonPro_C_X core/Exp_0_port_map/MonPro_C_Y 
+# add_wave core/Exp_0_port_map/MonPro_S_X core/Exp_0_port_map/MonPro_S_Y
+# add_wave core/Exp_0_port_map/MonPro_S/A_r core/Exp_0_port_map/MonPro_S/B_r
+# add_wave core/Exp_0_port_map/MonPro_S/C core/Exp_0_port_map/MonPro_S/D
+#add_wave core/Exp_0_port_map/MonPro_C_Carry_out core/Exp_0_port_map/MonPro_C_Sum_out
+#add_wave core/Exp_0_port_map/MonPro_S_Carry_out core/Exp_0_port_map/MonPro_S_Sum_out
+# add_wave core/Exp_0_port_map/MonPro_S/compressor_sum core/Exp_0_port_map/MonPro_S/compressor_carry
+# add_wave core/Exp_0_port_map/MonPro_C/compressor_sum core/Exp_0_port_map/MonPro_C/compressor_carry
 
-add_wave core/rl_exp/KSA_output
+#add_wave core/Exp_0_port_map/KSA_output
 
-# add_wave core/rl_exp/MonPro_C_en core/rl_exp/MonPro_S_en
-# add_wave core/rl_exp/MonPro_C/busy
-# add_wave core/rl_exp/MonPro_S/busy
-# add_wave core/rl_exp/done
-add_wave core/rl_exp/counter
+# add_wave core/Exp_0_port_map/MonPro_C_en core/Exp_0_port_map/MonPro_S_en
+# add_wave core/Exp_0_port_map/MonPro_C/busy
+# add_wave core/Exp_0_port_map/MonPro_S/busy
+# add_wave core/Exp_0_port_map/done
+add_wave core/Exp_0_port_map/counter
 # MonPro S
-# add_wave core/rl_exp/MonPro_C/X_s core/rl_exp/MonPro_C/Y_s 
-#core/rl_exp/MonPro_C/Z_s core/rl_exp/MonPro_C/N_s
-# add_wave core/rl_exp/MonPro_S/X_s core/rl_exp/MonPro_S/Y_s 
-#core/rl_exp/MonPro_S/Z_s core/rl_exp/MonPro_S/N_s
+# add_wave core/Exp_0_port_map/MonPro_C/X_s core/Exp_0_port_map/MonPro_C/Y_s 
+#core/Exp_0_port_map/MonPro_C/Z_s core/Exp_0_port_map/MonPro_C/N_s
+# add_wave core/Exp_0_port_map/MonPro_S/X_s core/Exp_0_port_map/MonPro_S/Y_s 
+#core/Exp_0_port_map/MonPro_S/Z_s core/Exp_0_port_map/MonPro_S/N_s
 
 
 # answers

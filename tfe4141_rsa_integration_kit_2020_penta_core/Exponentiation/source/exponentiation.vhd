@@ -3,12 +3,12 @@ use ieee.std_logic_1164.all;
 use IEEE.numeric_std.ALL;
 
 entity exponentiation is
-	generic (
-		C_block_size : integer := 256
-	);
-	port (
-	     -- basic important
-		 clk:            in std_logic;
+    generic (
+        C_block_size : integer := 256
+    );
+    port (
+         -- basic important
+         clk:            in std_logic;
          reset_n:        in std_logic;
          -- input values
          KEY:            in std_logic_vector(C_block_size-1 downto 0);
@@ -23,7 +23,7 @@ entity exponentiation is
          busy:           out std_logic;
          done:           out std_logic
          
-	);
+    );
 end exponentiation;
 
 
@@ -43,6 +43,19 @@ signal MP_start: std_logic:='0';
 --MonPro inputs
 signal MonPro_C_X,MonPro_C_Y: std_logic_vector(C_block_size downto 0);
 signal MonPro_S_X,MonPro_S_Y: std_logic_vector(C_block_size downto 0);
+signal MonPro_C_Carry_out,MonPro_C_Sum_out: std_logic_vector(C_block_size-1 downto 0);
+signal MonPro_C_Carry_out_reg,MonPro_C_Sum_out_reg: std_logic_vector(C_block_size-1 downto 0);
+signal MonPro_S_Carry_out,MonPro_S_Sum_out: std_logic_vector(C_block_size-1 downto 0);
+signal MonPro_S_Carry_out_reg,MonPro_S_Sum_out_reg: std_logic_vector(C_block_size-1 downto 0);
+signal MonPro_S_out_rdy: std_logic:= '0';
+signal MonPro_C_out_rdy: std_logic:= '0';
+signal KSA_enable: std_logic:='0';
+signal MonPro_C_EN_f, MonPro_S_EN_f: std_logic;
+signal KSA_input_X, KSA_input_Y: std_logic_vector(C_block_size-1 downto 0);
+signal KSA_output: std_logic_vector(C_block_size downto 0); 
+
+signal KSA_counter: unsigned(1 downto 0):="00";
+
 
 signal S_s, C_s: std_logic_vector(C_block_size downto 0);
 
@@ -73,14 +86,29 @@ MonPro_C: entity work.MonPro
             port map (clk => clk, reset_n => reset_n,
                       EN => MonPro_C_en, N=>N_reg,
                       X => MonPro_C_X, Y=> MonPro_C_Y,
-                      Busy => MonPro_C_busy, Z => C_s);
+                      Busy => MonPro_C_busy, 
+                      Carry => MonPro_C_Carry_out,
+                      Sum => MonPro_C_Sum_out);
 
 MonPro_S: entity work.MonPro 
             generic map(C_block_size => C_block_size)
             port map (clk => clk, reset_n => reset_n,
                       EN => MonPro_S_en, N=>N_reg,
                       X => MonPro_S_X, Y=> MonPro_S_Y,
-                      Busy => MonPro_S_busy,Z => S_s);
+                      Busy => MonPro_S_busy,
+                      Carry => MonPro_S_Carry_out,
+                      Sum => MonPro_S_Sum_out);
+KSA_adder: entity work.KoggeStoneAdder
+            port map(
+                i_x => KSA_input_X,
+                i_y => KSA_input_Y,
+                o_result => KSA_output
+            );
+
+
+
+--  Port (i_x, i_y : in std_logic_vector(255 downto 0);
+--        o_result   : out std_logic_vector(256 downto 0));
 
 MP_busy <= MonPro_C_busy & MonPro_S_busy;
 
@@ -250,16 +278,21 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                     when BUSY_WAIT =>
 --                        busy <='1';
                         if curr_state_exp = LOOP_EXP and MP_busy = "00" then
-                            if MonPro_S_en ='1' then
-                                key_shift_reg <= std_logic_vector(shift_right(unsigned(key_shift_reg),1));
+                            if MonPro_S_out_rdy = '0' and MonPro_C_out_rdy = '0' then
+                                if MonPro_S_en ='1' then
+                                    key_shift_reg <= std_logic_vector(shift_right(unsigned(key_shift_reg),1));
+                                end if;
+                                MonPro_C_X <= C_reg;
+                                MonPro_C_Y <= S_reg;     
+                                MonPro_S_X <= S_reg;
+                                MonPro_S_Y <= S_reg;      
+                                                      
+                                MonPro_S_en_start <= '1';
+                                MonPro_C_en_start <= key_shift_reg(0);
+                            else
+                                MonPro_S_en_start <= '0';
+                                MonPro_C_en_start <= '0';
                             end if;
-                            MonPro_C_X <= C_reg;
-                            MonPro_C_Y <= S_reg;     
-                            MonPro_S_X <= S_reg;
-                            MonPro_S_Y <= S_reg;      
-                                                  
-                            MonPro_S_en_start <= '1';
-                            MonPro_C_en_start <= key_shift_reg(0);
                         elsif curr_state_exp = LAST and MP_busy = "00" and next_state_mp/=MP_DONE_FSM then
                             MonPro_C_en_start <= '1';
                             MonPro_S_en_start <= '0';
@@ -268,10 +301,11 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                             MonPro_C_en_start <= '0';
                         end if;
                     when MP_DONE_FSM =>
---                        busy <='1';
-                        MP_done <= '1';
                         MonPro_S_en_start <= '0';
                         MonPro_C_en_start <= '0';
+                        if MonPro_S_out_rdy = '0' and MonPro_C_out_rdy = '0' then --Wait for KSA to finish
+                            MP_done <= '1';
+                        end if;
                 end case;
             end if;
         end if;
@@ -282,7 +316,7 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
 -----------------------Combinational stage for calculation FSM---------------------------------
 -----------------------------------------------------------------------------------------------
 
-    combinational_fsm_monpro: process(curr_state_mp, MP_busy, counter, MP_start, MonPro_S_busy, MonPro_C_busy, curr_state_exp)
+    combinational_fsm_monpro: process(curr_state_mp, MP_busy, counter, MP_start, MonPro_S_busy, MonPro_C_busy, curr_state_exp, MonPro_S_out_rdy,MonPro_C_out_rdy)
     begin
         case(curr_state_mp) is
             when IDLE =>
@@ -300,8 +334,12 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
             when BUSY_WAIT =>
                 if MP_busy = "00" then
                     if curr_state_exp = LOOP_EXP then
-                        if counter = C_block_size-1 then
-                            next_state_mp <= MP_DONE_FSM;
+                        if MonPro_S_out_rdy = '0' and MonPro_C_out_rdy = '0' then
+                            if counter = C_block_size-1 then
+                                next_state_mp <= MP_DONE_FSM;
+                            else
+                                next_state_mp <= BUSY_WAIT;
+                            end if;
                         else
                             next_state_mp <= BUSY_WAIT;
                         end if;
@@ -312,7 +350,11 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                     next_state_mp <= BUSY_WAIT;
                 end if;
             when MP_DONE_FSM =>
-                next_state_mp <= IDLE;
+                if MonPro_S_out_rdy = '0' and MonPro_C_out_rdy = '0' then
+                    next_state_mp <= IDLE;
+                else
+                    next_state_mp <= MP_DONE_FSM;
+                end if;
         end case;
     end process combinational_fsm_monpro;
    
@@ -325,6 +367,9 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
         if rising_edge(clk) then
             MonPro_S_busy_f <= MonPro_S_busy; 
             MonPro_C_busy_f <= MonPro_C_busy;
+            
+            MonPro_S_EN_f <= MonPro_S_EN; 
+            MonPro_C_EN_f <= MonPro_C_EN;
 
             if curr_state_exp = LOOP_EXP then
                 if MonPro_S_busy_f='1' and MonPro_S_busy='0' then
@@ -333,13 +378,62 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
             else
                 counter<=(others=>'0');
             end if;
+            if (MonPro_S_EN_f = '0' and MonPro_S_EN = '1') or (MonPro_C_EN_f = '0' and MonPro_C_EN = '1') then
+                if MonPro_C_EN_f = '0' and MonPro_C_EN = '1' then --Check for rising flank
+                    MonPro_C_out_rdy <= '1';
+                end if;
+                if MonPro_S_EN_f='0' and MonPro_S_EN='1' then
+                    MonPro_S_out_rdy <= '1';
+                end if;
+            elsif (MonPro_S_busy_f='1' and MonPro_S_busy='0') or (MonPro_C_busy_f='1' and MonPro_C_busy='0') then
+                if MonPro_S_busy_f='1' and MonPro_S_busy='0' then --Check for falling flank
+                    MonPro_S_Carry_out_reg <= MonPro_S_Carry_out;
+                    MonPro_S_Sum_out_reg   <= MonPro_S_Sum_out;
+                    MonPro_S_out_rdy <= '1';
+                    --S_reg <= S_s;
+                end if;
+                if MonPro_C_busy_f='1' and MonPro_C_busy='0' then
+                    MonPro_C_Carry_out_reg <= MonPro_C_Carry_out;
+                    MonPro_C_Sum_out_reg   <= MonPro_C_Sum_out;
+                    MonPro_C_out_rdy <= '1';
+                    --C_reg <= C_s;
+                end if;
+            else
+                -- This only happens after a monpro finishes
+                if MonPro_S_out_rdy = '1' and MonPro_S_EN = '0' then
+                    if KSA_enable = '0' then
+                        KSA_enable<='1';
+                        KSA_counter <= (others=>'0');
+                        KSA_input_X <= MonPro_S_Carry_out_reg;
+                        KSA_input_Y <= MonPro_S_Sum_out_reg;
+                    else
+                        if KSA_counter = 3 then
+                            KSA_enable <= '0';
+                            MonPro_S_out_rdy <= '0';
+                            S_reg <= KSA_output;
+                        else
+                            KSA_counter <= KSA_counter + 1;
+                        end if;
+                    end if;
+                elsif MonPro_C_out_rdy = '1' and MonPro_C_EN = '0' then
+                    if KSA_enable = '0' then
+                        KSA_enable<='1';
+                        KSA_counter <= (others=>'0');
+                        KSA_input_X <= MonPro_C_Carry_out_reg;
+                        KSA_input_Y <= MonPro_C_Sum_out_reg;
+                    else
+                        if KSA_counter = 3 then
+                            KSA_enable <= '0';
+                            MonPro_C_out_rdy <= '0';
+                            C_reg <= KSA_output;
+                        else
+                            KSA_counter <= KSA_counter + 1;
+                        end if;
+                    end if;
+                end if;
+            end if;
 
-            if MonPro_S_busy_f='1' and MonPro_S_busy='0' then --Check for falling flank
-                S_reg <= S_s;
-            end if;
-            if MonPro_C_busy_f='1' and MonPro_C_busy='0' then
-                C_reg <= C_s;
-            end if;
         end if;
     end process falling_edge_busy;
+
 end expBehave;

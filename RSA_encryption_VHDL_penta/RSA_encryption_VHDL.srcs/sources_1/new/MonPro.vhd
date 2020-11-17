@@ -122,7 +122,8 @@ architecture structural of MonPro is
 								A_r   <= Compressor_Carry;
 								B_r   <= Compressor_Sum_Shifted;
 								X_r   <= std_logic_vector(shift_right(unsigned(X_r),1));
-							elsif count = C_block_size then
+							elsif count <= C_block_size then
+							    count <= count + 1;
 								KSA_Sum_Input_r     <= Compressor_Sum_Shifted(C_block_size-1 downto 0);
                                 KSA_Carry_Input_r   <= Compressor_Carry(C_block_size-1 downto 0);
 							else

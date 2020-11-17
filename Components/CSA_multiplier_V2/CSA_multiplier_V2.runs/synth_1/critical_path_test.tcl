@@ -17,10 +17,6 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
-set_param synth.incrementalSynthesisCache ./.Xil/Vivado-12154-aleksw/incrSyn
-set_msg_config -id {Common 17-41} -limit 10000000
-set_msg_config -id {Synth 8-256} -limit 10000
-set_msg_config -id {Synth 8-638} -limit 10000
 create_project -in_memory -part xc7z020clg400-1
 
 set_param project.singleFileAddWarning.threshold 0
@@ -30,6 +26,7 @@ set_property webtalk.parent_dir /home/aleksw/NTNU/First_Year/DDS/Project/Compone
 set_property parent.project_path /home/aleksw/NTNU/First_Year/DDS/Project/Components/CSA_multiplier_V2/CSA_multiplier_V2.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language VHDL [current_project]
+set_property ip_output_repo /home/aleksw/NTNU/First_Year/DDS/Project/Components/CSA_multiplier_V2/CSA_multiplier_V2.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 read_vhdl -library xil_defaultlib {
   /home/aleksw/NTNU/First_Year/DDS/Project/Components/CSA_multiplier_V2/CSA_multiplier_V2.srcs/sources_1/new/CSA_adder.vhd

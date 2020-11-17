@@ -53,13 +53,14 @@ end RSA_Core;
 
 architecture Behavioral of RSA_Core is
 signal multiple_out:     std_logic := '0';
-signal init: std_logic;
+signal init: std_logic:='0';
 signal last_input_msg:   std_logic:='0';
 signal msgout_data_reg:  std_logic_vector(C_BLOCK_SIZE-1 downto 0);
 --signal output_message:   std_logic_vector(C_BLOCK_SIZE-1 downto 0);
-signal msgin_data_reg:   std_logic_vector(C_BLOCK_SIZE-1 downto 0);
---type msg_state is (MSGIN,WAIT_FOR_BUSY, MSGOUT);
---signal state_msg, next_state_msg, prev_state: msg_state:=MSGIN;
+--signal msgin_data_reg:   std_logic_vector(C_BLOCK_SIZE-1 downto 0);
+signal msgin_data_reg0, msgin_data_reg1, msgin_data_reg2, msgin_data_reg3:  std_logic_vector(C_BLOCK_SIZE-1 downto 0);
+signal msgin_valid_reg, msgin_last_reg, msgout_ready_reg, msgout_valid_reg: std_logic;
+signal msgin_data_reg: std_logic_vector(C_BLOCK_SIZE-1 downto 0);
 
 type msgin_state  is (IDLE_IN,Exp_in_0,Exp_in_1,Exp_in_2,Exp_in_3);
 type msgout_state is (IDLE_OUT,Exp_out_0,Exp_out_1,Exp_out_2,Exp_out_3);
@@ -77,6 +78,7 @@ signal msgout_valid_0_s, msgout_valid_1_s, msgout_valid_2_s, msgout_valid_3_s:  
 signal msgin_ready_s: std_logic:='0';
 
 begin
+
 -----------------------------------------------------------------------------------------------
 --------------------- Exponentiation component port map ---------------------------------------
 -----------------------------------------------------------------------------------------------
@@ -87,7 +89,7 @@ begin
                          reset_n => reset_n, 
                          KEY => key_e_d, 
                          N => key_n,
-                         MESSAGE => msgin_data_reg,
+                         MESSAGE => msgin_data_reg0,
                          busy => exp_0_busy,
                          init => exp_0_init,
                          done => exp_0_done,
@@ -99,7 +101,7 @@ begin
                          reset_n => reset_n, 
                          KEY => key_e_d, 
                          N => key_n,
-                         MESSAGE => msgin_data_reg,
+                         MESSAGE => msgin_data_reg1,
                          busy => exp_1_busy,
                          init => exp_1_init,
                          done => exp_1_done,
@@ -111,7 +113,7 @@ begin
                          reset_n => reset_n, 
                          KEY => key_e_d, 
                          N => key_n,
-                         MESSAGE => msgin_data_reg,
+                         MESSAGE => msgin_data_reg2,
                          busy => exp_2_busy,
                          init => exp_2_init,
                          done => exp_2_done,
@@ -123,12 +125,13 @@ begin
                          reset_n => reset_n, 
                          KEY => key_e_d, 
                          N => key_n,
-                         MESSAGE => msgin_data_reg,
+                         MESSAGE => msgin_data_reg3,
                          busy => exp_3_busy,
                          init => exp_3_init,
                          done => exp_3_done,
                          R2N => R2N,
                          output_message => exp_3_output);
+
     
 
 -----------------------------------------------------------------------------------------------
@@ -141,6 +144,25 @@ begin
     rsa_status <= R2N(C_BLOCK_SIZE-1 downto C_BLOCK_SIZE-32);
 
 
+
+    input_registers:process(clk,reset_n)
+    begin
+        if rising_edge(clk) then
+            if reset_n = '0' then
+                msgin_valid_reg <= '0';
+                msgin_last_reg <= '0';
+                msgout_ready_reg <= '0';
+                msgin_data_reg <= (others =>'0');
+            else
+                msgin_valid_reg <= msgin_valid;
+                msgin_last_reg <= msgin_last;
+--                msgout_ready_reg <= msgout_ready;
+                msgin_data_reg <= msgin_data;
+            end if;
+        end if;
+    end process input_registers;
+
+
     message_in_synchonous_FSM:process(reset_n, clk)
     begin
         if rising_edge(clk) then
@@ -151,13 +173,13 @@ begin
                     when IDLE_IN =>
                         -- Waiting for msgout to finish before a new message starts
                     when Exp_in_0 =>
-                        if msgin_valid = '1' and exp_0_busy = '0' and curr_msgout_exp /= Exp_out_0 then
+                        if msgin_valid_reg = '1' and exp_0_busy = '0' and curr_msgout_exp /= Exp_out_0 then
                             if init = '0' then
                                 init <= '1';
                                 exp_0_init<= '1';
                                 msgin_ready_s <= '1';
-                                msgin_data_reg <= msgin_data;
-                                if msgin_last = '1' then    -- Check if this is the last message or not
+                                msgin_data_reg0 <= msgin_data_reg;
+                                if msgin_last_reg = '1' then    -- Check if this is the last message or not
                                     last_input_msg_exp0 <= '1'; 
                                 else
                                     last_input_msg_exp0 <= '0';
@@ -172,13 +194,13 @@ begin
                         end if;
                     when Exp_in_1 =>
                         last_msgout_exp <= Exp_out_1;
-                        if msgin_valid = '1' and exp_1_busy = '0' and curr_msgout_exp /= Exp_out_1 then
+                        if msgin_valid_reg = '1' and exp_1_busy = '0' and curr_msgout_exp /= Exp_out_1 then
                             if init = '0' then
                                 init <= '1';
                                 exp_1_init<= '1';
                                 msgin_ready_s <= '1';
-                                msgin_data_reg <= msgin_data;
-                                if msgin_last = '1' then    -- Check if this is the last message or not
+                                msgin_data_reg1 <= msgin_data_reg;
+                                if msgin_last_reg = '1' then    -- Check if this is the last message or not
                                     last_input_msg_exp1 <= '1'; 
                                 else
                                     last_input_msg_exp1 <= '0';
@@ -192,13 +214,13 @@ begin
                             msgin_ready_s <= '0';
                         end if;
                     when Exp_in_2 =>
-                        if msgin_valid = '1' and exp_2_busy = '0' and curr_msgout_exp /= Exp_out_2 then
+                        if msgin_valid_reg = '1' and exp_2_busy = '0' and curr_msgout_exp /= Exp_out_2 then
                             if init = '0' then
                                 init <= '1';
                                 exp_2_init<= '1';
                                 msgin_ready_s <= '1';
-                                msgin_data_reg <= msgin_data;
-                                if msgin_last = '1' then    -- Check if this is the last message or not
+                                msgin_data_reg2 <= msgin_data_reg;
+                                if msgin_last_reg = '1' then    -- Check if this is the last message or not
                                     last_input_msg_exp2 <= '1'; 
                                 else
                                     last_input_msg_exp2 <= '0';
@@ -212,13 +234,13 @@ begin
                             msgin_ready_s <= '0';
                         end if;
                     when Exp_in_3 =>
-                        if msgin_valid = '1' and exp_3_busy = '0' and curr_msgout_exp /= Exp_out_3 then
+                        if msgin_valid_reg = '1' and exp_3_busy = '0' and curr_msgout_exp /= Exp_out_3 then
                             if init = '0' then
                                 init <= '1';
                                 exp_3_init<= '1';
                                 msgin_ready_s <= '1';
-                                msgin_data_reg <= msgin_data;
-                                if msgin_last = '1' then    -- Check if this is the last message or not
+                                msgin_data_reg3 <= msgin_data_reg;
+                                if msgin_last_reg = '1' then    -- Check if this is the last message or not
                                     last_input_msg_exp3 <= '1'; 
                                 else
                                     last_input_msg_exp3 <= '0';
@@ -237,7 +259,7 @@ begin
     end process message_in_synchonous_FSM;
 
 
-    message_in_combinational_FSM:process(curr_msgin_exp,curr_msgout_exp,exp_0_busy,exp_1_busy,exp_2_busy,exp_3_busy)
+    message_in_combinational_FSM:process(curr_msgin_exp,curr_msgout_exp,exp_0_busy,exp_1_busy,exp_2_busy,exp_3_busy,last_input_msg_exp0,last_input_msg_exp1,last_input_msg_exp2,last_input_msg_exp3)
     begin
         case(curr_msgin_exp) is
             WHEN IDLE_IN =>
@@ -254,6 +276,8 @@ begin
                         else
                             next_msgin_exp <= IDLE_IN;
                         end if;
+                    else
+                        next_msgin_exp <= Exp_in_0;
                     end if;
                 else
                     next_msgin_exp <= Exp_in_0;
@@ -266,6 +290,8 @@ begin
                         else
                             next_msgin_exp <= IDLE_IN;
                         end if;
+                    else
+                        next_msgin_exp <= Exp_in_1;
                     end if;
                 else
                     next_msgin_exp <= Exp_in_1;
@@ -278,6 +304,8 @@ begin
                         else
                             next_msgin_exp <= IDLE_IN;
                         end if;
+                    else
+                        next_msgin_exp <= Exp_in_2;
                     end if;
                 else
                     next_msgin_exp <= Exp_in_2;
@@ -290,6 +318,8 @@ begin
                         else
                             next_msgin_exp <= IDLE_IN;
                         end if;
+                    else
+                        next_msgin_exp <= Exp_in_3;
                     end if;
                 else
                     next_msgin_exp <= Exp_in_3;
@@ -321,8 +351,14 @@ begin
                          if exp_0_busy = '0' then
                               if msgout_valid_0_s = '0' then
                                 msgout_valid_0_s <= '1';
+                                if last_input_msg_exp0 = '1' then
+                                    msgout_last <= '1';
+                                else
+                                    msgout_last <= '0';
+                                end if;
                             elsif msgout_ready = '1'  then
                                 msgout_valid_0_s <= '0';
+                                msgout_last <= '0';
                             end if;
                         end if;
 
@@ -340,8 +376,14 @@ begin
                         if exp_1_busy = '0' then
                             if msgout_valid_1_s = '0' then
                                 msgout_valid_1_s <= '1';
+                                if last_input_msg_exp1 = '1' then
+                                    msgout_last <= '1';
+                                else
+                                    msgout_last <= '0';
+                                end if;
                             elsif msgout_ready = '1'  then
                                 msgout_valid_1_s <= '0';
+                                msgout_last <= '0';
                             end if;
                         end if;
                         msgout_data_reg  <= exp_1_output;
@@ -358,8 +400,14 @@ begin
                          if exp_2_busy = '0' then
                             if msgout_valid_2_s = '0' then
                                 msgout_valid_2_s <= '1';
+                                if last_input_msg_exp2 = '1' then
+                                    msgout_last <= '1';
+                                else
+                                    msgout_last <= '0';
+                                end if;
                             elsif msgout_ready = '1'  then
                                 msgout_valid_2_s <= '0';
+                                msgout_last <= '0';
                             end if;
                         end if;
                         msgout_data_reg  <= exp_2_output;
@@ -375,25 +423,26 @@ begin
                         if exp_3_busy = '0' then
                             if msgout_valid_3_s = '0' then
                                 msgout_valid_3_s <= '1';
+                                if last_input_msg_exp3 = '1' then
+                                    msgout_last <= '1';
+                                else
+                                    msgout_last <= '0';
+                                end if;
                             elsif msgout_ready = '1'  then
                                 msgout_valid_3_s <= '0';
+                                msgout_last <= '0';
                             end if;
                         else
                             msgout_valid_3_s <= '0';
                         end if;
 
                         msgout_data_reg  <= exp_3_output;
-                        if last_input_msg_exp3 = '1' then
-                            msgout_last <= '1';
-                        else
-                            msgout_last <= '0';
-                        end if;
                 end case;
             end if;
         end if;
     end process message_out_synchonous_FSM;
 
-    MSGOUT_combinational_FSM:process(curr_msgout_exp, init, msgout_valid_0_s,msgout_valid_1_s,msgout_valid_2_s,msgout_valid_3_s,last_input_msg_exp0 ,msgout_ready, exp_0_busy, exp_1_busy, exp_2_busy, exp_3_busy)
+    MSGOUT_combinational_FSM:process(curr_msgout_exp, init, msgout_valid_0_s,msgout_valid_1_s,msgout_valid_2_s,msgout_valid_3_s, last_input_msg_exp0, last_input_msg_exp1, last_input_msg_exp2,last_input_msg_exp3 ,msgout_ready, exp_0_busy, exp_1_busy, exp_2_busy, exp_3_busy)
     begin
         case(curr_msgout_exp) is
             when IDLE_OUT =>
@@ -409,6 +458,8 @@ begin
                     else
                         next_msgout_exp <= IDLE_OUT;
                     end if;
+                else
+                    next_msgout_exp <= Exp_out_0;
                 end if;
             when Exp_out_1 =>
                 if msgout_ready = '1' and msgout_valid_1_s = '1' then
@@ -417,6 +468,8 @@ begin
                     else
                         next_msgout_exp <= IDLE_OUT;
                     end if;
+                else
+                    next_msgout_exp <= Exp_out_1;
                 end if;
             when Exp_out_2 =>
                 if msgout_ready = '1' and msgout_valid_2_s = '1' then
@@ -425,6 +478,8 @@ begin
                     else
                         next_msgout_exp <= IDLE_OUT;
                     end if;
+                else
+                    next_msgout_exp <= Exp_out_2;
                 end if;
             when Exp_out_3 =>
                 if msgout_ready = '1' and msgout_valid_3_s = '1' then
@@ -433,6 +488,8 @@ begin
                     else
                         next_msgout_exp <= IDLE_OUT;
                     end if;
+                else
+                    next_msgout_exp <= Exp_out_3;
                 end if;
         end case;
     end process MSGOUT_combinational_FSM;

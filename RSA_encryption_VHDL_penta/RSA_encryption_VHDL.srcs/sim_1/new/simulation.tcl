@@ -14,6 +14,7 @@ add_wave u_rsa_core/curr_msgin_exp u_rsa_core/curr_msgout_exp
 add_wave u_rsa_core/msgin_valid_reg u_rsa_core/msgin_ready u_rsa_core/init
 add_wave u_rsa_core/msgin_last_reg
 add_wave u_rsa_core/msgout_last
+add_wave u_rsa_core/Exp_0_port_map/curr_state_exp u_rsa_core/Exp_0_port_map/curr_state_mp
 add_wave u_rsa_core/msgout_valid u_rsa_core/msgin_valid_reg u_rsa_core/msgout_ready_reg
 add_wave u_rsa_core/msgin_data_reg
 add_wave u_rsa_core/msgin_data_reg0 u_rsa_core/msgin_data_reg1 u_rsa_core/msgin_data_reg2 u_rsa_core/msgin_data_reg3 u_rsa_core/msgin_data_reg4

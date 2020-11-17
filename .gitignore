@@ -5,6 +5,7 @@ RSA_encryption_VHDL/RSA_encryption_VHDL.ip_user_files/
 *.sim/
 *.runs/
 *.cache/
+*.wdb
 *.ip_user_files/
 RSA_encryption_VHDL/RSA_encryption_VHDL.xpr
 !/tfe4141_rsa_integration_kit_2020/*

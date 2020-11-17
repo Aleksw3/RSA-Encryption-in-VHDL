@@ -2,8 +2,8 @@
 # Vivado v2019.2 (64-bit)
 # SW Build 2708876 on Wed Nov  6 21:39:14 MST 2019
 # IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
-# Start of session at: Sun Nov 15 17:45:40 2020
-# Process ID: 26088
+# Start of session at: Tue Nov 17 14:54:01 2020
+# Process ID: 8901
 # Current directory: /home/aleksw/NTNU/First_Year/DDS/Project/Components/CSA_multiplier_V2/CSA_multiplier_V2.runs/synth_1
 # Command line: vivado -log critical_path_test.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source critical_path_test.tcl
 # Log file: /home/aleksw/NTNU/First_Year/DDS/Project/Components/CSA_multiplier_V2/CSA_multiplier_V2.runs/synth_1/critical_path_test.vds

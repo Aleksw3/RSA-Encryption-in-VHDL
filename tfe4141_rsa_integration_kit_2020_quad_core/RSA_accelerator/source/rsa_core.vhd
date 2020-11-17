@@ -53,7 +53,7 @@ end RSA_Core;
 
 architecture Behavioral of RSA_Core is
 signal multiple_out:     std_logic := '0';
-signal init: std_logic;
+signal init: std_logic:='0';
 signal last_input_msg:   std_logic:='0';
 signal msgout_data_reg:  std_logic_vector(C_BLOCK_SIZE-1 downto 0);
 --signal output_message:   std_logic_vector(C_BLOCK_SIZE-1 downto 0);

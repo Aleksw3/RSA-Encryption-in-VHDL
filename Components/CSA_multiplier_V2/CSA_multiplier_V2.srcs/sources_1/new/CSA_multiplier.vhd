@@ -25,8 +25,8 @@ use IEEE.numeric_std.ALL;
 
 
 entity CSA_multiplier is
-	Generic(width_A: integer:=8; --longer bit length
-			width_B: integer:=8  --smaller bit length
+	Generic(width_A: integer:=257; --longer bit length
+			width_B: integer:=2  --smaller bit length
 		);
 	Port ( 
 			A: IN unsigned(width_A-1 downto 0);
@@ -65,13 +65,7 @@ first_adder: entity work.CSA_adder_for_mult
 				generic map(width => width_A+width_B-1)
 				port map(x=>P(0),y=>P(1),carry_in=>(others => '0'),sum=>sum(0),carry=>carry(0));
 
-CSA_adders: for i in 2 to (width_B-2) generate
-	adder: entity work.CSA_adder_for_mult 
-				generic map(width => width_A+width_B-1)
-				port map(x=>P(i),y=>sum(i-2),carry_in=>carry(i-2),sum=>sum(i-1),carry=>carry(i-1));
-end generate CSA_adders;
-
 last_adder: entity work.CSA_adder_for_mult 
 				generic map(width => width_A+width_B-1)
-				port map(x=>P(width_B-1),y=>sum(width_B-3),carry_in=>carry(width_B-3),sum=>sum_out,carry=>carry_out);
+				port map(x=>P(1),y=>sum(1),carry_in=>carry(0),sum=>sum_out,carry=>carry_out);
 end Behavioral;
