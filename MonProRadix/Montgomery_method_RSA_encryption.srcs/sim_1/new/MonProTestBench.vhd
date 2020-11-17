@@ -38,7 +38,7 @@ architecture Behavioral of MonProTb is
 		N, X, Y 			: 	in std_logic_vector(C_block_size downto 0);
 		N_inv               :   in std_logic_vector(1 downto 0);
 		busy				:	out std_logic;
-		Carry, Sum		    :  out std_logic_vector(C_block_size-1 downto 0));
+		Carry, Sum		    :  out std_logic_vector(C_block_size downto 0));
 	end component;
 
 	--Constants
@@ -56,15 +56,15 @@ architecture Behavioral of MonProTb is
 	signal clk : std_logic := '0';
 	signal EN : std_logic := '1';
 	signal reset_n : std_logic := '1';
-	signal N_inv : std_logic_vector(1 downto 0) := "11";
+	signal N_inv : std_logic_vector(1 downto 0) := "01";
 	signal N            : std_logic_vector(bit_width downto 0) := (others => '0');	
 	signal X            : std_logic_vector(bit_width downto 0) := (others => '0');	
 	signal Y 			: std_logic_vector(bit_width downto 0) := (others => '0');	
 	--Output signals of Monpro
 	signal busy, busy_s 			  : std_logic := '0';
-	signal Carry : std_logic_vector(bit_width-1 downto 0) := (others => '0');
-	signal Sum		:  std_logic_vector(bit_width-1 downto 0) := (others => '0');
-	signal Z				          : std_logic_vector(bit_width-1 downto 0) := (others => '0');
+	signal Carry : std_logic_vector(bit_width downto 0) := (others => '0');
+	signal Sum		:  std_logic_vector(bit_width downto 0) := (others => '0');
+	signal Z				          : std_logic_vector(bit_width downto 0) := (others => '0');
 	signal Z_expected : std_logic_vector(bit_width+3 downto 0) := (others => '0'); 
 --	signal Z_holder       : std_logic_vector(bit_width - 1 downto 0) := (others => '0');
 	
