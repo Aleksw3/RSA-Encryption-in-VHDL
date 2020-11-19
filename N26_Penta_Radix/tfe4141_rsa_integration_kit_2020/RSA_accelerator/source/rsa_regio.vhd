@@ -30,7 +30,7 @@ entity rsa_regio is
 		-- Users to add parameters here
 		C_BLOCK_SIZE        : integer := 256;
 		C_register_count    : integer := 33; --optinally replace with 64 --should probably be constant
-
+		radix 				: integer := 2;
 		-- User parameters ends
 		-- Do not modify the parameters beyond this line
 
@@ -44,6 +44,7 @@ entity rsa_regio is
 		key_e_d         : out std_logic_vector(C_BLOCK_SIZE-1 downto 0);
 		key_n           : out std_logic_vector(C_BLOCK_SIZE-1 downto 0);
 		R2N             : out std_logic_vector(C_BLOCK_SIZE-1 downto 0);
+		MOD_INV         : out std_logic_vector(radix-1 downto 0);
 		rsa_status      : in  std_logic_vector(31 downto 0);
 
 		-- User ports ends
@@ -389,7 +390,8 @@ begin
     
 	-- write to registers [63..33]
 	-- read from registers [31..16]
-    R2N   <= slv_reg(23) & slv_reg(22) & slv_reg(21) & slv_reg(20) & slv_reg(19) & slv_reg(18) & slv_reg(17) & slv_reg(16);
+    R2N       <= slv_reg(23) & slv_reg(22) & slv_reg(21) & slv_reg(20) & slv_reg(19) & slv_reg(18) & slv_reg(17) & slv_reg(16);
+    MOD_INV   <= slv_reg(25) & slv_reg(24);
 	-- User logic ends
 
 end rtl;

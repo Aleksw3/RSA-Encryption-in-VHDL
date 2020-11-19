@@ -4,7 +4,8 @@ use IEEE.numeric_std.all;
 
 entity RSA_Core is
     Generic(
-            C_BLOCK_SIZE: integer:=256
+            C_BLOCK_SIZE: integer:=256;
+            radix:        integer:=2
     );
     Port ( 
         -----------------------------------------------------------------------------
@@ -42,12 +43,13 @@ entity RSA_Core is
         -----------------------------------------------------------------------------
         -- Interface to the register block
         -----------------------------------------------------------------------------
-        key_n: in std_logic_vector(C_BLOCK_SIZE-1 downto 0);
-        key_e_d: in std_logic_vector(C_BLOCK_SIZE-1 downto 0);
+        key_n:      in std_logic_vector(C_BLOCK_SIZE-1 downto 0);
+        key_e_d:    in std_logic_vector(C_BLOCK_SIZE-1 downto 0);
         rsa_status: out std_logic_vector(31 downto 0);
 
         -- Additional value/constant saved in rsa_regio
-        R2N:  in std_logic_vector(C_BLOCK_SIZE-1 downto 0) --r^2 % n
+        R2N:        in std_logic_vector(C_BLOCK_SIZE-1 downto 0); --r^2 % n
+        mod_inv:    in std_logic_vector(radix-1 downto 0)
     );
 end RSA_Core;
 
@@ -56,11 +58,10 @@ signal multiple_out:     std_logic := '0';
 signal init: std_logic:='0';
 signal last_input_msg:   std_logic:='0';
 signal msgout_data_reg:  std_logic_vector(C_BLOCK_SIZE-1 downto 0);
---signal output_message:   std_logic_vector(C_BLOCK_SIZE-1 downto 0);
---signal msgin_data_reg:   std_logic_vector(C_BLOCK_SIZE-1 downto 0);
 signal msgin_data_reg0,msgin_data_reg1,msgin_data_reg2,msgin_data_reg3,msgin_data_reg4:   std_logic_vector(C_BLOCK_SIZE-1 downto 0);
 
 signal key_n_reg, key_e_d_reg, R2N_reg: std_logic_vector(C_BLOCK_SIZE-1 downto 0);
+signal mod_inv_reg: std_logic_vector(radix-1 downto 0);
 signal msgin_valid_reg, msgin_last_reg, msgout_ready_reg, msgout_valid_reg: std_logic;
 signal msgin_data_reg: std_logic_vector(C_BLOCK_SIZE-1 downto 0);
 
@@ -69,9 +70,9 @@ type msgout_state is (IDLE_OUT,Exp_out_0,Exp_out_1,Exp_out_2,Exp_out_3,Exp_out_4
 signal curr_msgin_exp, next_msgin_exp: msgin_state;
 signal curr_msgout_exp, next_msgout_exp, last_msgout_exp: msgout_state;
 
-signal exp_0_busy,exp_1_busy,exp_2_busy,exp_3_busy,exp_4_busy: std_logic; -- Busy working signals, active high
-signal exp_0_init,exp_1_init,exp_2_init,exp_3_init,exp_4_init: std_logic:='0'; -- Busy working signals, active high
-signal exp_0_done,exp_1_done,exp_2_done,exp_3_done,exp_4_done: std_logic; -- Busy working signals, active high
+signal exp_0_busy,exp_1_busy,exp_2_busy,exp_3_busy,exp_4_busy: std_logic;
+signal exp_0_init,exp_1_init,exp_2_init,exp_3_init,exp_4_init: std_logic:='0';
+signal exp_0_done,exp_1_done,exp_2_done,exp_3_done,exp_4_done: std_logic; 
 signal last_input_msg_exp0,last_input_msg_exp1,last_input_msg_exp2,last_input_msg_exp3,last_input_msg_exp4:   std_logic:='0';
 
 signal exp_0_output,exp_1_output,exp_2_output,exp_3_output,exp_4_output: std_logic_vector(C_BLOCK_SIZE-1 downto 0);
@@ -91,6 +92,7 @@ begin
                          reset_n => reset_n, 
                          KEY => key_e_d_reg, 
                          N => key_n_reg,
+                         mod_inv => mod_inv_reg,
                          MESSAGE => msgin_data_reg0,
                          busy => exp_0_busy,
                          init => exp_0_init,
@@ -103,6 +105,7 @@ begin
                          reset_n => reset_n, 
                          KEY => key_e_d_reg, 
                          N => key_n_reg,
+                         mod_inv => mod_inv_reg,
                          MESSAGE => msgin_data_reg1,
                          busy => exp_1_busy,
                          init => exp_1_init,
@@ -115,6 +118,7 @@ begin
                          reset_n => reset_n, 
                          KEY => key_e_d_reg, 
                          N => key_n_reg,
+                         mod_inv => mod_inv_reg,
                          MESSAGE => msgin_data_reg2,
                          busy => exp_2_busy,
                          init => exp_2_init,
@@ -127,6 +131,7 @@ begin
                          reset_n => reset_n, 
                          KEY => key_e_d_reg, 
                          N => key_n_reg,
+                         mod_inv => mod_inv_reg,
                          MESSAGE => msgin_data_reg3,
                          busy => exp_3_busy,
                          init => exp_3_init,
@@ -139,6 +144,7 @@ begin
                          reset_n => reset_n, 
                          KEY => key_e_d_reg, 
                          N => key_n_reg,
+                         mod_inv => mod_inv_reg,
                          MESSAGE => msgin_data_reg4,
                          busy => exp_4_busy,
                          init => exp_4_init,
@@ -152,10 +158,10 @@ begin
 --------------------- Message In Signalling----------------------------------------------------
 -----------------------------------------------------------------------------------------------
     -- ready to receive if exponentiation function is not busy
-    msgin_ready <= msgin_ready_s; 
-    msgout_data <= msgout_data_reg;
+    msgin_ready  <= msgin_ready_s; 
+    msgout_data  <= msgout_data_reg;
     msgout_valid <= msgout_valid_0_s or msgout_valid_1_s or msgout_valid_2_s or msgout_valid_3_s or msgout_valid_4_s;
-    rsa_status <= R2N(C_BLOCK_SIZE-1 downto C_BLOCK_SIZE-32);
+    rsa_status   <= R2N(C_BLOCK_SIZE-1 downto C_BLOCK_SIZE-32);
 
 
 
@@ -170,6 +176,7 @@ begin
                 key_n_reg <= (others =>'0');
                 key_e_d_reg <= (others =>'0');
                 R2N_reg <= (others =>'0');
+                mod_inv_reg <= (others =>'0');
             else
                 msgin_valid_reg <= msgin_valid;
                 msgin_last_reg <= msgin_last;
@@ -177,6 +184,7 @@ begin
                 key_n_reg <= key_n;
                 key_e_d_reg <= key_e_d;
                 R2N_reg <= R2N;
+                mod_inv_reg <= mod_inv;
             end if;
         end if;
     end process input_registers;
@@ -578,12 +586,5 @@ begin
                 end if;
         end case;
     end process MSGOUT_combinational_FSM;
-
-
-    
------------------------------------------------------------------------------------------------
---------------------- Message Out signalling---------------------------------------------------
------------------------------------------------------------------------------------------------
-
 
 end Behavioral;

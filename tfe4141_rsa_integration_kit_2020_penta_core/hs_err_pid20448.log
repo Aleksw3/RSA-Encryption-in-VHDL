@@ -1,0 +1,15 @@
+#
+# An unexpected error has occurred (6)
+#
+Stack:
+/lib/x86_64-linux-gnu/libc.so.6(+0x46470) [0x7f88048ac470]
+/lib/x86_64-linux-gnu/libc.so.6(gsignal+0xcb) [0x7f88048ac3eb]
+/lib/x86_64-linux-gnu/libc.so.6(abort+0x12b) [0x7f880488b899]
+/home/aleksw/Apps/Xilinx/Vivado/2019.2/lib/lnx64.o/Ubuntu/18/libstdc++.so.6(+0x8c8fb) [0x7f8804d228fb]
+/home/aleksw/Apps/Xilinx/Vivado/2019.2/lib/lnx64.o/Ubuntu/18/libstdc++.so.6(+0x92d3a) [0x7f8804d28d3a]
+/home/aleksw/Apps/Xilinx/Vivado/2019.2/lib/lnx64.o/Ubuntu/18/libstdc++.so.6(+0x92d95) [0x7f8804d28d95]
+/home/aleksw/Apps/Xilinx/Vivado/2019.2/lib/lnx64.o/Ubuntu/18/libstdc++.so.6(+0x93bd3) [0x7f8804d29bd3]
+/home/aleksw/Apps/Xilinx/Vivado/2019.2/lib/lnx64.o/librdi_wavedata.so(WaveViewer::WVWaveformModel::canFindValue(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&) const+0x70) [0x7f87c8f45e30]
+/home/aleksw/Apps/Xilinx/Vivado/2019.2/lib/lnx64.o/librdi_wavedata.so(WVExecutive::canFindValue[abi:cxx11]() const+0x30) [0x7f87c8f1b610]
+/home/aleksw/Apps/Xilinx/Vivado/2019.2/lib/lnx64.o/librdi_wavedata.so(Java_ui_views_waveform_waveformi_WVExecutive_1canFindValue+0x40) [0x7f87c8f813f0]
+[0x7f87abeeaf91]

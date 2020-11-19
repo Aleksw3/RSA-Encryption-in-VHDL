@@ -60,7 +60,7 @@ if __name__ == "__main__":
 	#multiplicative_inverse(a,n)
 	modulus = 0x99925173ad65686715385ea800cd28120288fc70a9bc98dd4c90d676f8ff768d
 	radix = 2**2 #radix 4 = 2^r = 2^2, for r bits
-	print(multiplicative_inverse((modulus),radix))
+	print(multiplicative_inverse(-modulus,radix))
 	print((-modulus*3)%radix)
 
 	modulus_inverse = 3 # should satisfy (-Modulus*Modulus_inverse)%radix = 1

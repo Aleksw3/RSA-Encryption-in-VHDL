@@ -1,0 +1,5 @@
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL/RSA_encryption_VHDL.srcs/sources_1/new/RL_exponentiation.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'exponentiation'
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL/RSA_encryption_VHDL.srcs/sources_1/new/exponentiation.vhd" into library xil_defaultlib
+INFO: [VRFC 10-3107] analyzing entity 'exponentiation'
+WARNING: [VRFC 10-3608] overwriting existing secondary unit 'expbehave' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL/RSA_encryption_VHDL.srcs/sources_1/new/exponentiation.vhd:30]

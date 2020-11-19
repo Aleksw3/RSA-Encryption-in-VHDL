@@ -4,17 +4,16 @@ use ieee.numeric_std.all;
 
 entity MonPro is
 	generic(C_block_size: integer := 256;
-	        radix : integer := 2);
+	        radix :       integer := 2);
 	port(
 		clk, reset_n, EN: in std_logic;
 		N, X, Y 		: in std_logic_vector(C_block_size downto 0);
-		--N_inv           : in std_logic_vector(1 downto 0);
+		N_inv           : in std_logic_vector(radix - 1 downto 0);
 		busy			: out std_logic;
-		Carry, Sum		: out std_logic_vector(C_block_size-1 downto 0));
+		Carry, Sum		: out std_logic_vector(C_block_size - 1 downto 0));
 end MonPro;
 
 architecture structural of MonPro is
-
 	--Structural components
 	component CompressorMultiBit_6to2 is
 	generic(C_block_size : integer := 256;
@@ -66,7 +65,7 @@ architecture structural of MonPro is
         C_out : out std_logic);
     end component;
     
-	
+	----- Signals
 	type state is (INIT, COMPUTE);
 	signal curr_state_MP, next_state_MP : state;
 	
@@ -83,7 +82,7 @@ architecture structural of MonPro is
     signal modmult_input1           : std_logic_vector(1 downto 0);
     signal LSB_carry, LSB_sum       : std_logic_vector(1 downto 0);
     signal LSB_cout : std_logic; 
-    signal N_inv : std_logic_vector(1 downto 0) := "11";
+    --signal N_inv : std_logic_vector(1 downto 0) := "11";
 --	signal C_s, D_s                 : std_logic_vector(C_block_size-1 downto 0);
     signal compressor_sum           : std_logic_vector(C_block_size + radix + 2 downto 0) := (others => '0');
     signal compressor_carry         : std_logic_vector(C_block_size + radix + 2 downto 0) := (others => '0');

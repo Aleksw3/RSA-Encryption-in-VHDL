@@ -1,0 +1,15 @@
+# compile vhdl design source files
+vhdl2008 xil_defaultlib  \
+"../../../../../../Exponentiation/source/MonPro.vhd" \
+"../../../../../../Exponentiation/source/KoggeStoneAdder.vhd" \
+"../../../../../../Exponentiation/source/exponentiation.vhd" \
+"../../../../../source/rsa_core.vhd" \
+"../../../../../../Exponentiation/source/CompressorMultiBit_4to2.vhd" \
+"../../../../../../Exponentiation/source/CompressorSimple_4to2.vhd" \
+"../../../../../../Exponentiation/source/FullAdder.vhd" \
+"../../../../../../Exponentiation/source/carry_operation.vhd" \
+"../../../../../../Exponentiation/source/gp_generator.vhd" \
+"../../../../../testbench/rsa_accelerator_tb.vhd" \
+
+# Do not sort compile order
+nosort

@@ -1,0 +1,18 @@
+Vivado Simulator 2019.2
+Copyright 1986-1999, 2001-2019 Xilinx, Inc. All Rights Reserved.
+Running: /home/aleksw/Apps/Xilinx/Vivado/2019.2/bin/unwrapped/lnx64.o/xelab -wto 05eae9ff11a24f01bbce43035f6d4ea8 --incr --debug typical --relax --mt 8 -L xil_defaultlib -L secureip --snapshot csa_mult_tb_behav xil_defaultlib.csa_mult_tb -log elaborate.log 
+Using 8 slave threads.
+Starting static elaboration
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling package ieee.math_real
+Compiling architecture behavioral of entity xil_defaultlib.CSA_adder_for_mult [\CSA_adder_for_mult(width=17)\]
+Compiling architecture behavioral of entity xil_defaultlib.CSA_multiplier [\CSA_multiplier(width_a=16)\]
+Compiling architecture behavioral of entity xil_defaultlib.csa_mult_tb
+Built simulation snapshot csa_mult_tb_behav

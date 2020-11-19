@@ -1,0 +1,16 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd" \
+"../../../../RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd" \
+"../../../../RSA_encryption_VHDL.srcs/sources_1/new/FullAdder.vhd" \
+"../../../../RSA_encryption_VHDL.srcs/sources_1/new/KoggeStoneAdder.vhd" \
+"../../../../RSA_encryption_VHDL.srcs/sources_1/new/MonPro.vhd" \
+"../../../../RSA_encryption_VHDL.srcs/sources_1/new/RL_exponentiation.vhd" \
+"../../../../RSA_encryption_VHDL.srcs/sources_1/new/exponentiation.vhd" \
+"../../../../RSA_encryption_VHDL.srcs/sources_1/new/RSA_Core.vhd" \
+"../../../../RSA_encryption_VHDL.srcs/sources_1/new/carry_operation.vhd" \
+"../../../../RSA_encryption_VHDL.srcs/sources_1/new/gp_generator.vhd" \
+"../../../../RSA_encryption_VHDL.srcs/sim_1/new/RL_exp_tb.vhd" \
+
+# Do not sort compile order
+nosort

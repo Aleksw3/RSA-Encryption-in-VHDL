@@ -1,0 +1,553 @@
+
+*** Running vivado
+    with args -log RSA_Core.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source RSA_Core.tcl
+
+
+****** Vivado v2019.2 (64-bit)
+  **** SW Build 2708876 on Wed Nov  6 21:39:14 MST 2019
+  **** IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
+    ** Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+
+source RSA_Core.tcl -notrace
+Command: synth_design -top RSA_Core -part xc7k70tfbv676-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7k70t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7k70t'
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 21243 
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 1619.430 ; gain = 183.535 ; free physical = 656 ; free virtual = 5534
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'RSA_Core' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/RSA_Core.vhd:54]
+	Parameter C_BLOCK_SIZE bound to: 256 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'exponentiation' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/exponentiation.vhd:30]
+	Parameter C_block_size bound to: 256 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'MonPro' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/MonPro.vhd:35]
+	Parameter C_block_size bound to: 256 - type: integer 
+	Parameter bit_width bound to: 256 - type: integer 
+INFO: [Synth 8-3491] module 'CompressorMultiBit_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:5' bound to instance 'Cprs_Inst' of component 'CompressorMultiBit_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/MonPro.vhd:84]
+INFO: [Synth 8-638] synthesizing module 'CompressorMultiBit_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:18]
+	Parameter bit_width bound to: 256 - type: integer 
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:33]
+INFO: [Synth 8-638] synthesizing module 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:13]
+INFO: [Synth 8-3491] module 'Full_Adder' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/FullAdder.vhd:6' bound to instance 'FA0' of component 'Full_Adder' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:27]
+INFO: [Synth 8-638] synthesizing module 'Full_Adder' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/FullAdder.vhd:16]
+INFO: [Synth 8-256] done synthesizing module 'Full_Adder' (1#1) [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/FullAdder.vhd:16]
+INFO: [Synth 8-3491] module 'Full_Adder' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/FullAdder.vhd:6' bound to instance 'FA1' of component 'Full_Adder' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:28]
+INFO: [Synth 8-256] done synthesizing module 'CompressorSimple_4to2' (2#1) [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:13]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Synth 8-3491] module 'CompressorSimple_4to2' declared at '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorSimple_4to2.vhd:4' bound to instance 'Comp_inst' of component 'CompressorSimple_4to2' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:36]
+INFO: [Common 17-14] Message 'Synth 8-3491' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-256] done synthesizing module 'CompressorMultiBit_4to2' (3#1) [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/CompressorMultiBit_4to2.vhd:18]
+INFO: [Synth 8-226] default block is never used [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/MonPro.vhd:173]
+INFO: [Synth 8-256] done synthesizing module 'MonPro' (4#1) [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/MonPro.vhd:35]
+INFO: [Synth 8-638] synthesizing module 'KoggeStoneAdder' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/KoggeStoneAdder.vhd:9]
+INFO: [Synth 8-638] synthesizing module 'gp_generator' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/gp_generator.vhd:39]
+INFO: [Synth 8-256] done synthesizing module 'gp_generator' (5#1) [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/gp_generator.vhd:39]
+INFO: [Synth 8-638] synthesizing module 'carry_operation' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/carry_operation.vhd:40]
+INFO: [Synth 8-256] done synthesizing module 'carry_operation' (6#1) [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/carry_operation.vhd:40]
+INFO: [Synth 8-256] done synthesizing module 'KoggeStoneAdder' (7#1) [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/KoggeStoneAdder.vhd:9]
+INFO: [Synth 8-256] done synthesizing module 'exponentiation' (8#1) [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/exponentiation.vhd:30]
+WARNING: [Synth 8-614] signal 'done' is read in the process but is not in the sensitivity list [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/RSA_Core.vhd:139]
+WARNING: [Synth 8-3848] Net rsa_status in module/entity RSA_Core does not have driver. [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/RSA_Core.vhd:47]
+INFO: [Synth 8-256] done synthesizing module 'RSA_Core' (9#1) [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/RSA_Core.vhd:54]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[31]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[30]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[29]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[28]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[27]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[26]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[25]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[24]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[23]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[22]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[21]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[20]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[19]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[18]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[17]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[16]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[15]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[14]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[13]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[12]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[11]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[10]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[9]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[8]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[7]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[6]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[5]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[4]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[3]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[2]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[1]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[0]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port msgin_last
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 1701.180 ; gain = 265.285 ; free physical = 691 ; free virtual = 5458
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 1716.023 ; gain = 280.129 ; free physical = 698 ; free virtual = 5465
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7k70tfbv676-1
+INFO: [Device 21-403] Loading part xc7k70tfbv676-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 1724.027 ; gain = 288.133 ; free physical = 698 ; free virtual = 5464
+---------------------------------------------------------------------------------
+INFO: [Synth 8-802] inferred FSM for state register 'curr_state_exp_reg' in module 'exponentiation'
+INFO: [Synth 8-802] inferred FSM for state register 'state_msg_reg' in module 'RSA_Core'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                    idle |                            00001 |                              000
+                 initial |                            00010 |                              001
+                loop_exp |                            00100 |                              010
+                    last |                            01000 |                              011
+                data_out |                            10000 |                              100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'curr_state_exp_reg' using encoding 'one-hot' in module 'exponentiation'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                   msgin |                              001 |                               00
+           wait_for_busy |                              010 |                               01
+                  msgout |                              100 |                               10
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'state_msg_reg' using encoding 'one-hot' in module 'RSA_Core'
+WARNING: [Synth 8-327] inferring latch for variable 'prev_state_reg' [/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.srcs/sources_1/new/RSA_Core.vhd:145]
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:20 ; elapsed = 00:00:19 . Memory (MB): peak = 1751.918 ; gain = 316.023 ; free physical = 599 ; free virtual = 5355
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      9 Bit       Adders := 3     
+	   2 Input      2 Bit       Adders := 1     
++---XORs : 
+	   2 Input      1 Bit         XORs := 2569  
++---Registers : 
+	              257 Bit    Registers := 13    
+	              256 Bit    Registers := 19    
+	                9 Bit    Registers := 3     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 23    
++---Muxes : 
+	   2 Input    257 Bit        Muxes := 6     
+	   3 Input    257 Bit        Muxes := 2     
+	   4 Input    257 Bit        Muxes := 4     
+	   4 Input    256 Bit        Muxes := 1     
+	   2 Input    256 Bit        Muxes := 2     
+	   5 Input      5 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 4     
+	   2 Input      3 Bit        Muxes := 8     
+	   5 Input      3 Bit        Muxes := 3     
+	   3 Input      3 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 6     
+	   6 Input      2 Bit        Muxes := 2     
+	   3 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 28    
+	   4 Input      1 Bit        Muxes := 6     
+	   3 Input      1 Bit        Muxes := 10    
+	   5 Input      1 Bit        Muxes := 4     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module RSA_Core 
+Detailed RTL Component Info : 
++---Registers : 
+	              256 Bit    Registers := 2     
+	                1 Bit    Registers := 4     
++---Muxes : 
+	   3 Input      3 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 5     
+	   3 Input      1 Bit        Muxes := 8     
+Module Full_Adder 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 2     
+Module MonPro 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      9 Bit       Adders := 1     
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	              257 Bit    Registers := 2     
+	              256 Bit    Registers := 4     
+	                9 Bit    Registers := 1     
+	                1 Bit    Registers := 3     
++---Muxes : 
+	   2 Input    257 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 6     
+Module gp_generator 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
+Module KoggeStoneAdder 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 255   
+Module exponentiation 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      9 Bit       Adders := 1     
+	   2 Input      2 Bit       Adders := 1     
++---Registers : 
+	              257 Bit    Registers := 9     
+	              256 Bit    Registers := 9     
+	                9 Bit    Registers := 1     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 13    
++---Muxes : 
+	   2 Input    257 Bit        Muxes := 4     
+	   3 Input    257 Bit        Muxes := 2     
+	   4 Input    257 Bit        Muxes := 4     
+	   4 Input    256 Bit        Muxes := 1     
+	   2 Input    256 Bit        Muxes := 2     
+	   5 Input      5 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 4     
+	   2 Input      3 Bit        Muxes := 3     
+	   5 Input      3 Bit        Muxes := 3     
+	   2 Input      2 Bit        Muxes := 6     
+	   6 Input      2 Bit        Muxes := 2     
+	   3 Input      2 Bit        Muxes := 1     
+	   4 Input      1 Bit        Muxes := 6     
+	   2 Input      1 Bit        Muxes := 16    
+	   3 Input      1 Bit        Muxes := 2     
+	   5 Input      1 Bit        Muxes := 4     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+Warning: Parallel synthesis criteria is not met 
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[31]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[30]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[29]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[28]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[27]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[26]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[25]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[24]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[23]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[22]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[21]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[20]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[19]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[18]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[17]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[16]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[15]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[14]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[13]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[12]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[11]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[10]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[9]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[8]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[7]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[6]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[5]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[4]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[3]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[2]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[1]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port rsa_status[0]
+WARNING: [Synth 8-3331] design RSA_Core has unconnected port msgin_last
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (rl_exp/\message_reg_reg[256] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (MonPro:/\B_r_reg[256] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (rl_exp/\R2N_reg_reg[256] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (rl_exp/\N_reg_reg[256] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\prev_state_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (last_input_msg_reg)
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (MonPro:/\Carry_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (msgout_last_reg)
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (rl_exp/\MonPro_S_Carry_out_reg_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (rl_exp/\MonPro_C_Carry_out_reg_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (rl_exp/\KSA_input_X_reg[0] )
+WARNING: [Synth 8-3332] Sequential element (prev_state_reg[0]) is unused and will be removed from module RSA_Core.
+INFO: [Synth 8-3886] merging instance 'rl_exp/MonPro_S_X_reg[256]' (FDRE) to 'rl_exp/MonPro_S_Y_reg[256]'
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (rl_exp/MonPro_S/\N_r_reg[256] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (rl_exp/MonPro_C/\N_r_reg[256] )
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:13 ; elapsed = 00:01:14 . Memory (MB): peak = 2029.199 ; gain = 593.305 ; free physical = 618 ; free virtual = 5252
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:01:16 ; elapsed = 00:01:17 . Memory (MB): peak = 2035.137 ; gain = 599.242 ; free physical = 618 ; free virtual = 5254
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:01:22 ; elapsed = 00:01:24 . Memory (MB): peak = 2043.324 ; gain = 607.430 ; free physical = 641 ; free virtual = 5276
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:01:28 ; elapsed = 00:01:30 . Memory (MB): peak = 2043.324 ; gain = 607.430 ; free physical = 637 ; free virtual = 5363
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:29 ; elapsed = 00:01:30 . Memory (MB): peak = 2043.324 ; gain = 607.430 ; free physical = 637 ; free virtual = 5363
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:29 ; elapsed = 00:01:31 . Memory (MB): peak = 2043.324 ; gain = 607.430 ; free physical = 635 ; free virtual = 5362
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:29 ; elapsed = 00:01:31 . Memory (MB): peak = 2043.324 ; gain = 607.430 ; free physical = 635 ; free virtual = 5362
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:33 ; elapsed = 00:01:35 . Memory (MB): peak = 2043.324 ; gain = 607.430 ; free physical = 629 ; free virtual = 5388
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:33 ; elapsed = 00:01:35 . Memory (MB): peak = 2043.324 ; gain = 607.430 ; free physical = 629 ; free virtual = 5388
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+------+------+
+|      |Cell  |Count |
++------+------+------+
+|1     |BUFG  |     1|
+|2     |LUT1  |     5|
+|3     |LUT2  |   405|
+|4     |LUT3  |  2091|
+|5     |LUT4  |  1219|
+|6     |LUT5  |  1934|
+|7     |LUT6  |  2552|
+|8     |FDRE  |  9804|
+|9     |FDSE  |     1|
+|10    |LD    |     1|
+|11    |IBUF  |  1028|
+|12    |OBUF  |   259|
+|13    |OBUFT |    32|
++------+------+------+
+
+Report Instance Areas: 
++------+-------------+---------------+------+
+|      |Instance     |Module         |Cells |
++------+-------------+---------------+------+
+|1     |top          |               | 19332|
+|2     |  rl_exp     |exponentiation | 17493|
+|3     |    MonPro_C |MonPro         |  3880|
+|4     |    MonPro_S |MonPro_0       |  4420|
++------+-------------+---------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:33 ; elapsed = 00:01:35 . Memory (MB): peak = 2043.324 ; gain = 607.430 ; free physical = 629 ; free virtual = 5388
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 70 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:33 ; elapsed = 00:01:35 . Memory (MB): peak = 2043.324 ; gain = 607.430 ; free physical = 632 ; free virtual = 5391
+Synthesis Optimization Complete : Time (s): cpu = 00:01:33 ; elapsed = 00:01:35 . Memory (MB): peak = 2043.332 ; gain = 607.430 ; free physical = 632 ; free virtual = 5391
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00.23 ; elapsed = 00:00:00.23 . Memory (MB): peak = 2043.332 ; gain = 0.000 ; free physical = 700 ; free virtual = 5454
+INFO: [Netlist 29-17] Analyzing 1 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2099.352 ; gain = 0.000 ; free physical = 626 ; free virtual = 5391
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 1 instances were transformed.
+  LD => LDCE: 1 instance 
+
+INFO: [Common 17-83] Releasing license: Synthesis
+147 Infos, 70 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:43 ; elapsed = 00:01:50 . Memory (MB): peak = 2099.352 ; gain = 663.609 ; free physical = 772 ; free virtual = 5536
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2099.352 ; gain = 0.000 ; free physical = 772 ; free virtual = 5536
+WARNING: [Constraints 18-5210] No constraints selected for write.
+Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
+INFO: [Common 17-1381] The checkpoint '/home/aleksw/NTNU/First_Year/DDS/Project/RSA_encryption_VHDL_single_core/RSA_encryption_VHDL.runs/synth_1/RSA_Core.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file RSA_Core_utilization_synth.rpt -pb RSA_Core_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Tue Nov 17 12:37:27 2020...

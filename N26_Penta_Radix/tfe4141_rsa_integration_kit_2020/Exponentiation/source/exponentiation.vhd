@@ -4,7 +4,8 @@ use IEEE.numeric_std.ALL;
 
 entity exponentiation is
     generic (
-        C_block_size : integer := 256
+        C_block_size : integer := 256;
+        radix:         integer := 2
     );
     port (
          -- basic important
@@ -15,6 +16,7 @@ entity exponentiation is
          N:              in std_logic_vector(C_block_size-1 downto 0);
          MESSAGE:        in std_logic_vector(C_block_size-1 downto 0);
          R2N:            in std_logic_vector(C_block_size-1 downto 0);
+         mod_inv:        in std_logic_vector(radix-1 downto 0);
          
          output_message: out std_logic_vector(C_block_size-1 downto 0);
          
@@ -70,6 +72,7 @@ signal curr_state_mp, next_state_mp: state_mp;
 -- shift register
 signal key_shift_reg: std_logic_vector(C_block_size-1 downto 0);
 signal key_reg:       std_logic_vector(C_block_size-1 downto 0);
+signal mod_inv_reg:   std_logic_vector(radix-1 downto 0);
 signal counter:       unsigned (8 downto 0);
 signal MonPro_S_busy_f, MonPro_C_busy_f: std_logic:='0';
 
@@ -86,6 +89,7 @@ MonPro_C: entity work.MonPro
             port map (clk => clk, reset_n => reset_n,
                       EN => MonPro_C_en, N=>N_reg,
                       X => MonPro_C_X, Y=> MonPro_C_Y,
+                      N_inv => mod_inv_reg,
                       Busy => MonPro_C_busy, 
                       Carry => MonPro_C_Carry_out,
                       Sum => MonPro_C_Sum_out);
@@ -95,6 +99,7 @@ MonPro_S: entity work.MonPro
             port map (clk => clk, reset_n => reset_n,
                       EN => MonPro_S_en, N=>N_reg,
                       X => MonPro_S_X, Y=> MonPro_S_Y,
+                      N_inv => mod_inv_reg,
                       Busy => MonPro_S_busy,
                       Carry => MonPro_S_Carry_out,
                       Sum => MonPro_S_Sum_out);
@@ -136,6 +141,7 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                 message_reg     <=(others =>'0');
                 key_reg         <=(others =>'0');
                 output_message  <=(others =>'0');
+                mod_inv_reg     <=(others =>'0');
             else
                 curr_state_exp <= next_state_exp;
                 case(curr_state_exp) is
@@ -154,6 +160,7 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                         R2N_reg <= '0'&R2N; -- R^2 % n, input constant
                         message_reg <= '0'&MESSAGE;
                         key_reg <= KEY;
+                        mod_inv_reg <= mod_inv;
                         if next_state_exp = LOOP_EXP then
                             MP_start<='1';
                         else
@@ -224,8 +231,7 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
         if rising_edge(clk) then
             if reset_n = '0' then
                 curr_state_mp     <= IDLE;
-                MP_done           <= '0';
---                busy              <= '0';                
+                MP_done           <= '0';      
                 MonPro_C_X        <= (others=>'0');
                 MonPro_C_Y        <= (others=>'0');
                 MonPro_S_X        <= (others=>'0');
@@ -236,8 +242,7 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                 curr_state_mp <= next_state_mp;
                 case(curr_state_mp) is
                     when IDLE =>
-                        MP_done           <= '0';
---                        busy              <= '0';                
+                        MP_done           <= '0';        
                         MonPro_C_X        <= (others=>'0');
                         MonPro_C_Y        <= (others=>'0');
                         MonPro_S_X        <= (others=>'0');
@@ -245,7 +250,6 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                         MonPro_S_en_start <= '0';
                         MonPro_C_en_start <= '0';
                     when LOAD =>
---                        busy <='1';
                         if curr_state_exp = INITIAL then
                             MonPro_C_X <= std_logic_vector(resize(one,MonPro_C_X'length));
                             MonPro_C_Y <= R2N_reg;
@@ -276,7 +280,6 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                         end if;
    
                     when BUSY_WAIT =>
---                        busy <='1';
                         if curr_state_exp = LOOP_EXP and MP_busy = "00" then
                             if MonPro_S_out_rdy = '0' and MonPro_C_out_rdy = '0' then
                                 if MonPro_S_en ='1' then
@@ -432,7 +435,6 @@ MonPro_C_en <= MonPro_C_en_start or MonPro_C_busy;
                     end if;
                 end if;
             end if;
-
         end if;
     end process falling_edge_busy;
 

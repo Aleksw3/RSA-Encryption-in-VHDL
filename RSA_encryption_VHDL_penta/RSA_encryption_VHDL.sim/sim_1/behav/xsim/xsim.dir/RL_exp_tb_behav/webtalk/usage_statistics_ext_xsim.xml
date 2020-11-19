@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<webTalkData  fileName='usage_statistics_ext_xsim.xml'  majorVersion='1' minorVersion='0' timeStamp='Sat Nov 14 17:47:04 2020'>
+<section name="__ROOT__" level="0" order="1" description="">
+ <section name="software_version_and_target_device" level="1" order="1" description="">
+  <keyValuePair key="beta" value="FALSE" description="" />
+  <keyValuePair key="build_version" value="2708876" description="" />
+  <keyValuePair key="date_generated" value="Sat Nov 14 17:47:02 2020" description="" />
+  <keyValuePair key="os_platform" value="LIN64" description="" />
+  <keyValuePair key="product_version" value="XSIM v2019.2 (64-bit)" description="" />
+  <keyValuePair key="project_id" value="6776c0d0857846298ec0e69f9af59c9b" description="" />
+  <keyValuePair key="project_iteration" value="361" description="" />
+  <keyValuePair key="random_id" value="b23c8356-a75c-4c2c-b7b1-b751a49d01c2" description="" />
+  <keyValuePair key="registration_id" value="b23c8356-a75c-4c2c-b7b1-b751a49d01c2" description="" />
+  <keyValuePair key="route_design" value="FALSE" description="" />
+  <keyValuePair key="target_device" value="not_applicable" description="" />
+  <keyValuePair key="target_family" value="not_applicable" description="" />
+  <keyValuePair key="target_package" value="not_applicable" description="" />
+  <keyValuePair key="target_speed" value="not_applicable" description="" />
+  <keyValuePair key="tool_flow" value="xsim_vivado" description="" />
+ </section>
+ <section name="user_environment" level="1" order="2" description="">
+  <keyValuePair key="cpu_name" value="Intel(R) Core(TM) i7-8565U CPU @ 1.80GHz" description="" />
+  <keyValuePair key="cpu_speed" value="2300.000 MHz" description="" />
+  <keyValuePair key="os_name" value="Ubuntu" description="" />
+  <keyValuePair key="os_release" value="Ubuntu 18.04.03 LTS" description="" />
+  <keyValuePair key="system_ram" value="16.000 GB" description="" />
+  <keyValuePair key="total_processors" value="1" description="" />
+ </section>
+ <section name="vivado_usage" level="1" order="3" description="">
+ </section>
+ <section name="xsim" level="1" order="4" description="">
+  <section name="command_line_options" level="2" order="1" description="">
+   <keyValuePair key="command" value="xelab" description="" />
+   <keyValuePair key="debug" value="typical" description="" />
+   <keyValuePair key="dpi_used" value="false" description="" />
+   <keyValuePair key="file_counter" value="16" description="" />
+   <keyValuePair key="gendll" value="false" description="" />
+   <keyValuePair key="hwcosim" value="false" description="" />
+   <keyValuePair key="sdfmodeling" value="false" description="" />
+   <keyValuePair key="vhdl2008" value="false" description="" />
+  </section>
+  <section name="usage" level="2" order="2" description="">
+   <keyValuePair key="compiler_memory" value="327944_KB" description="" />
+   <keyValuePair key="compiler_time" value="6.06_sec" description="" />
+   <keyValuePair key="simulation_image_code" value="546 KB" description="" />
+   <keyValuePair key="simulation_image_data" value="510 KB" description="" />
+   <keyValuePair key="total_instances" value="5653" description="" />
+   <keyValuePair key="total_nets" value="0" description="" />
+   <keyValuePair key="total_processes" value="14409" description="" />
+   <keyValuePair key="xilinx_hdl_libraries_used" value="secureip " description="" />
+  </section>
+ </section>
+</section>
+</webTalkData>
