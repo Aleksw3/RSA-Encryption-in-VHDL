@@ -7,7 +7,7 @@ def int_to_bin(in_num, k):
   return in_num
 #############################################################################
 #Radix
-def monpro_radix(A,B,N,bits,radix,modulus_inv):  ## bit monpro
+def mp2_radix(A,B,N,bits,radix,modulus_inv):  ## bit monpro
   u = 0 
   A = int_to_bin(A,bits+10)[::-1] ## LSB - MSB
   B_bin_0 = int(int_to_bin(B,0)[-2:],2) #The two LSBs of B
@@ -29,20 +29,20 @@ def R_L_bin_exp_radix(M, e, n,radix,mod_inv):
   # print(f"M = {hex(M)}\nkey = {hex(e)}\nn = {hex(n)}\nR2N = {hex(R2N)}")
   e_bin_str = int_to_bin(e,k)[::-1]
   r = 2**k
-  C = monpro_radix(1, R2N, n,k,radix,mod_inv)
-  S = monpro_radix(M, R2N, n,k,radix,mod_inv)
+  C = mp2_radix(1, R2N, n,k,radix,mod_inv)
+  S = mp2_radix(M, R2N, n,k,radix,mod_inv)
   for i in range(k): ## LSB - MSB
     if int(e_bin_str[i]) == 1:
-      C = monpro_radix(C,S,n,k,radix,mod_inv)
-    S = monpro_radix(S,S,n,k,radix,mod_inv)
+      C = mp2_radix(C,S,n,k,radix,mod_inv)
+    S = mp2_radix(S,S,n,k,radix,mod_inv)
     # print(f"C{i+1} = {hex(C)} S{i+1} = {hex(S)}")
-  C = monpro_radix(1,C,n,k,radix,mod_inv)
+  C = mp2_radix(1,C,n,k,radix,mod_inv)
   return C 
 
 
 ###############################################################################
 #normal monpro
-def monpro(A,B,N,bits):  ## bit monpro
+def mp2(A,B,N,bits):  ## bit monpro
   u = 0 
   A = int_to_bin(A,bits+1)[::-1]
   for i in range(bits+1): ## LSB - MSB
@@ -61,20 +61,20 @@ def R_L_bin_exp(M, e, n):
   # print(f"M = {hex(M)}\nkey = {hex(e)}\nn = {hex(n)}\nR2N = {hex(R2N)}")
   e_bin_str = int_to_bin(e,k)[::-1]
   r = 2**k
-  C = monpro(1, R2N, n,k)
-  S = monpro(M, R2N, n,k)
+  C = mp2(1, R2N, n,k)
+  S = mp2(M, R2N, n,k)
   for i in range(k): ## LSB - MSB
     if int(e_bin_str[i]) == 1:
-      C = monpro(C,S,n,k)
-    S = monpro(S,S,n,k)
+      C = mp2(C,S,n,k)
+    S = mp2(S,S,n,k)
     # print(f"C{i+1} = {hex(C)} S{i+1} = {hex(S)}")
-  C = monpro(1,C,n,k)
+  C = mp2(1,C,n,k)
   return C 
 
 
 if __name__ == "__main__":
 
-  #### Vivado example keys
+  #### VIvado example keys
   n_key = 0x99925173ad65686715385ea800cd28120288fc70a9bc98dd4c90d676f8ff768d
   e_key = 0x0000000000000000000000000000000000000000000000000000000000010001
   d_key = 0x0cea1651ef44be1f1f1476b7539bed10d73e3aac782bd9999a1e5a790932bfe9
@@ -111,22 +111,22 @@ if __name__ == "__main__":
   # # modulus_inv = 1
   # # radix = 4
 
-  # # # radix_monpro_output0  = monpro_radix(X,Y,N,bits,radix,0)
-  # # # radix_monpro_output1  = monpro_radix(X,Y,N,bits,radix,1)
-  # # # radix_monpro_output2  = monpro_radix(X,Y,N,bits,radix,2)
-  # # # radix_monpro_output3  = monpro_radix(X,Y,N,bits,radix,3)
+  # # # radix_monpro_output0  = mp2_radix(X,Y,N,bits,radix,0)
+  # # # radix_monpro_output1  = mp2_radix(X,Y,N,bits,radix,1)
+  # # # radix_monpro_output2  = mp2_radix(X,Y,N,bits,radix,2)
+  # # # radix_monpro_output3  = mp2_radix(X,Y,N,bits,radix,3)
   # # # (A,B,N,bits
-  # # # print(f"output mp:{hex(monpro(X,Y,N,bits))}")
+  # # # print(f"output mp:{hex(mp2(X,Y,N,bits))}")
 
   # # print(f"Output0:  {hex(radix_monpro_output0)}\nOutput1:  {hex(radix_monpro_output1)}\nOutput2:  {hex(radix_monpro_output2)}\nOutput3:  {hex(radix_monpro_output3)}\nExpected: {hex(expected)}\n")
 
   # # X = Y = 0x73c62e9bc00f21f1ea65357668cf6930bb45ab5c9eda68c69837693367b8ac7b
   # # expected = 0x8fd555996526563c71cdd1df998cea33bd34758d32b65f42b4199c2c9fa11260
 
-  # # radix_monpro_output0  = monpro_radix(X,Y,N,bits,radix,0)
-  # # radix_monpro_output1  = monpro_radix(X,Y,N,bits,radix,1)
-  # # radix_monpro_output2  = monpro_radix(X,Y,N,bits,radix,2)
-  # # radix_monpro_output3  = monpro_radix(X,Y,N,bits,radix,3)
+  # # radix_monpro_output0  = mp2_radix(X,Y,N,bits,radix,0)
+  # # radix_monpro_output1  = mp2_radix(X,Y,N,bits,radix,1)
+  # # radix_monpro_output2  = mp2_radix(X,Y,N,bits,radix,2)
+  # # radix_monpro_output3  = mp2_radix(X,Y,N,bits,radix,3)
 
   # # print(f"Output0:  {hex(radix_monpro_output0)}\nOutput1:  {hex(radix_monpro_output1)}\nOutput2:  {hex(radix_monpro_output2)}\nOutput3:  {hex(radix_monpro_output3)}\nExpected: {hex(expected)}")
 
@@ -173,7 +173,7 @@ if __name__ == "__main__":
   # M = 0xee5279c61dc177d39b873a8488544e5e4a19411713c81616103660f57922a05c
 
 
-  # norm = monpro(M, M, n_key,k)
+  # norm = mp2(M, M, n_key,k)
 
 
   # print(f"Good = {hex(norm)}")
