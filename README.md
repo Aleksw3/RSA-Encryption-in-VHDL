@@ -4,3 +4,5 @@ The goal of the project was to optimize the design for performance. Using 5 core
 The keys are of 256 bit size.
 
 The development used both a high level model developed in python and testbenches created in VHDL. 
+
+The VHDL source files for the project can be found in ./RSA_encryption_VHDL_penta/RSA_encryption_VHDL.srcs/sources_1/new/
